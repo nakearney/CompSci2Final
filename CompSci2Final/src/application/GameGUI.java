@@ -119,6 +119,17 @@ public class GameGUI extends BorderPane {
 			}
 			
 		});
+		
+		b.setOnMouseReleased((EventHandler<? super MouseEvent>) new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent arg0) {
+				
+				b.setBackground(new Background(new BackgroundFill(Color.BLACK,null,null)));
+				
+			}
+			
+		});
 			
 		b.setOnAction(new EventHandler<ActionEvent>() {
 
