@@ -9,23 +9,15 @@ import javafx.scene.layout.BorderPane;
 public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
-		try {
-			
-			BorderPane root = new BorderPane();
-			
-			//Initialize a Map Object, and creates a window with everything in it
-			
-			Scene scene = new Scene(root,400,400);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			primaryStage.setScene(scene);
-			primaryStage.show();
-			
-			
-			
-			
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
+		
+		GameGUI game = new GameGUI();
+		Scene s = new Scene(game);
+		
+		primaryStage.setMaximized(true);
+		primaryStage.setScene(s);
+		primaryStage.setTitle("Gamers VS Society");
+		primaryStage.show();
+		
 	}
 	
 	public static void main(String[] args) {
