@@ -16,8 +16,11 @@ public class GenericUnit { //Will become abstract | Figure out handling of unit 
 		return hp;
 	}
 	
-	public void setHP(int newHP) { //Sets HP & will maybe handle unit destruction
-		
+	public void takeDamage(int damage) { //Sets HP & will maybe handle unit destruction
+		hp = hp - damage;
+		if(hp <= 0) {
+			//Something happen to destroy unit
+		}
 	}
 	
 	public int getAttack() {

@@ -120,8 +120,8 @@ public class Tile extends StackPane {
 		return unit;
 	}
 	
-	public void setUnit() { //Sets Unit
-		
+	public void setUnit(GenericUnit unit) { //Sets Unit
+		this.unit = unit;
 	}
 	
 	public void moveUnit(Tile destination) { //Moves Unit from this tile, to destination Tile if it is empty ????
