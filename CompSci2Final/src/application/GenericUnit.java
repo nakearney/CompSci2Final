@@ -1,12 +1,14 @@
 package application;
 
-public class GenericUnit { //Will become abstract | Figure out handling of unit destruction
+public class GenericUnit { //Will become abstract 
 
 	int hp;
 	int attack;
 	int movementRange;
+	boolean isAlive;
+	//Add Image Variable
 	
-	public GenericUnit(int hp, int attack, int movementRange) {
+	public GenericUnit(int hp, int attack, int movementRange) { // Add Image Parameter
 		this.hp = hp;
 		this.attack = attack;
 		this.movementRange = movementRange;
@@ -16,8 +18,11 @@ public class GenericUnit { //Will become abstract | Figure out handling of unit 
 		return hp;
 	}
 	
-	public void setHP(int newHP) { //Sets HP & will maybe handle unit destruction
-		
+	public void takeDamage(int damage) { //Nick has an idea for unit death
+		hp = hp - damage;
+		if(hp <= 0) {
+			isAlive = false;
+		}
 	}
 	
 	public int getAttack() {
@@ -28,12 +33,16 @@ public class GenericUnit { //Will become abstract | Figure out handling of unit 
 		return movementRange;
 	}
 	
+	public boolean isAlive() {
+		return isAlive;
+	}
+	
 	public void move() { //Maybe need a move function here? | Don't think so though | Would become abstract
 		
 	}
 	
 	public void attack(GenericUnit target) { //Would be an abstract method
-		
+		target.takeDamage(attack);
 	}
 	
 	
