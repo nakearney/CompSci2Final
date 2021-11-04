@@ -11,7 +11,6 @@ import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 
 public class Tile extends StackPane {
 	
@@ -33,6 +32,15 @@ public class Tile extends StackPane {
 	public Tile(Image image) {
 		
 		getChildren().add(new ImageView(image));
+		
+	}
+	
+	public Tile(Image image, GenericUnit troop) {
+		
+		isOccupied=true;
+		unit=troop;
+		getChildren().add(new ImageView(image));
+		getChildren().add(troop);
 		
 	}
 	
@@ -130,6 +138,7 @@ public class Tile extends StackPane {
 	
 	public void setUnit(GenericUnit unit) { //Sets Unit
 		this.unit = unit;
+		if(!isOccupied) getChildren().add(unit);
 	}
 	
 	public void moveUnit(Tile destination) { //Moves Unit from this tile, to destination Tile if it is empty ????
