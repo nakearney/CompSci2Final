@@ -18,23 +18,33 @@ public class Tile extends StackPane {
 	GenericUnit unit;
 	Color backGroundColor;
 	
+	/*
+	 * Tile constructors below. Supports constructors for initializing a Tile using a
+	 * color, integer, or image, with really only just changes the way the Tile's background looks.
+	 * You can send in a GenericUnit with any of these paramters to make a tile start with a unit.
+	 */
+	
+	//Creates a blank tile. Background is Cyan to represent the sky.
 	public Tile() {
 		
 		isOccupied=false;
 		setPrefHeight(75);
 		setPrefWidth(75);
 		
-		backGroundColor = Color.BLACK;
+		backGroundColor = Color.CYAN;
 		setColor(backGroundColor);
 		
 	}
 	
+	//Makes tile with an image background
 	public Tile(Image image) {
 		
+		isOccupied=false;
 		getChildren().add(new ImageView(image));
 		
 	}
 	
+	//Makes tile with an image background and puts a troop in it.
 	public Tile(Image image, GenericUnit troop) {
 		
 		isOccupied=true;
@@ -44,6 +54,7 @@ public class Tile extends StackPane {
 		
 	}
 	
+	//Makes a tile with a colored background.
 	public Tile(int type) {
 		
 		isOccupied=false;
@@ -51,7 +62,7 @@ public class Tile extends StackPane {
 		setPrefWidth(75);
 		
 		if(type==0) {
-			backGroundColor = Color.BLACK;
+			backGroundColor = Color.CYAN;
 		} else if(type==1) {
 			backGroundColor = Color.GREEN;
 		} else if(type==2) {
@@ -66,6 +77,7 @@ public class Tile extends StackPane {
 		
 	}
 	
+	//Makes tile with a background color and a troop within it.
 	public Tile(int type, GenericUnit troop) {
 		
 		isOccupied=false;
@@ -74,7 +86,7 @@ public class Tile extends StackPane {
 		setPrefWidth(75);
 		
 		if(type==0) {
-			backGroundColor = Color.BLACK;
+			backGroundColor = Color.CYAN;
 		} else if(type==1) {
 			backGroundColor = Color.GREEN;
 		} else if(type==2) {
@@ -89,6 +101,7 @@ public class Tile extends StackPane {
 		
 	}
 	
+	//Sets tile to a preset color.
 	public Tile(Color color) {
 		
 		isOccupied=false;
@@ -100,6 +113,7 @@ public class Tile extends StackPane {
 		
 	}
 	
+	//Sets tile to a preset color and puts a troop in it
 	public Tile(Color color, GenericUnit troop) {
 		
 		isOccupied=true;
@@ -111,16 +125,21 @@ public class Tile extends StackPane {
 		setColor(color);
 		
 	}
+	/*
+	 * End of all of the Tile Constructors
+	 */
 	
-	public Color getColor() { //Change return type for this method
+	public Color getColor() {
 		
 		return backGroundColor;
 		
 	}
 	
-	public void setColor(Color color) { //Changes color of Tile
+	//Change color of tile
+	public void setColor(Color color) {
 		
 		backGroundColor = color;
+		//Sets properties of the border around tile.
 		BorderStroke[] stroke =  {new BorderStroke(color.darker(),BorderStrokeStyle.SOLID,new CornerRadii(0),new BorderWidths(5.0,5.0,5.0,5.0))};
 		
 		setBackground(new Background(new BackgroundFill(color,null,null)));
@@ -138,7 +157,10 @@ public class Tile extends StackPane {
 	
 	public void setUnit(GenericUnit unit) { //Sets Unit
 		this.unit = unit;
-		if(!isOccupied) getChildren().add(unit);
+		if(!isOccupied) {
+			getChildren().add(unit);
+			isOccupied=true;
+		}
 	}
 	
 	public void moveUnit(Tile destination) { //Moves Unit from this tile, to destination Tile if it is empty ????

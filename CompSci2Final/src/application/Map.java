@@ -48,7 +48,7 @@ public class Map extends GridPane {
 		
 	}
 	
-	//If no parameters sent in, the map is filled with empty black tiles.
+	//If no parameters sent in, the map is filled with empty cyan tiles.
 	void fill() {
 		
 		fill(false);
