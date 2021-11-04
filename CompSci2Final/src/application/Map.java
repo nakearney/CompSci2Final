@@ -2,6 +2,7 @@ package application;
 
 import java.util.Random;
 import javafx.geometry.Pos;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.GridPane;
@@ -25,6 +26,17 @@ public class Map extends GridPane {
 		
 	}
 	
+	public Map(Image image) { 
+		
+		tileGrid= new Tile[15][15];
+		setBackground(new Background(new BackgroundFill(Color.BLACK,null,null)));
+		setHgap(0.0);
+		setVgap(0.0);
+		setAlignment(Pos.CENTER);
+		fill(image);
+		
+	}
+	
 	public Map(int[][] types) {
 		
 		tileGrid= new Tile[15][15];
@@ -40,6 +52,21 @@ public class Map extends GridPane {
 	void fill() {
 		
 		fill(false);
+		
+	}
+	
+	void fill(Image image) {
+		
+		for(int y=0;y<15;y++) {
+			
+			for(int x=0;x<15;x++) {
+				
+				tileGrid[y][x] = new Tile(image);
+				add(tileGrid[y][x],x,y);
+				
+			}
+			
+		}
 		
 	}
 	
