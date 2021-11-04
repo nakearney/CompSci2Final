@@ -1,5 +1,7 @@
 package application;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Border;
@@ -25,6 +27,12 @@ public class Tile extends StackPane {
 		
 		backGroundColor = Color.BLACK;
 		setColor(backGroundColor);
+		
+	}
+	
+	public Tile(Image image) {
+		
+		getChildren().add(new ImageView(image));
 		
 	}
 	
