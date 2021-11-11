@@ -30,7 +30,9 @@ public class GameGUI extends BorderPane {
 	public Player p1;
 	public Player p2;
 	
-	GameGUI(Player p1, Player p2) {
+	
+	//Initializes Map in Main Currently. Then passes it here.
+	GameGUI(Player p1, Player p2, Map field) {
 		
 		setBackground(new Background(new BackgroundFill(Color.BLACK,null,null)));
 		
@@ -42,7 +44,7 @@ public class GameGUI extends BorderPane {
 		scroller.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 		scroller.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 		
-		field = new Map(new Image("/Sprites/GrassTile.png"));
+		this.field = field;
 		scroller.setContent(field);
 		setCenter(scroller);
 		
@@ -88,62 +90,7 @@ public class GameGUI extends BorderPane {
 		
 	}
 	
-	GameGUI(Player p1, Player p2, Map field) {
-		
-		setBackground(new Background(new BackgroundFill(Color.BLACK,null,null)));
-		
-		ScrollPane scroller = new ScrollPane();
-		scroller.setPannable(true);
-		scroller.setBackground(new Background(new BackgroundFill(Color.BLACK,null,null)));
-		scroller.setMaxHeight(600*1.81);
-		scroller.setMaxWidth(600*1.81);
-		scroller.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-		scroller.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-		
-		this.field = field;
-		scroller.setContent(field);
-		setCenter(scroller);
-		
-		buttons = new HBox();
-		buttons.setPadding(new Insets(4.0,4.0,4.0,4.0));
-		
-		move = new Button("MOVE");
-		formatButton(move,Color.BLUE);
-		
-		attack = new Button("ATTACK");
-		formatButton(attack,Color.RED);
-		
-		endTurn = new Button("END TURN");
-		formatButton(endTurn, Color.GRAY);
-		
-		endTurn.setOnMouseReleased((EventHandler<? super MouseEvent>) new EventHandler<MouseEvent>() {
-
-			@Override
-			public void handle(MouseEvent arg0) {
-				
-				if(p1.yourTurn() && p2.getUnitCount() == 0) {
-					//player 1 win condition
-				} else if(p2.yourTurn() && p1.getUnitCount() == 0) {
-					//player 2 win condition
-				}
-				
-				p1.switchTurn();
-				p2.switchTurn();
-				turnDisplay(p1,p2);
-				
-			}
-			
-		});
-		
-		buttons.getChildren().add(move);
-		buttons.getChildren().add(attack);
-		buttons.getChildren().add(endTurn);
-		
-		setTop(turnGUI);
-		setBottom(buttons);
-		
-	}
-	
+	//Makes buttons have this game's unique style with changing colors
 	private void formatButton(Button b, Color color) {
 		
 		BorderStroke[] stroke =  {new BorderStroke(Color.WHITESMOKE,BorderStrokeStyle.SOLID,new CornerRadii(4.0),new BorderWidths(6.0,6.0,6.0,6.0))};

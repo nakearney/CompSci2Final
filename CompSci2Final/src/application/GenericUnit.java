@@ -1,6 +1,8 @@
 package application;
 
-public class GenericUnit { //Will become abstract 
+import javafx.scene.control.Button;
+
+public class GenericUnit extends Button { //Will become abstract 
 
 	int hp;
 	int attack;
