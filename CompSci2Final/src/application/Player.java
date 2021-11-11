@@ -29,7 +29,7 @@ public class Player {
 	}
 	
 	public void subtractUnit() {
-		unitCount++;
+		unitCount--;
 	}
 	
 	public void switchTurn() {

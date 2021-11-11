@@ -56,8 +56,40 @@ public class GameGUI extends BorderPane {
 		move = new Button("MOVE");
 		formatButton(move,Color.BLUE);
 		
+		move.setOnMouseReleased((EventHandler<? super MouseEvent>) new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent arg0) { //Temporary testing
+				
+				if(p1.yourTurn()) {
+					p1.addUnit();
+				} else if(p2.yourTurn()) {
+					p2.addUnit();
+				}
+				turnDisplay(p1,p2);
+				
+			}
+			
+		});
+		
 		attack = new Button("ATTACK");
 		formatButton(attack,Color.RED);
+		
+		attack.setOnMouseReleased((EventHandler<? super MouseEvent>) new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent arg0) { //Temporary testing
+				
+				if(p1.yourTurn()) {
+					p1.subtractUnit();
+				} else if(p2.yourTurn()) {
+					p2.subtractUnit();
+				}
+				turnDisplay(p1,p2);
+				
+			}
+			
+		});
 		
 		endTurn = new Button("END TURN");
 		formatButton(endTurn, Color.GRAY);
@@ -68,14 +100,14 @@ public class GameGUI extends BorderPane {
 			public void handle(MouseEvent arg0) {
 				
 				if(p1.yourTurn() && p2.getUnitCount() == 0) {
-					//player 1 win condition
+					turnGUI.setText("Player 1 Wins");
 				} else if(p2.yourTurn() && p1.getUnitCount() == 0) {
-					//player 2 win condition
+					turnGUI.setText("Player 2 Wins");
+				} else {
+					p1.switchTurn();
+					p2.switchTurn();
+					turnDisplay(p1,p2);
 				}
-				
-				p1.switchTurn();
-				p2.switchTurn();
-				turnDisplay(p1,p2);
 				
 			}
 			
