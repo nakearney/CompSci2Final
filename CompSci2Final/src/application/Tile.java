@@ -21,7 +21,7 @@ public class Tile extends StackPane {
 	/*
 	 * Tile constructors below. Supports constructors for initializing a Tile using a
 	 * color, integer, or image, with really only just changes the way the Tile's background looks.
-	 * You can send in a GenericUnit with any of these paramters to make a tile start with a unit.
+	 * You can send in a GenericUnit with any of these parameters to make a tile start with a unit.
 	 */
 	
 	//Creates a blank tile.

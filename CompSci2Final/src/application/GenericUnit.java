@@ -1,6 +1,8 @@
 package application;
 
+import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 
 public class GenericUnit extends Button { //Will become abstract 
 
@@ -9,6 +11,7 @@ public class GenericUnit extends Button { //Will become abstract
 	private int movementRange;
 	private Player player;
 	private boolean isDead;
+	private boolean isSelected;
 	//Add Image Variable
 	
 	public GenericUnit(int hp, int attack, int movementRange, Player player) { // Add Image Parameter
@@ -17,14 +20,23 @@ public class GenericUnit extends Button { //Will become abstract
 		this.movementRange = movementRange;
 		this.player = player;
 		isDead = false;
+		isSelected = false;
 		player.addUnit();
+		this.setOnMouseReleased((EventHandler<? super MouseEvent>) new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent arg0) {
+				isSelected = !isSelected;
+			}
+			
+		});
 	}
 	
 	public int getHP() {
 		return hp;
 	}
 	
-	public void takeDamage(int damage) { //Nick has an idea for unit death
+	public void takeDamage(int damage) { 
 		hp = hp - damage;
 		if(hp <= 0) {
 			hp = 0;
@@ -48,6 +60,14 @@ public class GenericUnit extends Button { //Will become abstract
 		return isDead;
 	}
 	
+	public boolean isSelected() {
+		return isSelected;
+	}
+	
+	public void setSelected(boolean isSelected) {
+		this.isSelected = isSelected;
+	}
+	
 	public void move() { //Maybe need a move function here? | Don't think so though | Would become abstract
 		
 	}
@@ -56,7 +76,7 @@ public class GenericUnit extends Button { //Will become abstract
 		target.takeDamage(attack);
 		if(target.isDead()) {
 			target.getPlayer().subtractUnit();
-			//Remove unit from field
+			//Destroy unit
 		}
 	}
 	
