@@ -7,9 +7,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.BorderStroke;
@@ -171,7 +173,7 @@ public class GameGUI extends BorderPane {
 			@Override
 			public void handle(ActionEvent arg0) {
 				
-				b.setBackground(new Background(new BackgroundFill(color,null,null)));
+				b.setBackground(new Background(new BackgroundFill(Color.BLACK,null,null)));
 				
 			}
 			

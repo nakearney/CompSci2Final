@@ -3,6 +3,8 @@ package application;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class GenericUnit extends Button { //Will become abstract 
 
@@ -12,7 +14,6 @@ public class GenericUnit extends Button { //Will become abstract
 	private Player player;
 	private boolean isDead;
 	private boolean isSelected;
-	//Add Image Variable
 	
 	public GenericUnit(int hp, int attack, int movementRange, Player player) { // Add Image Parameter
 		this.hp = hp;
@@ -21,6 +22,14 @@ public class GenericUnit extends Button { //Will become abstract
 		this.player = player;
 		isDead = false;
 		isSelected = false;
+		if(player.getPlayerNumber()==1) {
+			this.setGraphic(new ImageView(new Image("/Sprites/RedTank.png")));
+		} else {
+			this.setGraphic(new ImageView(new Image("/Sprites/BlueTank.png")));
+		}
+		this.setBackground(null);
+		this.setMaxHeight(30);
+		this.setMaxWidth(30);
 		player.addUnit();
 		this.setOnMouseReleased((EventHandler<? super MouseEvent>) new EventHandler<MouseEvent>() {
 
@@ -30,14 +39,16 @@ public class GenericUnit extends Button { //Will become abstract
 			}
 			
 		});
+
 	}
 	
 	public int getHP() {
 		return hp;
 	}
 	
-	public void takeDamage(int damage) { 
-		hp = hp - damage;
+
+	public void takeDamage(int damage) { //Nick has an idea for unit death
+		hp-=damage;
 		if(hp <= 0) {
 			hp = 0;
 			isDead = true;

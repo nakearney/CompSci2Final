@@ -63,7 +63,7 @@ public class Map extends GridPane {
 			
 			for(int x=0;x<MAP_SIZE;x++) {
 				
-				tileGrid[y][x] = new Tile(image);
+				tileGrid[y][x] = new Tile(image,x,y);
 				add(tileGrid[y][x],x,y);
 				
 			}
@@ -87,7 +87,7 @@ public class Map extends GridPane {
 			for(int x=0;x<MAP_SIZE;x++) {
 				
 				Random rand = new Random();
-				tileGrid[y][x] = new Tile(rand.nextInt(5)*i);
+				tileGrid[y][x] = new Tile(rand.nextInt(5)*i,x,y);
 				add(tileGrid[y][x],x,y);
 				
 			}
@@ -103,7 +103,7 @@ public class Map extends GridPane {
 			
 			for(int x=0;x<MAP_SIZE;x++) {
 				
-				tileGrid[y][x] = new Tile(types[y][x]);
+				tileGrid[y][x] = new Tile(types[y][x],x,y);
 				add(tileGrid[y][x],x,y);
 				
 			}
@@ -202,6 +202,12 @@ public class Map extends GridPane {
 		
 		tiles=setBorder(tiles,15,type);
 		return tiles;
+		
+	}
+	
+	public void setUnit(int x, int y, GenericUnit unit) {
+		
+		tileGrid[y][x].setUnit(unit);
 		
 	}
 	
