@@ -10,7 +10,10 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		
-		GameGUI game = new GameGUI();
+		Player player1 = new Player(1,true);
+		Player player2 = new Player(2,false);
+		
+		GameGUI game = new GameGUI(player1, player2);
 		Scene s = new Scene(game);
 		
 		primaryStage.setMaximized(true);

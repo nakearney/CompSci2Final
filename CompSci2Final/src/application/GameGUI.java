@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
@@ -22,10 +23,14 @@ public class GameGUI extends BorderPane {
 
 	public Map field;
 	public HBox buttons;
+	public Label turnGUI;
 	public Button attack;
 	public Button move;
+	public Button endTurn;
+	public Player p1;
+	public Player p2;
 	
-	GameGUI() {
+	GameGUI(Player p1, Player p2) {
 		
 		setBackground(new Background(new BackgroundFill(Color.BLACK,null,null)));
 		
@@ -41,6 +46,8 @@ public class GameGUI extends BorderPane {
 		scroller.setContent(field);
 		setCenter(scroller);
 		
+		turnGUI = new Label("Player 1: You have " + p1.getUnitCount() + " units remaining");
+		
 		buttons = new HBox();
 		buttons.setPadding(new Insets(4.0,4.0,4.0,4.0));
 		
@@ -50,14 +57,38 @@ public class GameGUI extends BorderPane {
 		attack = new Button("ATTACK");
 		formatButton(attack,Color.RED);
 		
+		endTurn = new Button("END TURN");
+		formatButton(endTurn, Color.GRAY);
+		
+		endTurn.setOnMouseReleased((EventHandler<? super MouseEvent>) new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent arg0) {
+				
+				if(p1.yourTurn() && p2.getUnitCount() == 0) {
+					//player 1 win condition
+				} else if(p2.yourTurn() && p1.getUnitCount() == 0) {
+					//player 2 win condition
+				}
+				
+				p1.switchTurn();
+				p2.switchTurn();
+				turnDisplay(p1,p2);
+				
+			}
+			
+		});
+		
 		buttons.getChildren().add(move);
 		buttons.getChildren().add(attack);
+		buttons.getChildren().add(endTurn);
 		
+		setTop(turnGUI);
 		setBottom(buttons);
 		
 	}
 	
-	GameGUI(Map field) {
+	GameGUI(Player p1, Player p2, Map field) {
 		
 		setBackground(new Background(new BackgroundFill(Color.BLACK,null,null)));
 		
@@ -82,9 +113,33 @@ public class GameGUI extends BorderPane {
 		attack = new Button("ATTACK");
 		formatButton(attack,Color.RED);
 		
+		endTurn = new Button("END TURN");
+		formatButton(endTurn, Color.GRAY);
+		
+		endTurn.setOnMouseReleased((EventHandler<? super MouseEvent>) new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent arg0) {
+				
+				if(p1.yourTurn() && p2.getUnitCount() == 0) {
+					//player 1 win condition
+				} else if(p2.yourTurn() && p1.getUnitCount() == 0) {
+					//player 2 win condition
+				}
+				
+				p1.switchTurn();
+				p2.switchTurn();
+				turnDisplay(p1,p2);
+				
+			}
+			
+		});
+		
 		buttons.getChildren().add(move);
 		buttons.getChildren().add(attack);
+		buttons.getChildren().add(endTurn);
 		
+		setTop(turnGUI);
 		setBottom(buttons);
 		
 	}
@@ -143,6 +198,16 @@ public class GameGUI extends BorderPane {
 			
 		});
 		
+	}
+	
+	private void turnDisplay(Player p1, Player p2) {
+		if(p1.yourTurn()) {
+			turnGUI.setText("Player 1: You have " + p1.getUnitCount() + " units remaining");
+		} else if(p2.yourTurn()) {
+			turnGUI.setText("Player 2: You have " + p2.getUnitCount() + " units remaining");
+		} else {
+			turnGUI.setText("Turn Terror");
+		}
 	}
 	
 }
