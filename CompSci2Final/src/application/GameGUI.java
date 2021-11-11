@@ -24,7 +24,6 @@ public class GameGUI extends BorderPane {
 	public HBox buttons;
 	public Button attack;
 	public Button move;
-	int[][] Map1;
 	
 	GameGUI() {
 		
@@ -38,17 +37,7 @@ public class GameGUI extends BorderPane {
 		scroller.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 		scroller.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 		
-		//Creating Map Below
-		Map1=new int[Map.MAP_SIZE][Map.MAP_SIZE];
-		Map1=Map.setRect(Map1, 2, 2, 11, 11, true, 1);
-		Map1=Map.setRow(Map1,7,3);
-		Map1=Map.setTile(Map1, 4, 7, 4);
-		Map1=Map.setTile(Map1, 5, 7, 4);
-		Map1=Map.setTile(Map1, 10, 7, 4);
-		Map1=Map.setTile(Map1, 9, 7, 4);
-		Map1=Map.setBorder(Map1, 2, 0);
-		
-		field = new Map(Map1);
+		field = new Map(true);
 		scroller.setContent(field);
 		setCenter(scroller);
 		
