@@ -24,15 +24,11 @@ public class Tile extends StackPane {
 	 * You can send in a GenericUnit with any of these paramters to make a tile start with a unit.
 	 */
 	
-	//Creates a blank tile. Background is Cyan to represent the sky.
+	//Creates a blank tile.
 	public Tile() {
 		
 		isOccupied=false;
-		setPrefHeight(75);
-		setPrefWidth(75);
-		
-		backGroundColor = Color.CYAN;
-		setColor(backGroundColor);
+		getChildren().add(new ImageView("/Sprites/SkyTile.png"));
 		
 	}
 	
@@ -47,10 +43,9 @@ public class Tile extends StackPane {
 	//Makes tile with an image background and puts a troop in it.
 	public Tile(Image image, GenericUnit troop) {
 		
+		this(image);
 		isOccupied=true;
 		unit=troop;
-		getChildren().add(new ImageView(image));
-		getChildren().add(troop);
 		
 	}
 	
@@ -58,48 +53,35 @@ public class Tile extends StackPane {
 	public Tile(int type) {
 		
 		isOccupied=false;
-		setPrefHeight(75);
-		setPrefWidth(75);
 		
 		if(type==0) {
-			backGroundColor = Color.CYAN;
+			getChildren().add(new ImageView("/Sprites/SkyTile.png"));
 		} else if(type==1) {
-			backGroundColor = Color.GREEN;
+			getChildren().add(new ImageView("/Sprites/GrassTile.png"));
 		} else if(type==2) {
-			backGroundColor = Color.GREY;
+			getChildren().add(new ImageView("/Sprites/RockTile.png"));
 		} else if(type==3) {
-			backGroundColor = Color.BLUE;
+			getChildren().add(new ImageView("/Sprites/WaterTile.png"));
 		} else if(type==4) {
-			backGroundColor = Color.SADDLEBROWN;
+			getChildren().add(new ImageView("/Sprites/WoodTile.png"));
 		}
-		
-		setColor(backGroundColor);
 		
 	}
 	
 	//Makes tile with a background color and a troop within it.
 	public Tile(int type, GenericUnit troop) {
 		
-		isOccupied=false;
+		this(type);
+		isOccupied=true;
 		unit=troop;
-		setPrefHeight(75);
-		setPrefWidth(75);
-		
-		if(type==0) {
-			backGroundColor = Color.CYAN;
-		} else if(type==1) {
-			backGroundColor = Color.GREEN;
-		} else if(type==2) {
-			backGroundColor = Color.GREY;
-		} else if(type==3) {
-			backGroundColor = Color.BLUE;
-		} else if(type==4) {
-			backGroundColor = Color.SADDLEBROWN;
-		}
-		
-		setColor(backGroundColor);
 		
 	}
+	
+	/*
+	 * The stuff below sets a tile to a certain color, and does stuff with the color.
+	 * Useless now that all the Tile sprites are made. But its there.
+	 */
+	
 	
 	//Sets tile to a preset color.
 	public Tile(Color color) {
@@ -116,13 +98,9 @@ public class Tile extends StackPane {
 	//Sets tile to a preset color and puts a troop in it
 	public Tile(Color color, GenericUnit troop) {
 		
+		this(color);
 		isOccupied=true;
 		unit=troop;
-		setPrefHeight(75);
-		setPrefWidth(75);
-		
-		backGroundColor = color;
-		setColor(color);
 		
 	}
 	/*
@@ -146,6 +124,11 @@ public class Tile extends StackPane {
 		setBorder(new Border(stroke));
 		
 	}
+	
+	
+	/*
+	 * End of largely irrelevant Tile Color Stuff
+	 */
 	
 	public boolean isOccupied() { //Returns whether a unit is inside of Tile
 		return isOccupied;

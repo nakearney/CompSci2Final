@@ -3,6 +3,7 @@ package application;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 
 public class Main extends Application {
@@ -14,7 +15,8 @@ public class Main extends Application {
 		
 		primaryStage.setMaximized(true);
 		primaryStage.setScene(s);
-		primaryStage.setTitle("Gamers VS Society");
+		primaryStage.setTitle("Scam Kids: Make Money");
+		primaryStage.getIcons().add(new Image("/Sprites/HastilyMadeTank.png"));
 		primaryStage.show();
 		
 	}
