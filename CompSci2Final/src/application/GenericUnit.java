@@ -25,7 +25,7 @@ public class GenericUnit extends Button { //Will become abstract
 	}
 	
 	public void takeDamage(int damage) { //Nick has an idea for unit death
-		hp = hp - damage;
+		hp-=damage;
 		if(hp <= 0) {
 			hp = 0;
 			isDead = true;

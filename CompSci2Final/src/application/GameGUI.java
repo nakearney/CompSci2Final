@@ -171,7 +171,7 @@ public class GameGUI extends BorderPane {
 			@Override
 			public void handle(ActionEvent arg0) {
 				
-				b.setBackground(new Background(new BackgroundFill(color,null,null)));
+				b.setBackground(new Background(new BackgroundFill(Color.BLACK,null,null)));
 				
 			}
 			
