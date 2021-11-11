@@ -3,6 +3,12 @@ package application;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.paint.Color;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -31,11 +37,46 @@ public class GenericUnit extends Button { //Will become abstract
 		this.setMaxHeight(30);
 		this.setMaxWidth(30);
 		player.addUnit();
+		Button b = this;
+		
+		this.setOnMouseEntered((EventHandler<? super MouseEvent>) new EventHandler<MouseEvent>() {
+			
+			@Override
+			public void handle(MouseEvent arg0) {
+				if(isSelected) {
+					BorderStroke[] stroke =  {new BorderStroke(Color.PURPLE,BorderStrokeStyle.SOLID,new CornerRadii(4.0),new BorderWidths(6.0,6.0,6.0,6.0))};
+					b.setBorder(new Border(stroke));
+				} else {
+					BorderStroke[] stroke =  {new BorderStroke(Color.GOLD,BorderStrokeStyle.SOLID,new CornerRadii(4.0),new BorderWidths(6.0,6.0,6.0,6.0))};
+					b.setBorder(new Border(stroke));
+				}
+			}
+		});
+		
+		this.setOnMouseExited((EventHandler<? super MouseEvent>) new EventHandler<MouseEvent>() {
+			
+			@Override
+			public void handle(MouseEvent arg0) {
+				if(!isSelected) {
+					b.setBorder(null);
+				}
+				
+			}
+		});
+		
+		
 		this.setOnMouseReleased((EventHandler<? super MouseEvent>) new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent arg0) {
 				isSelected = !isSelected;
+				if(isSelected) {
+					BorderStroke[] stroke =  {new BorderStroke(Color.PURPLE,BorderStrokeStyle.SOLID,new CornerRadii(4.0),new BorderWidths(6.0,6.0,6.0,6.0))};
+					b.setBorder(new Border(stroke));
+				} else {
+					BorderStroke[] stroke =  {new BorderStroke(Color.GOLD,BorderStrokeStyle.SOLID,new CornerRadii(4.0),new BorderWidths(6.0,6.0,6.0,6.0))};
+					b.setBorder(new Border(stroke));
+				}
 			}
 			
 		});
