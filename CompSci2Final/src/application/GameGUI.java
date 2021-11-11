@@ -25,6 +25,11 @@ public class GameGUI extends BorderPane {
 	public Button attack;
 	public Button move;
 	
+	/*
+	 * Currently Just Makes Random Map. If we want to initialize 
+	 * Maps in here instead of Main, I can do that
+	 * -Will Livezey-Corr
+	 */
 	GameGUI() {
 		
 		setBackground(new Background(new BackgroundFill(Color.BLACK,null,null)));
@@ -57,6 +62,7 @@ public class GameGUI extends BorderPane {
 		
 	}
 	
+	//Initializes Map in Main Currently. Then passes it here.
 	GameGUI(Map field) {
 		
 		setBackground(new Background(new BackgroundFill(Color.BLACK,null,null)));
@@ -89,6 +95,7 @@ public class GameGUI extends BorderPane {
 		
 	}
 	
+	//Makes buttons have this game's unique style with changing colors
 	private void formatButton(Button b, Color color) {
 		
 		BorderStroke[] stroke =  {new BorderStroke(Color.WHITESMOKE,BorderStrokeStyle.SOLID,new CornerRadii(4.0),new BorderWidths(6.0,6.0,6.0,6.0))};

@@ -25,13 +25,15 @@ public class Map extends GridPane {
 		
 	}
 	
+	//Makes either a random or blank map. True=random, False=blank
 	public Map(boolean random) { 
 		
 		this();
 		fill(random);
 		
 	}
-	
+
+	//Fills Map with one image
 	public Map(Image image) { 
 		
 		this();
@@ -39,6 +41,7 @@ public class Map extends GridPane {
 		
 	}
 	
+	//Fills Map with preset map
 	public Map(int[][] types) {
 		
 		this();
@@ -53,6 +56,7 @@ public class Map extends GridPane {
 		
 	}
 	
+	//Fills with an image
 	void fill(Image image) {
 		
 		for(int y=0;y<MAP_SIZE;y++) {

@@ -18,6 +18,9 @@ public class Main extends Application {
 		Map1=Map.setTile(Map1, 5, 7, 4);
 		Map1=Map.setTile(Map1, 10, 7, 4);
 		Map1=Map.setTile(Map1, 9, 7, 4);
+		Map1=Map.setTile(Map1, 3, 3, 2);
+		Map1=Map.setTile(Map1, 3, 4, 2);
+		Map1=Map.setTile(Map1, 4, 3, 2);
 		Map1=Map.setBorder(Map1, 2, 0);
 		
 		Map map1 = new Map(Map1);
@@ -36,4 +39,5 @@ public class Main extends Application {
 	public static void main(String[] args) {
 		launch(args);
 	}
+	
 }
