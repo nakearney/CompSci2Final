@@ -37,7 +37,7 @@ public class GameGUI extends BorderPane {
 		scroller.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 		scroller.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 		
-		field = new Map(new Image("/Sprites/WaterTile.png"));
+		field = new Map(new Image("/Sprites/RockTile.png"));
 		scroller.setContent(field);
 		setCenter(scroller);
 		
