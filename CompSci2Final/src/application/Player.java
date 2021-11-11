@@ -2,9 +2,9 @@ package application;
 
 public class Player {
 	
-	int number;
-	int unitCount;
-	boolean yourTurn;
+	private int number;
+	private int unitCount;
+	private boolean yourTurn;
 	
 	public Player(int number, boolean yourTurn) {
 		this.number = number;

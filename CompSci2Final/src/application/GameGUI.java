@@ -21,18 +21,18 @@ import javafx.scene.paint.Color;
 
 public class GameGUI extends BorderPane {
 
-	public Map field;
-	public HBox buttons;
-	public Label turnGUI;
-	public Button attack;
-	public Button move;
-	public Button endTurn;
-	public Player p1;
-	public Player p2;
+	private Map field;
+	private HBox buttons;
+	private Label turnGUI;
+	private Button attack;
+	private Button move;
+	private Button endTurn;
+	private Player p1;
+	private Player p2;
 	
 	
 	//Initializes Map in Main Currently. Then passes it here.
-	GameGUI(Player p1, Player p2, Map field) {
+	public GameGUI(Player p1, Player p2, Map field) {
 		
 		setBackground(new Background(new BackgroundFill(Color.BLACK,null,null)));
 		

@@ -10,7 +10,7 @@ import javafx.scene.paint.Color;
 
 public class Map extends GridPane {
 
-	Tile[][] tileGrid;
+	private Tile[][] tileGrid;
 	
 	final public static int MAP_SIZE=15;
 	
@@ -50,14 +50,14 @@ public class Map extends GridPane {
 	}
 	
 	//If no parameters sent in, the map is filled with empty cyan tiles.
-	void fill() {
+	private void fill() {
 		
 		fill(false);
 		
 	}
 	
 	//Fills with an image
-	void fill(Image image) {
+	private void fill(Image image) {
 		
 		for(int y=0;y<MAP_SIZE;y++) {
 			
@@ -73,7 +73,7 @@ public class Map extends GridPane {
 	}
 	
 	//Fills either randomly or all empty. Send in a true parameter to make it not empty, false for empty.
-	void fill(boolean random) {
+	private void fill(boolean random) {
 		
 		int i=0;
 		
@@ -97,7 +97,7 @@ public class Map extends GridPane {
 	}
 	
 	//Sends in a bunch of integers, corresponding to tiles, get a map!
-	void fill(int[][] types) {
+	private void fill(int[][] types) {
 		
 		for(int y=0;y<MAP_SIZE;y++) {
 			

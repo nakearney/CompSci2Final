@@ -14,9 +14,9 @@ import javafx.scene.paint.Color;
 
 public class Tile extends StackPane {
 	
-	boolean isOccupied;
-	GenericUnit unit;
-	Color backGroundColor;
+	private boolean isOccupied;
+	private GenericUnit unit;
+	private Color backGroundColor;
 	
 	/*
 	 * Tile constructors below. Supports constructors for initializing a Tile using a

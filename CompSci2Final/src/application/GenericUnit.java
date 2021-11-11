@@ -4,11 +4,11 @@ import javafx.scene.control.Button;
 
 public class GenericUnit extends Button { //Will become abstract 
 
-	int hp;
-	int attack;
-	int movementRange;
-	Player player;
-	boolean isDead;
+	private int hp;
+	private int attack;
+	private int movementRange;
+	private Player player;
+	private boolean isDead;
 	//Add Image Variable
 	
 	public GenericUnit(int hp, int attack, int movementRange, Player player) { // Add Image Parameter
