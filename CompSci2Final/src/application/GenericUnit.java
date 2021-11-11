@@ -1,6 +1,8 @@
 package application;
 
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class GenericUnit extends Button { //Will become abstract 
 
@@ -17,7 +19,13 @@ public class GenericUnit extends Button { //Will become abstract
 		this.movementRange = movementRange;
 		this.player = player;
 		isDead = false;
+		if(player.getPlayerNumber()==1) this.setGraphic(new ImageView(new Image("/Sprites/RedTank.png")));
+		else this.setGraphic(new ImageView(new Image("/Sprites/BlueTank.png")));
+		this.setBackground(null);
+		this.setMaxHeight(30);
+		this.setMaxWidth(30);
 		player.addUnit();
+		
 	}
 	
 	public int getHP() {

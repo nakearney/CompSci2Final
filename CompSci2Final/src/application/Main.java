@@ -27,6 +27,8 @@ public class Main extends Application {
 		Map1=Map.setBorder(Map1, 2, 0);
 		
 		Map map1 = new Map(Map1);
+		map1.setUnit(5, 10, new GenericUnit(3,3,2,player1));
+		map1.setUnit(8, 10, new GenericUnit(3,3,2,player2));
 		
 		GameGUI game = new GameGUI(player1, player2, map1);
 		Scene s = new Scene(game);
@@ -34,7 +36,7 @@ public class Main extends Application {
 		primaryStage.setMaximized(true);
 		primaryStage.setScene(s);
 		primaryStage.setTitle("Scam Kids: Make Money");
-		primaryStage.getIcons().add(new Image("/Sprites/HastilyMadeTank.png"));
+		primaryStage.getIcons().add(new Image("/Sprites/TinyTank.png"));
 		primaryStage.show();
 		
 	}

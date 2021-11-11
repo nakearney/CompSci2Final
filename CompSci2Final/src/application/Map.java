@@ -205,4 +205,10 @@ public class Map extends GridPane {
 		
 	}
 	
+	public void setUnit(int x, int y, GenericUnit unit) {
+		
+		tileGrid[y][x].setUnit(unit);
+		
+	}
+	
 }

@@ -47,8 +47,9 @@ public class Tile extends StackPane {
 	public Tile(Image image, GenericUnit troop, int x, int y) {
 		
 		this(image,x,y);
-		isOccupied=true;
 		unit=troop;
+		setUnit(troop);
+		isOccupied=true;
 		
 	}
 	
@@ -77,8 +78,9 @@ public class Tile extends StackPane {
 	public Tile(int type, GenericUnit troop, int x, int y) {
 		
 		this(type,x,y);
-		isOccupied=true;
 		unit=troop;
+		setUnit(troop);
+		isOccupied=true;
 		
 	}
 	
@@ -106,8 +108,9 @@ public class Tile extends StackPane {
 	public Tile(Color color, GenericUnit troop, int x, int y) {
 		
 		this(color,x,y);
-		isOccupied=true;
 		unit=troop;
+		setUnit(troop);
+		isOccupied=true;
 		
 	}
 	/*
