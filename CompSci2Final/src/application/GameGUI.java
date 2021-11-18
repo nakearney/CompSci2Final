@@ -39,6 +39,7 @@ public class GameGUI extends BorderPane {
 	private Button endTurn;
 	private Player p1;
 	private Player p2;
+	private double sideWidth=150.0;
 	
 	
 	//Initializes Map in Main Currently. Then passes it here.
@@ -65,10 +66,12 @@ public class GameGUI extends BorderPane {
 		turnDisplay(p1,p2);
 		
 		infoGUI = new ScrollPane();
+		infoGUI.setPrefWidth(sideWidth);
 		infoGUI.setPannable(true);
 		//Info GUI Stuff Here
 		
 		econGUI = new VBox();
+		econGUI.setPrefWidth(sideWidth);
 		Button cat = new Button("Cat Soldier: $" + CatSoldier.getCost());
 		cat.setOnMouseReleased((EventHandler<? super MouseEvent>) new EventHandler<MouseEvent>() {
 			@Override
