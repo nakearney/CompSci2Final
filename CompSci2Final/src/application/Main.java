@@ -30,8 +30,8 @@ public class Main extends Application {
 		//Process for making units is to initialize the map of tiles created above,
 		//Then use the Map methods to add units.
 		map1 = new Map(Map1);
-		map1.setUnit(8, 4, new GenericUnit(5,8,4,player1));
-		map1.setUnit(8, 10, new GenericUnit(5,8,4,player2));
+		map1.setUnit(8, 4, new CatSoldier(player1));
+		map1.setUnit(8, 10, new CatSoldier(player2));
 		
 		GameGUI game = new GameGUI(player1, player2, map1);
 		Scene s = new Scene(game);

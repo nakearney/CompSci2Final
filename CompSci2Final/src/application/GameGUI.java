@@ -83,11 +83,12 @@ public class GameGUI extends BorderPane {
 				
 				if(unitList.size()==1 && unitList.get(0).getUnit().getPlayer().yourTurn()) {
 					
-					ArrayList<Tile> moveArea = field.getMovementTilesLand(unitList.get(0).getUnit().getMovementRange());
+					GenericUnit unit = unitList.get(0).getUnit();
+					ArrayList<Tile> moveArea = unit.moveStyle(field);
 					
 					for(Tile t : moveArea) {
 				
-						t.setMyButton(new MoveButton(t,unitList.get(0),unitList.get(0).getUnit()));
+						t.setMyButton(new MoveButton(t,unitList.get(0),unit));
 						
 					}
 				}
@@ -108,13 +109,14 @@ public class GameGUI extends BorderPane {
 				
 				if(unitList.size()==1 && unitList.get(0).getUnit().getPlayer().yourTurn()) {
 		
-					ArrayList<Tile> attackArea = field.getAttackTilesLandWater(2);
-					ArrayList<Tile> nullSpace = field.getSurroundingTiles(2);
+					GenericUnit unit = unitList.get(0).getUnit();
+					ArrayList<Tile> attackArea = unit.attackStyle(field);
+					ArrayList<Tile> nullSpace = unit.nullStyle(field);
 					
 					for(Tile t : nullSpace) {
 						
 						if(attackArea.contains(t)) {
-							t.setMyButton(new AttackButton(t,unitList.get(0),unitList.get(0).getUnit()));
+							t.setMyButton(new AttackButton(t,unitList.get(0),unit));
 						} else {
 							t.setMyButton(new NullButton());
 						}

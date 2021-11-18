@@ -20,16 +20,18 @@ public abstract class GenericUnit extends Button { //Will become abstract
 	private int hp;
 	private int attack;
 	private int movementRange;
+	private int attackRange;
 	private Player player;
 	private boolean isDead;
 	private boolean isSelected;
 	private boolean hasMoved;
 	private boolean hasAttacked;
 	
-	public GenericUnit(int hp, int attack, int movementRange, Player player) { // Add Image Parameter
+	public GenericUnit(int hp, int attack, int movementRange, int attackRange, Player player) { // Add Image Parameter
 		this.hp = hp;
 		this.attack = attack;
 		this.movementRange = movementRange;
+		this.attackRange = attackRange;
 		this.player = player;
 		isDead = false;
 		isSelected = false;
@@ -125,6 +127,10 @@ public abstract class GenericUnit extends Button { //Will become abstract
 		return attack;
 	}
 	
+	public int getAttackRange() {
+		return attackRange;
+	}
+	
 	public int getMovementRange() {
 		return movementRange;
 	}
@@ -185,5 +191,9 @@ public abstract class GenericUnit extends Button { //Will become abstract
 	}
 	
 	public abstract ArrayList<Tile> attackStyle(Map field);
+	
+	public abstract ArrayList<Tile> nullStyle(Map field);
+	
+	public abstract ArrayList<Tile> moveStyle(Map field);
 	
 }
