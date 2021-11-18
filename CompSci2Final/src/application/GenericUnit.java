@@ -24,8 +24,7 @@ public class GenericUnit extends Button { //Will become abstract
 	private boolean hasMoved;
 	private boolean hasAttacked;
 	
-	public GenericUnit(String name, int hp, int attack, int movementRange, Player player) { // Add Image Parameter
-		this.name = name;
+	public GenericUnit(int hp, int attack, int movementRange, Player player) { // Add Image Parameter
 		this.hp = hp;
 		this.attack = attack;
 		this.movementRange = movementRange;
