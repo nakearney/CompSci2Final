@@ -35,11 +35,6 @@ public abstract class GenericUnit extends Button { //Will become abstract
 		this.player = player;
 		isDead = false;
 		isSelected = false;
-		if(player.getPlayerNumber()==1) {
-			this.setGraphic(new ImageView(new Image("/Sprites/RedTank.png")));
-		} else {
-			this.setGraphic(new ImageView(new Image("/Sprites/BlueTank.png")));
-		}
 		this.setBackground(null);
 		this.setMaxHeight(30);
 		this.setMaxWidth(30);
