@@ -22,6 +22,7 @@ import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
@@ -30,6 +31,8 @@ public class GameGUI extends BorderPane {
 
 	private Map field;
 	private HBox buttons;
+	private VBox econGUI;
+	private VBox econGUI2;
 	private Label turnGUI;
 	private Button attack;
 	private Button move;
@@ -59,6 +62,10 @@ public class GameGUI extends BorderPane {
 		turnGUI.setTextFill(Color.WHITESMOKE);
 		turnGUI.setFont(new Font("Arial",20));
 		turnGUI.setTextAlignment(TextAlignment.CENTER);
+		
+		econGUI = new VBox();
+		Label text = new Label("Words words words");
+		econGUI.getChildren().add(text);
 		
 		buttons = new HBox();
 		buttons.setPadding(new Insets(4.0,4.0,4.0,4.0));
@@ -171,6 +178,7 @@ public class GameGUI extends BorderPane {
 		setTop(turnGUI);
 		BorderPane.setAlignment(turnGUI, Pos.CENTER);
 		setBottom(buttons);
+		setRight(econGUI);
 		
 	}
 	

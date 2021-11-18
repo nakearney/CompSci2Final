@@ -14,6 +14,7 @@ import javafx.scene.image.ImageView;
 
 public class GenericUnit extends Button { //Will become abstract 
 
+	private String name;
 	private int hp;
 	private int attack;
 	private int movementRange;
@@ -23,7 +24,8 @@ public class GenericUnit extends Button { //Will become abstract
 	private boolean hasMoved;
 	private boolean hasAttacked;
 	
-	public GenericUnit(int hp, int attack, int movementRange, Player player) { // Add Image Parameter
+	public GenericUnit(String name, int hp, int attack, int movementRange, Player player) { // Add Image Parameter
+		this.name = name;
 		this.hp = hp;
 		this.attack = attack;
 		this.movementRange = movementRange;
@@ -174,16 +176,10 @@ public class GenericUnit extends Button { //Will become abstract
 		
 	}
 	
-	
-	/*public void move() { //Maybe need a move function here? | Don't think so though | Would become abstract
-		
-	}*/
-	
 	public void attack(GenericUnit target) { //Would be an abstract method though it will follow a similar formula 
 		target.takeDamage(attack);
 		if(target.isDead()) {
 			target.getPlayer().subtractUnit();
-			//Destroy unit
 		}
 	}
 	

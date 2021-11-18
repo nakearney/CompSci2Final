@@ -51,11 +51,11 @@ public class Tile extends StackPane {
 	}
 	
 	//Makes tile with an image background and puts a troop in it.
-	public Tile(Image image, GenericUnit troop, int x, int y) {
+	public Tile(Image image, GenericUnit unit, int x, int y) {
 		
 		this(image,x,y);
-		unit=troop;
-		setUnit(troop);
+		this.unit=unit;
+		setUnit(unit);
 		isOccupied=true;
 		
 	}
