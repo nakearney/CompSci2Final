@@ -17,6 +17,9 @@ public class Tile extends StackPane {
 	private boolean isOccupied;
 	private GenericUnit unit;
 	private Color backGroundColor;
+	private boolean isTraversible;
+	private boolean isWater;
+	private MapButton myButton=null;
 	int x,y;
 	
 	/*
@@ -29,6 +32,8 @@ public class Tile extends StackPane {
 	public Tile(int x, int y) {
 		
 		isOccupied=false;
+		isTraversible=false;
+		isWater=false;
 		getChildren().add(new ImageView("/Sprites/SkyTile.png"));
 		setCoords(x,y);
 		
@@ -38,6 +43,8 @@ public class Tile extends StackPane {
 	public Tile(Image image, int x, int y) {
 		
 		isOccupied=false;
+		isTraversible=true;
+		isWater=false;
 		getChildren().add(new ImageView(image));
 		setCoords(x,y);
 		
@@ -60,14 +67,20 @@ public class Tile extends StackPane {
 		
 		if(type==0) {
 			getChildren().add(new ImageView("/Sprites/SkyTile.png"));
+			isTraversible=false;
 		} else if(type==1) {
 			getChildren().add(new ImageView("/Sprites/GrassTile.png"));
+			isTraversible=true;
 		} else if(type==2) {
 			getChildren().add(new ImageView("/Sprites/RockTile.png"));
+			isTraversible=false;
 		} else if(type==3) {
 			getChildren().add(new ImageView("/Sprites/WaterTile.png"));
+			isTraversible=false;
+			isWater=true;
 		} else if(type==4) {
 			getChildren().add(new ImageView("/Sprites/WoodTile.png"));
+			isTraversible=true;
 		}
 		
 		setCoords(x,y);
@@ -101,6 +114,9 @@ public class Tile extends StackPane {
 		setColor(color);
 		
 		setCoords(x,y);
+		
+		isWater=false;
+		isTraversible=true;
 		
 	}
 	
@@ -156,6 +172,19 @@ public class Tile extends StackPane {
 		}
 	}
 	
+	//This is risky to use outside of MoveButton and AttackButton, as it assumes unit is in the tile
+	public void removeUnit(GenericUnit unit) {
+		
+		if(isOccupied) {
+			
+			getChildren().remove(unit);
+			this.unit=null;
+			isOccupied=false;
+			
+		}
+		
+	}
+	
 	void setCoords(int x, int y) {
 		
 		this.x=x;
@@ -175,7 +204,59 @@ public class Tile extends StackPane {
 		
 	}
 	
+	boolean getTraversible() {
+		
+		return isTraversible;
+		
+	}
+	
+	boolean getIsWater() {
+		
+		return isWater;
+		
+	}
+	
+	void setMyButton(MapButton b) {
+		
+		if(myButton!=null) removeMyButton();
+		myButton = b;
+		this.getChildren().add(myButton);
+		
+	}
+	
+	MapButton getMyButton() {
+		
+		return myButton;
+		
+	}
+	
+	void removeMyButton() {
+		
+		if(myButton!=null) {
+			
+			this.getChildren().remove(myButton);
+			myButton=null;
+			
+		}
+		
+	}
+	
+	void deselectUnit() {
+		
+		if(isOccupied) {
+			
+			getUnit().setSelected(false);
+			getUnit().setBorder(null);
+			
+		}
+		
+	}
+	
+	//Method below rendered useless
+	/*
 	public void moveUnit(Tile destination) { //Moves Unit from this tile, to destination Tile if it is empty ????
 		
 	}
+	*/
+	
 }

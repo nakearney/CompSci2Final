@@ -1,8 +1,11 @@
 package application;
 
+import java.util.ArrayList;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -20,6 +23,8 @@ import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 
 public class GameGUI extends BorderPane {
 
@@ -51,6 +56,9 @@ public class GameGUI extends BorderPane {
 		setCenter(scroller);
 		
 		turnGUI = new Label("Player 1: You have " + p1.getUnitCount() + " units remaining");
+		turnGUI.setTextFill(Color.WHITESMOKE);
+		turnGUI.setFont(new Font("Arial",20));
+		turnGUI.setTextAlignment(TextAlignment.CENTER);
 		
 		buttons = new HBox();
 		buttons.setPadding(new Insets(4.0,4.0,4.0,4.0));
@@ -59,17 +67,23 @@ public class GameGUI extends BorderPane {
 		formatButton(move,Color.BLUE);
 		
 		move.setOnMouseReleased((EventHandler<? super MouseEvent>) new EventHandler<MouseEvent>() {
-
+			
 			@Override
 			public void handle(MouseEvent arg0) { //Temporary testing
 				
-				if(p1.yourTurn()) {
-					p1.addUnit();
-				} else if(p2.yourTurn()) {
-					p2.addUnit();
-				}
-				turnDisplay(p1,p2);
+				field.removeMapButtons();
+				ArrayList<Tile> unitList = field.getUnitTiles();
 				
+				if(unitList.size()==1 && unitList.get(0).getUnit().getPlayer().yourTurn()) {
+					
+					ArrayList<Tile> moveArea = field.getMovementTilesLand(unitList.get(0).getUnit().getMovementRange());
+					
+					for(Tile t : moveArea) {
+				
+						t.setMyButton(new MoveButton(t,unitList.get(0),unitList.get(0).getUnit()));
+						
+					}
+				}
 			}
 			
 		});
@@ -82,12 +96,25 @@ public class GameGUI extends BorderPane {
 			@Override
 			public void handle(MouseEvent arg0) { //Temporary testing
 				
-				if(p1.yourTurn()) {
-					p1.subtractUnit();
-				} else if(p2.yourTurn()) {
-					p2.subtractUnit();
+				field.removeMapButtons();
+				ArrayList<Tile> unitList = field.getUnitTiles();
+				
+				if(unitList.size()==1 && unitList.get(0).getUnit().getPlayer().yourTurn()) {
+		
+					ArrayList<Tile> attackArea = field.getAttackTilesLandWater(2);
+					ArrayList<Tile> nullSpace = field.getSurroundingTiles(2);
+					
+					for(Tile t : nullSpace) {
+						
+						if(attackArea.contains(t)) {
+							t.setMyButton(new AttackButton(t,unitList.get(0),unitList.get(0).getUnit()));
+						} else {
+							t.setMyButton(new NullButton());
+						}
+						
+					}
+					
 				}
-				turnDisplay(p1,p2);
 				
 			}
 			
@@ -101,6 +128,9 @@ public class GameGUI extends BorderPane {
 			@Override
 			public void handle(MouseEvent arg0) {
 				
+				field.removeMapButtons();
+				field.deselectUnits();
+				
 				if(p1.yourTurn() && p2.getUnitCount() == 0) {
 					turnGUI.setText("Player 1 Wins");
 				} else if(p2.yourTurn() && p1.getUnitCount() == 0) {
@@ -111,15 +141,35 @@ public class GameGUI extends BorderPane {
 					turnDisplay(p1,p2);
 				}
 				
+				Tile[][] tiles = field.getTiles();
+				
+				for(Tile[] T : tiles) {
+					
+					for(Tile t : T) {
+						
+						GenericUnit unit = t.getUnit();
+						
+						if(unit!=null) {
+							
+							unit.resetActions();
+							
+						}
+						
+					}
+					
+				}
+				
 			}
 			
 		});
 		
+		buttons.setAlignment(Pos.CENTER);
 		buttons.getChildren().add(move);
 		buttons.getChildren().add(attack);
 		buttons.getChildren().add(endTurn);
 		
 		setTop(turnGUI);
+		BorderPane.setAlignment(turnGUI, Pos.CENTER);
 		setBottom(buttons);
 		
 	}
@@ -133,7 +183,7 @@ public class GameGUI extends BorderPane {
 		b.setBorder(new Border(stroke));
 		b.setStyle("-fx-font-size: 32");
 		b.setTextFill(Color.WHITESMOKE);
-		b.setPrefWidth(1000);
+		b.setPrefWidth(362);
 		
 		b.setOnMouseEntered((EventHandler<? super MouseEvent>) new EventHandler<MouseEvent>() {
 

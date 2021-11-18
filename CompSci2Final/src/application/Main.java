@@ -4,9 +4,11 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.layout.BorderPane;
 
 public class Main extends Application {
+	
+	public static Map map1;
+	
 	@Override
 	public void start(Stage primaryStage) {
 		
@@ -25,10 +27,11 @@ public class Main extends Application {
 		Map1=Map.setTile(Map1, 3, 4, 2);
 		Map1=Map.setTile(Map1, 4, 3, 2);
 		Map1=Map.setBorder(Map1, 2, 0);
-		
-		Map map1 = new Map(Map1);
-		map1.setUnit(5, 10, new GenericUnit(3,3,2,player1));
-		map1.setUnit(8, 10, new GenericUnit(3,3,2,player2));
+		//Process for making units is to initialize the map of tiles created above,
+		//Then use the Map methods to add units.
+		map1 = new Map(Map1);
+		map1.setUnit(8, 4, new GenericUnit(5,8,4,player1));
+		map1.setUnit(8, 10, new GenericUnit(5,8,4,player2));
 		
 		GameGUI game = new GameGUI(player1, player2, map1);
 		Scene s = new Scene(game);

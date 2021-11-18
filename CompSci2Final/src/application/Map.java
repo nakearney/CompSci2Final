@@ -1,5 +1,6 @@
 package application;
 
+import java.util.ArrayList;
 import java.util.Random;
 import javafx.geometry.Pos;
 import javafx.scene.image.Image;
@@ -208,6 +209,736 @@ public class Map extends GridPane {
 	public void setUnit(int x, int y, GenericUnit unit) {
 		
 		tileGrid[y][x].setUnit(unit);
+		
+	}
+	
+	/*
+	 * WARNING: getSurroundingTiles is a HIGHLY DISGUSTING & COMPACT Method. It it to be
+	 * eventually revised to look and function cleaner, but for now, it is NASTY
+	 * Returns an ArrayList of the tiles surrounding a certain unit given a certain range
+	 * Only includes tiles which can be moved on
+	 * The integer is for if you are 1: moving, 2: attacking, 3,4,5...: whatever else we need
+	 */
+	
+	public ArrayList<Tile> getAttackTilesWater(int range) {
+		
+		ArrayList<Tile> unitTiles = this.getUnitTiles();
+		ArrayList<Tile> surroundingTiles = new ArrayList<Tile>();
+		
+		if(unitTiles.size()!=1) {
+			
+			return null;
+			
+		} else {
+		
+			Tile unitTile = unitTiles.get(0);
+			//Unit's x & y coords
+			
+			
+			for(int i=0;i<range;i++) {
+				
+				if(i==0) {
+					
+					int x = unitTile.getX();
+					int y = unitTile.getY();
+					
+					//Algorithm to add 4 tiles around unit. used a basis for adding more and more tiles.
+					//Adds directly to the left, right, up and down of the tile.
+					//cos = 1 when i=0 or 2, cos = 0 when i=1 or 3. Opposite for sin.
+					for(int step=0;step<4;step++) {
+						
+						int spotX=(int)(x+Math.cos(step*(Math.PI/2)));
+						int spotY=(int)(y+Math.sin(step*(Math.PI/2)));
+						
+						System.out.println(spotX);
+						System.out.println(spotY);
+						
+						if(spotY>-1&&spotY<MAP_SIZE&&spotX>-1&&spotX<MAP_SIZE)
+						if(tileGrid[spotY][spotX].getIsWater())
+						//if(tileGrid[spotY][spotX].isOccupied())
+						surroundingTiles.add(tileGrid[spotY][spotX]);
+						
+					}
+					
+				} else {
+					
+					/*
+					 * Goes through every tile in surrounding tiles and attempts to add more tiles
+					 * to every adjacent open space around them.
+					 */
+					
+					ArrayList<Tile> currentTiles = new ArrayList<Tile>();
+					
+					for(Tile t : surroundingTiles) {
+						
+						currentTiles.add(t);
+						
+					}
+					
+					for(Tile t : currentTiles) {
+					
+						int x = t.getX();
+						int y = t.getY();
+						
+						for(int step=0;step<4;step++) {
+								
+							int spotX=(int)(x+Math.cos(step*(Math.PI/2)));
+							int spotY=(int)(y+Math.sin(step*(Math.PI/2)));
+								
+							if(spotY>-1&&spotY<MAP_SIZE&&spotX>-1&&spotX<MAP_SIZE)
+							if(tileGrid[spotY][spotX].getIsWater())
+							//if(tileGrid[spotY][spotX].isOccupied())
+							//Key difference between when i==0 and when i!=0 is that the tile checks
+							//to make sure the tile it is about to add hasn't already been added.
+							if(!surroundingTiles.contains(tileGrid[spotY][spotX]))
+							if(!(spotX==unitTile.getX()&&spotY==unitTile.getY()))
+							surroundingTiles.add(tileGrid[spotY][spotX]);
+								
+						}
+							
+					}
+					
+				}
+				
+			}
+			
+		}
+		
+		ArrayList<Tile> tileChecker = new ArrayList<Tile>();
+		
+		for(Tile t : surroundingTiles) {
+			
+			tileChecker.add(t);
+			
+		}
+		
+		for(Tile t : tileChecker) {
+			
+			if(!surroundingTiles.get(surroundingTiles.indexOf(t)).isOccupied()) {
+				surroundingTiles.remove(t);
+			}
+			
+		}
+		
+		return surroundingTiles;
+		
+	}
+	
+	//For units that can only attack 
+	public ArrayList<Tile> getAttackTilesLandWater(int range) {
+		
+		ArrayList<Tile> unitTiles = this.getUnitTiles();
+		ArrayList<Tile> surroundingTiles = new ArrayList<Tile>();
+		
+		if(unitTiles.size()!=1) {
+			
+			return null;
+			
+		} else {
+		
+			Tile unitTile = unitTiles.get(0);
+			//Unit's x & y coords
+			
+			
+			for(int i=0;i<range;i++) {
+				
+				if(i==0) {
+					
+					int x = unitTile.getX();
+					int y = unitTile.getY();
+					
+					//Algorithm to add 4 tiles around unit. used a basis for adding more and more tiles.
+					//Adds directly to the left, right, up and down of the tile.
+					//cos = 1 when i=0 or 2, cos = 0 when i=1 or 3. Opposite for sin.
+					for(int step=0;step<4;step++) {
+						
+						int spotX=(int)(x+Math.cos(step*(Math.PI/2)));
+						int spotY=(int)(y+Math.sin(step*(Math.PI/2)));
+						
+						System.out.println(spotX);
+						System.out.println(spotY);
+						
+						if(spotY>-1&&spotY<MAP_SIZE&&spotX>-1&&spotX<MAP_SIZE)
+						if(tileGrid[spotY][spotX].getTraversible()||tileGrid[spotY][spotX].getIsWater())
+						//if(tileGrid[spotY][spotX].isOccupied())
+						surroundingTiles.add(tileGrid[spotY][spotX]);
+						
+					}
+					
+				} else {
+					
+					/*
+					 * Goes through every tile in surrounding tiles and attempts to add more tiles
+					 * to every adjacent open space around them.
+					 */
+					
+					ArrayList<Tile> currentTiles = new ArrayList<Tile>();
+					
+					for(Tile t : surroundingTiles) {
+						
+						currentTiles.add(t);
+						
+					}
+					
+					for(Tile t : currentTiles) {
+					
+						int x = t.getX();
+						int y = t.getY();
+						
+						for(int step=0;step<4;step++) {
+								
+							int spotX=(int)(x+Math.cos(step*(Math.PI/2)));
+							int spotY=(int)(y+Math.sin(step*(Math.PI/2)));
+								
+							if(spotY>-1&&spotY<MAP_SIZE&&spotX>-1&&spotX<MAP_SIZE)
+							if(tileGrid[spotY][spotX].getTraversible()||tileGrid[spotY][spotX].getIsWater())
+							//if(tileGrid[spotY][spotX].isOccupied())
+							//Key difference between when i==0 and when i!=0 is that the tile checks
+							//to make sure the tile it is about to add hasn't already been added.
+							if(!surroundingTiles.contains(tileGrid[spotY][spotX]))
+							if(!(spotX==unitTile.getX()&&spotY==unitTile.getY()))
+							surroundingTiles.add(tileGrid[spotY][spotX]);
+								
+						}
+							
+					}
+					
+				}
+				
+			}
+			
+		}
+		
+		ArrayList<Tile> tileChecker = new ArrayList<Tile>();
+		
+		for(Tile t : surroundingTiles) {
+			
+			tileChecker.add(t);
+			
+		}
+		
+		for(Tile t : tileChecker) {
+			
+			if(!surroundingTiles.get(surroundingTiles.indexOf(t)).isOccupied()) {
+				surroundingTiles.remove(t);
+			}
+			
+		}
+		
+		return surroundingTiles;
+		
+	}
+	
+	//For units that can only attack targets on land
+	public ArrayList<Tile> getAttackTilesLand(int range) {
+		
+		ArrayList<Tile> unitTiles = this.getUnitTiles();
+		ArrayList<Tile> surroundingTiles = new ArrayList<Tile>();
+		
+		if(unitTiles.size()!=1) {
+			
+			return null;
+			
+		} else {
+		
+			Tile unitTile = unitTiles.get(0);
+			//Unit's x & y coords
+			
+			
+			for(int i=0;i<range;i++) {
+				
+				if(i==0) {
+					
+					int x = unitTile.getX();
+					int y = unitTile.getY();
+					
+					//Algorithm to add 4 tiles around unit. used a basis for adding more and more tiles.
+					//Adds directly to the left, right, up and down of the tile.
+					//cos = 1 when i=0 or 2, cos = 0 when i=1 or 3. Opposite for sin.
+					for(int step=0;step<4;step++) {
+						
+						int spotX=(int)(x+Math.cos(step*(Math.PI/2)));
+						int spotY=(int)(y+Math.sin(step*(Math.PI/2)));
+						
+						System.out.println(spotX);
+						System.out.println(spotY);
+						
+						if(spotY>-1&&spotY<MAP_SIZE&&spotX>-1&&spotX<MAP_SIZE)
+						if(tileGrid[spotY][spotX].getTraversible())
+						//if(tileGrid[spotY][spotX].isOccupied())
+						surroundingTiles.add(tileGrid[spotY][spotX]);
+						
+					}
+					
+				} else {
+					
+					/*
+					 * Goes through every tile in surrounding tiles and attempts to add more tiles
+					 * to every adjacent open space around them.
+					 */
+					
+					ArrayList<Tile> currentTiles = new ArrayList<Tile>();
+					
+					for(Tile t : surroundingTiles) {
+						
+						currentTiles.add(t);
+						
+					}
+					
+					for(Tile t : currentTiles) {
+					
+						int x = t.getX();
+						int y = t.getY();
+						
+						for(int step=0;step<4;step++) {
+								
+							int spotX=(int)(x+Math.cos(step*(Math.PI/2)));
+							int spotY=(int)(y+Math.sin(step*(Math.PI/2)));
+								
+							if(spotY>-1&&spotY<MAP_SIZE&&spotX>-1&&spotX<MAP_SIZE)
+							if(tileGrid[spotY][spotX].getTraversible())
+							//if(tileGrid[spotY][spotX].isOccupied())
+							//Key difference between when i==0 and when i!=0 is that the tile checks
+							//to make sure the tile it is about to add hasn't already been added.
+							if(!surroundingTiles.contains(tileGrid[spotY][spotX]))
+							if(!(spotX==unitTile.getX()&&spotY==unitTile.getY()))
+							surroundingTiles.add(tileGrid[spotY][spotX]);
+								
+						}
+							
+					}
+					
+				}
+				
+			}
+			
+		}
+		
+		ArrayList<Tile> tileChecker = new ArrayList<Tile>();
+		
+		for(Tile t : surroundingTiles) {
+			
+			tileChecker.add(t);
+			
+		}
+		
+		for(Tile t : tileChecker) {
+			
+			if(!surroundingTiles.get(surroundingTiles.indexOf(t)).isOccupied()) {
+				surroundingTiles.remove(t);
+			}
+			
+		}
+		
+		return surroundingTiles;
+		
+	}
+	
+	//For units that can only move on water
+	public ArrayList<Tile> getMovementTilesWater(int range) {
+		
+		ArrayList<Tile> unitTiles = this.getUnitTiles();
+		ArrayList<Tile> surroundingTiles = new ArrayList<Tile>();
+		
+		if(unitTiles.size()!=1) {
+			
+			return null;
+			
+		} else {
+		
+			Tile unitTile = unitTiles.get(0);
+			//Unit's x & y coords
+			
+			
+			for(int i=0;i<range;i++) {
+				
+				if(i==0) {
+					
+					int x = unitTile.getX();
+					int y = unitTile.getY();
+					
+					//Algorithm to add 4 tiles around unit. used a basis for adding more and more tiles.
+					//Adds directly to the left, right, up and down of the tile.
+					//cos = 1 when i=0 or 2, cos = 0 when i=1 or 3. Opposite for sin.
+					for(int step=0;step<4;step++) {
+						
+						int spotX=(int)(x+Math.cos(step*(Math.PI/2)));
+						int spotY=(int)(y+Math.sin(step*(Math.PI/2)));
+						
+						System.out.println(spotX);
+						System.out.println(spotY);
+						
+						if(spotY>-1&&spotY<MAP_SIZE&&spotX>-1&&spotX<MAP_SIZE)
+						if(tileGrid[spotY][spotX].getIsWater())
+						if(!tileGrid[spotY][spotX].isOccupied())
+						surroundingTiles.add(tileGrid[spotY][spotX]);
+						
+					}
+					
+				} else {
+					
+					/*
+					 * Goes through every tile in surrounding tiles and attempts to add more tiles
+					 * to every adjacent open space around them.
+					 */
+					
+					ArrayList<Tile> currentTiles = new ArrayList<Tile>();
+					
+					for(Tile t : surroundingTiles) {
+						
+						currentTiles.add(t);
+						
+					}
+					
+					for(Tile t : currentTiles) {
+					
+						int x = t.getX();
+						int y = t.getY();
+						
+						for(int step=0;step<4;step++) {
+								
+							int spotX=(int)(x+Math.cos(step*(Math.PI/2)));
+							int spotY=(int)(y+Math.sin(step*(Math.PI/2)));
+								
+							if(spotY>-1&&spotY<MAP_SIZE&&spotX>-1&&spotX<MAP_SIZE)
+							if(tileGrid[spotY][spotX].getIsWater())
+							if(!tileGrid[spotY][spotX].isOccupied())
+							//Key difference between when i==0 and when i!=0 is that the tile checks
+							//to make sure the tile it is about to add hasn't already been added.
+							if(!surroundingTiles.contains(tileGrid[spotY][spotX]))
+							surroundingTiles.add(tileGrid[spotY][spotX]);
+								
+						}
+							
+					}
+					
+				}
+				
+			}
+			
+		}
+		
+		return surroundingTiles;
+		
+	}
+	
+	//For units that can move on land and water (But not rocks or sky)
+	public ArrayList<Tile> getMovementTilesLandWater(int range) {
+		
+		ArrayList<Tile> unitTiles = this.getUnitTiles();
+		ArrayList<Tile> surroundingTiles = new ArrayList<Tile>();
+		
+		if(unitTiles.size()!=1) {
+			
+			return null;
+			
+		} else {
+		
+			Tile unitTile = unitTiles.get(0);
+			//Unit's x & y coords
+			
+			
+			for(int i=0;i<range;i++) {
+				
+				if(i==0) {
+					
+					int x = unitTile.getX();
+					int y = unitTile.getY();
+					
+					//Algorithm to add 4 tiles around unit. used a basis for adding more and more tiles.
+					//Adds directly to the left, right, up and down of the tile.
+					//cos = 1 when i=0 or 2, cos = 0 when i=1 or 3. Opposite for sin.
+					for(int step=0;step<4;step++) {
+						
+						int spotX=(int)(x+Math.cos(step*(Math.PI/2)));
+						int spotY=(int)(y+Math.sin(step*(Math.PI/2)));
+						
+						System.out.println(spotX);
+						System.out.println(spotY);
+						
+						if(spotY>-1&&spotY<MAP_SIZE&&spotX>-1&&spotX<MAP_SIZE)
+						if(tileGrid[spotY][spotX].getTraversible()||tileGrid[spotY][spotX].getIsWater())
+						if(!tileGrid[spotY][spotX].isOccupied())
+						surroundingTiles.add(tileGrid[spotY][spotX]);
+						
+					}
+					
+				} else {
+					
+					/*
+					 * Goes through every tile in surrounding tiles and attempts to add more tiles
+					 * to every adjacent open space around them.
+					 */
+					
+					ArrayList<Tile> currentTiles = new ArrayList<Tile>();
+					
+					for(Tile t : surroundingTiles) {
+						
+						currentTiles.add(t);
+						
+					}
+					
+					for(Tile t : currentTiles) {
+					
+						int x = t.getX();
+						int y = t.getY();
+						
+						for(int step=0;step<4;step++) {
+								
+							int spotX=(int)(x+Math.cos(step*(Math.PI/2)));
+							int spotY=(int)(y+Math.sin(step*(Math.PI/2)));
+								
+							if(spotY>-1&&spotY<MAP_SIZE&&spotX>-1&&spotX<MAP_SIZE)
+							if(tileGrid[spotY][spotX].getTraversible()||tileGrid[spotY][spotX].getIsWater())
+							if(!tileGrid[spotY][spotX].isOccupied())
+							//Key difference between when i==0 and when i!=0 is that the tile checks
+							//to make sure the tile it is about to add hasn't already been added.
+							if(!surroundingTiles.contains(tileGrid[spotY][spotX]))
+							surroundingTiles.add(tileGrid[spotY][spotX]);
+								
+						}
+							
+					}
+					
+				}
+				
+			}
+			
+		}
+		
+		return surroundingTiles;
+		
+	}
+	
+	//For units that can only move on land
+	public ArrayList<Tile> getMovementTilesLand(int range) {
+		
+		ArrayList<Tile> unitTiles = this.getUnitTiles();
+		ArrayList<Tile> surroundingTiles = new ArrayList<Tile>();
+		
+		if(unitTiles.size()!=1) {
+			
+			return null;
+			
+		} else {
+		
+			Tile unitTile = unitTiles.get(0);
+			//Unit's x & y coords
+			
+			
+			for(int i=0;i<range;i++) {
+				
+				if(i==0) {
+					
+					int x = unitTile.getX();
+					int y = unitTile.getY();
+					
+					//Algorithm to add 4 tiles around unit. used a basis for adding more and more tiles.
+					//Adds directly to the left, right, up and down of the tile.
+					//cos = 1 when i=0 or 2, cos = 0 when i=1 or 3. Opposite for sin.
+					for(int step=0;step<4;step++) {
+						
+						int spotX=(int)(x+Math.cos(step*(Math.PI/2)));
+						int spotY=(int)(y+Math.sin(step*(Math.PI/2)));
+						
+						System.out.println(spotX);
+						System.out.println(spotY);
+						
+						if(spotY>-1&&spotY<MAP_SIZE&&spotX>-1&&spotX<MAP_SIZE)
+						if(tileGrid[spotY][spotX].getTraversible())
+						if(!tileGrid[spotY][spotX].isOccupied())
+						surroundingTiles.add(tileGrid[spotY][spotX]);
+						
+					}
+					
+				} else {
+					
+					/*
+					 * Goes through every tile in surrounding tiles and attempts to add more tiles
+					 * to every adjacent open space around them.
+					 */
+					
+					ArrayList<Tile> currentTiles = new ArrayList<Tile>();
+					
+					for(Tile t : surroundingTiles) {
+						
+						currentTiles.add(t);
+						
+					}
+					
+					for(Tile t : currentTiles) {
+					
+						int x = t.getX();
+						int y = t.getY();
+						
+						for(int step=0;step<4;step++) {
+								
+							int spotX=(int)(x+Math.cos(step*(Math.PI/2)));
+							int spotY=(int)(y+Math.sin(step*(Math.PI/2)));
+								
+							if(spotY>-1&&spotY<MAP_SIZE&&spotX>-1&&spotX<MAP_SIZE)
+							if(tileGrid[spotY][spotX].getTraversible())
+							if(!tileGrid[spotY][spotX].isOccupied())
+							//Key difference between when i==0 and when i!=0 is that the tile checks
+							//to make sure the tile it is about to add hasn't already been added.
+							if(!surroundingTiles.contains(tileGrid[spotY][spotX]))
+							surroundingTiles.add(tileGrid[spotY][spotX]);
+								
+						}
+							
+					}
+					
+				}
+				
+			}
+			
+		}
+		
+		return surroundingTiles;
+		
+	}
+	
+	/*
+	 * Used to make null buttons. Do not delete.
+	 * gets EVERy tile surrounding a unit, regardless if that unit is occupied,
+	 * water, traversible, etc.
+	 */
+	public ArrayList<Tile> getSurroundingTiles(int range) {
+		
+		ArrayList<Tile> unitTiles = this.getUnitTiles();
+		ArrayList<Tile> surroundingTiles = new ArrayList<Tile>();
+		
+		if(unitTiles.size()!=1) {
+			
+			return null;
+			
+		} else {
+		
+			Tile unitTile = unitTiles.get(0);
+			//Unit's x & y coords
+			
+			
+			for(int i=0;i<range;i++) {
+				
+				if(i==0) {
+					
+					int x = unitTile.getX();
+					int y = unitTile.getY();
+					
+					//Algorithm to add 4 tiles around unit. used a basis for adding more and more tiles.
+					//Adds directly to the left, right, up and down of the tile.
+					//cos = 1 when i=0 or 2, cos = 0 when i=1 or 3. Opposite for sin.
+					for(int step=0;step<4;step++) {
+						
+						int spotX=(int)(x+Math.cos(step*(Math.PI/2)));
+						int spotY=(int)(y+Math.sin(step*(Math.PI/2)));
+						
+						System.out.println(spotX);
+						System.out.println(spotY);
+						
+						if(spotY>-1&&spotY<MAP_SIZE&&spotX>-1&&spotX<MAP_SIZE)
+						surroundingTiles.add(tileGrid[spotY][spotX]);
+						
+					}
+					
+				} else {
+					
+					/*
+					 * Goes through every tile in surrounding tiles and attempts to add more tiles
+					 * to every adjacent open space around them.
+					 */
+					
+					ArrayList<Tile> currentTiles = new ArrayList<Tile>();
+					
+					for(Tile t : surroundingTiles) {
+						
+						currentTiles.add(t);
+						
+					}
+					
+					for(Tile t : currentTiles) {
+					
+						int x = t.getX();
+						int y = t.getY();
+						
+						for(int step=0;step<4;step++) {
+								
+							int spotX=(int)(x+Math.cos(step*(Math.PI/2)));
+							int spotY=(int)(y+Math.sin(step*(Math.PI/2)));
+								
+							if(spotY>-1&&spotY<MAP_SIZE&&spotX>-1&&spotX<MAP_SIZE)
+							if(!surroundingTiles.contains(tileGrid[spotY][spotX]))
+							if(!(spotY==unitTile.getY()&&spotX==unitTile.getX()))
+							surroundingTiles.add(tileGrid[spotY][spotX]);
+								
+						}
+							
+					}
+					
+				}
+				
+			}
+			
+		}
+		
+		return surroundingTiles;
+		
+	}
+	
+	//Finds all tiles with SELECTED units in them
+	public ArrayList<Tile> getUnitTiles() {
+		
+		ArrayList<Tile> unitTiles = new ArrayList<Tile>();
+		
+		for(Tile[] tR : tileGrid) {
+			
+			for(Tile tC : tR) {
+				
+				if(tC.getUnit()!=null&&tC.getUnit().isSelected()) {
+					
+					unitTiles.add(tC);
+					
+				}
+				
+			}
+			
+		}
+		
+		return unitTiles;
+		
+	}
+	
+	public void removeMapButtons() {
+		
+		for(Tile[] T : tileGrid) {
+			
+			for(Tile t : T) {
+				
+				t.removeMyButton();
+				
+			}
+			
+		}
+		
+	}
+	
+	public void deselectUnits() {
+		
+		for(Tile[] T : tileGrid) {
+			
+			for(Tile t : T) {
+				
+				t.deselectUnit();
+				
+			}
+			
+		}
+		
+	}
+		
+	public Tile[][] getTiles() {
+		
+		return tileGrid;
 		
 	}
 	
