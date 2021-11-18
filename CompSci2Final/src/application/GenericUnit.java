@@ -1,5 +1,7 @@
 package application;
 
+import java.util.ArrayList;
+
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
@@ -12,7 +14,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class GenericUnit extends Button { //Will become abstract 
+public abstract class GenericUnit extends Button { //Will become abstract 
 
 	private String name;
 	private int hp;
@@ -181,5 +183,7 @@ public class GenericUnit extends Button { //Will become abstract
 			target.getPlayer().subtractUnit();
 		}
 	}
+	
+	public abstract ArrayList<Tile> attackStyle(Map field);
 	
 }
