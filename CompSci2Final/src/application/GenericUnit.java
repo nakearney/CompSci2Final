@@ -20,6 +20,7 @@ public abstract class GenericUnit extends Button { //Will become abstract
 	private int hp;
 	private int attack;
 	private int movementRange;
+	private static int cost;
 	private int attackRange;
 	private Player player;
 	private boolean isDead;
@@ -33,6 +34,7 @@ public abstract class GenericUnit extends Button { //Will become abstract
 		this.movementRange = movementRange;
 		this.attackRange = attackRange;
 		this.player = player;
+		cost = 1000;
 		isDead = false;
 		isSelected = false;
 		this.setBackground(null);
@@ -134,6 +136,10 @@ public abstract class GenericUnit extends Button { //Will become abstract
 		return player;
 	}
 	
+	public static int getCost() {
+		return cost;
+	}
+	
 	public boolean isDead() {
 		return isDead;
 	}
@@ -182,6 +188,7 @@ public abstract class GenericUnit extends Button { //Will become abstract
 		target.takeDamage(attack);
 		if(target.isDead()) {
 			target.getPlayer().subtractUnit();
+			this.getPlayer().addMoney(target.getCost()/2);
 		}
 	}
 	

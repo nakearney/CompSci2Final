@@ -32,7 +32,7 @@ public class GameGUI extends BorderPane {
 	private Map field;
 	private HBox buttons;
 	private VBox econGUI;
-	private VBox econGUI2;
+	private ScrollPane infoGUI;
 	private Label turnGUI;
 	private Button attack;
 	private Button move;
@@ -58,14 +58,55 @@ public class GameGUI extends BorderPane {
 		scroller.setContent(field);
 		setCenter(scroller);
 		
-		turnGUI = new Label("Player 1: You have " + p1.getUnitCount() + " units remaining");
+		turnGUI = new Label();
 		turnGUI.setTextFill(Color.WHITESMOKE);
 		turnGUI.setFont(new Font("Arial",20));
 		turnGUI.setTextAlignment(TextAlignment.CENTER);
+		turnDisplay(p1,p2);
+		
+		infoGUI = new ScrollPane();
+		infoGUI.setPannable(true);
+		//Info GUI Stuff Here
 		
 		econGUI = new VBox();
-		Label text = new Label("Words words words");
-		econGUI.getChildren().add(text);
+		Button cat = new Button("Cat Soldier: $" + CatSoldier.getCost());
+		cat.setOnMouseReleased((EventHandler<? super MouseEvent>) new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				if(p1.yourTurn() && p1.getMoney() >= CatSoldier.getCost()) { //facility is selected and on the right team
+					p1.subtractMoney(CatSoldier.getCost()); 
+					//Spawn at
+				} else if(p2.yourTurn()) {
+					p2.subtractMoney(CatSoldier.getCost());
+					//Spawn at
+				}
+				turnDisplay(p1,p2);
+			}
+		});
+		
+		Button squirrel = new Button("Squirrel Rogue: $" + SquirrelRogue.getCost());
+		Button axolotl = new Button("Axolotl God: $" + AxolotlGod.getCost());
+		Button duck = new Button("Duck Wizard: $" + DuckWizard.getCost());
+		Button flamingo = new Button("Flamingo Sniper: $" + FlamingoSniper.getCost());
+		Button armadillo = new Button("Armadillo Tank: $" + ArmadilloTank.getCost());
+		Button bull = new Button("Bull Matador: $" + BullMatador.getCost());
+		
+		econGUI.getChildren().add(cat);
+		econGUI.getChildren().add(squirrel);
+		econGUI.getChildren().add(axolotl);
+		econGUI.getChildren().add(duck);
+		econGUI.getChildren().add(flamingo);
+		econGUI.getChildren().add(armadillo);
+		econGUI.getChildren().add(bull);
+		
+		this.setOnMouseReleased((EventHandler<? super MouseEvent>) new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent arg0) {
+				if(turnGUI.getText() != "Player 1 Wins" && turnGUI.getText() != "Player 2 Wins") {
+					turnDisplay(p1,p2);
+				}
+			}
+		});
 		
 		buttons = new HBox();
 		buttons.setPadding(new Insets(4.0,4.0,4.0,4.0));
@@ -140,6 +181,12 @@ public class GameGUI extends BorderPane {
 				field.removeMapButtons();
 				field.deselectUnits();
 				
+				if(p1.yourTurn()) {
+					p2.addMoney(3000);
+				} else if(p2.yourTurn()) {
+					p1.addMoney(3000);
+				}
+				
 				if(p1.yourTurn() && p2.getUnitCount() == 0) {
 					turnGUI.setText("Player 1 Wins");
 				} else if(p2.yourTurn() && p1.getUnitCount() == 0) {
@@ -149,7 +196,7 @@ public class GameGUI extends BorderPane {
 					p2.switchTurn();
 					turnDisplay(p1,p2);
 				}
-				
+	
 				Tile[][] tiles = field.getTiles();
 				
 				for(Tile[] T : tiles) {
@@ -180,6 +227,7 @@ public class GameGUI extends BorderPane {
 		setTop(turnGUI);
 		BorderPane.setAlignment(turnGUI, Pos.CENTER);
 		setBottom(buttons);
+		setLeft(infoGUI);
 		setRight(econGUI);
 		
 	}
@@ -243,11 +291,11 @@ public class GameGUI extends BorderPane {
 	
 	private void turnDisplay(Player p1, Player p2) {
 		if(p1.yourTurn()) {
-			turnGUI.setText("Player 1: You have " + p1.getUnitCount() + " units remaining");
+			turnGUI.setText("Player 1: You have " + p1.getUnitCount() + " units and $" + p1.getMoney() + " remaining");
 		} else if(p2.yourTurn()) {
-			turnGUI.setText("Player 2: You have " + p2.getUnitCount() + " units remaining");
+			turnGUI.setText("Player 2: You have " + p2.getUnitCount() + " units and $" + p2.getMoney() + " remaining");
 		} else {
-			turnGUI.setText("Turn Terror");
+			turnGUI.setText("Turn Error");
 		}
 	}
 	
