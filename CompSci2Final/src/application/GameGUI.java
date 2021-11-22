@@ -41,6 +41,14 @@ public class GameGUI extends BorderPane {
 	private Player p2;
 	private double sideWidth=225.0;
 	
+	//Initialize Images here
+	private Image catImage = new Image("/Sprites/RedTank.png");
+	private Image squirrelImage = new Image("/Sprites/RedTank.png");
+	private Image axolotlImage = new Image("/Sprites/RedTank.png");;
+	private Image duckImage = new Image("/Sprites/RedTank.png");;
+	private Image flamingoImage = new Image("/Sprites/RedTank.png");;
+	private Image armadilloImage = new Image("/Sprites/RedTank.png");;
+	private Image bullImage = new Image("/Sprites/RedTank.png");;
 	
 	//Initializes Map in Main Currently. Then passes it here.
 	public GameGUI(Player p1, Player p2, Map field) {
@@ -68,14 +76,22 @@ public class GameGUI extends BorderPane {
 		infoGUI = new ScrollPane();
 		infoGUI.setPrefWidth(sideWidth);
 		infoGUI.setPannable(true);
-		//Info GUI Stuff Here
+		
+		VBox infoList = new VBox();
+		HBox catGUI = new HBox();
+		catGUI.setAlignment(Pos.CENTER);
+		catGUI.getChildren().add(new ImageView(catImage));
+		
+		infoList.getChildren().add(catGUI);
+		
+		infoGUI.setContent(infoList);
 		
 		econGUI = new VBox();
 		econGUI.setPrefWidth(sideWidth);
 		
 		Button cat = new Button("Cat Soldier: $" + CatSoldier.COST);
 		formatEconButton(cat, CatSoldier.COST, p1, p2);
-		cat.setOnMouseReleased((EventHandler<? super MouseEvent>) new EventHandler<MouseEvent>() {  //MAKE UNITS WORK PROPERLY
+		cat.setOnMouseReleased((EventHandler<? super MouseEvent>) new EventHandler<MouseEvent>() { 
 			@Override
 			public void handle(MouseEvent event) {
 				
@@ -533,7 +549,7 @@ public class GameGUI extends BorderPane {
 		}
 	}
 	
-	private void formatEconButton(Button b, int unitCost, Player p1, Player p2) { //Color based on whether you can AFFORD IT
+	private void formatEconButton(Button b, int unitCost, Player p1, Player p2) { 
 		
 		BorderStroke[] stroke =  {new BorderStroke(Color.WHITESMOKE,BorderStrokeStyle.SOLID,new CornerRadii(4.0),new BorderWidths(6.0,6.0,6.0,6.0))};
 
