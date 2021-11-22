@@ -1132,6 +1132,28 @@ public class Map extends GridPane {
 		
 	}
 	
+	public ArrayList<Tile> getBuildingTiles(Player p) {
+		
+		ArrayList<Tile> buildingTiles = new ArrayList<Tile>();
+		
+		for(Tile[] tR : tileGrid) {
+			
+			for(Tile tC : tR) {
+				
+				if(tC.getUnit()!=null&&tC.getUnit() instanceof Building&&tC.getUnit().getPlayer()==p) {
+					
+					buildingTiles.add(tC);
+					
+				}
+				
+			}
+			
+		}
+		
+		return buildingTiles;
+		
+	}
+	
 	public void removeMapButtons() {
 		
 		for(Tile[] T : tileGrid) {
