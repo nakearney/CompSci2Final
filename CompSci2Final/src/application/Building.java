@@ -2,7 +2,7 @@ package application;
 
 public abstract class Building extends GenericUnit {
 	
-	boolean canBuild;
+	protected boolean canBuild;
 	
 	public Building(Player player) {
 		super(20,0,0,0,player);

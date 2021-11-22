@@ -11,8 +11,6 @@ public class Facility extends Building {
 	public Facility(int hp, int attack, int movementRange, int attackRange, Player player) {
 		this(player);
 	}
-
-	boolean canBuild;
 	
 	public void buildUnit(GenericUnit unit, Map field) { 
 		
