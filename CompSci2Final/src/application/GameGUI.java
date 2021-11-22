@@ -88,11 +88,13 @@ public class GameGUI extends BorderPane {
 						
 						p1.subtractMoney(CatSoldier.COST);
 						f.buildUnit(new CatSoldier(p1), field);
+						field.deselectUnits();
 						
 					} else if(p2.yourTurn() && p2 == f.getPlayer() && p2.getMoney() >= CatSoldier.COST && f.getBuild()) {
 						
 						p2.subtractMoney(CatSoldier.COST);
 						f.buildUnit(new CatSoldier(p2), field);
+						field.deselectUnits();
 						
 					}
 					
@@ -118,11 +120,13 @@ public class GameGUI extends BorderPane {
 						
 						p1.subtractMoney(SquirrelRogue.COST);
 						f.buildUnit(new SquirrelRogue(p1), field);
+						field.deselectUnits();
 						
 					} else if(p2.yourTurn() && p2 == f.getPlayer() && p2.getMoney() >= SquirrelRogue.COST && f.getBuild()) {
 						
 						p2.subtractMoney(SquirrelRogue.COST);
 						f.buildUnit(new SquirrelRogue(p2), field);
+						field.deselectUnits();
 						
 					}
 					
@@ -148,11 +152,13 @@ public class GameGUI extends BorderPane {
 						
 						p1.subtractMoney(AxolotlGod.COST);
 						d.buildUnit(new AxolotlGod(p1), field);
+						field.deselectUnits();
 						
 					} else if(p2.yourTurn() && p2 == d.getPlayer() && p2.getMoney() >= AxolotlGod.COST && d.getBuild()) {
 						
 						p2.subtractMoney(AxolotlGod.COST);
 						d.buildUnit(new AxolotlGod(p2), field);
+						field.deselectUnits();
 						
 					}
 					
@@ -178,11 +184,13 @@ public class GameGUI extends BorderPane {
 						
 						p1.subtractMoney(DuckWizard.COST);
 						f.buildUnit(new DuckWizard(p1), field);
+						field.deselectUnits();
 						
 					} else if(p2.yourTurn() && p2 == f.getPlayer() && p2.getMoney() >= DuckWizard.COST && f.getBuild()) {
 						
 						p2.subtractMoney(DuckWizard.COST);
 						f.buildUnit(new DuckWizard(p2), field);
+						field.deselectUnits();
 						
 					}
 					
@@ -195,11 +203,13 @@ public class GameGUI extends BorderPane {
 						
 						p1.subtractMoney(DuckWizard.COST);
 						d.buildUnit(new DuckWizard(p1), field);
+						field.deselectUnits();
 						
 					} else if(p2.yourTurn() && p2 == d.getPlayer() && p2.getMoney() >= DuckWizard.COST && d.getBuild()) {
 						
 						p2.subtractMoney(DuckWizard.COST);
 						d.buildUnit(new DuckWizard(p2), field);
+						field.deselectUnits();
 						
 					}
 				}
@@ -223,11 +233,13 @@ public class GameGUI extends BorderPane {
 						
 						p1.subtractMoney(FlamingoSniper.COST);
 						f.buildUnit(new FlamingoSniper(p1), field);
+						field.deselectUnits();
 						
 					} else if(p2.yourTurn() && p2 == f.getPlayer() && p2.getMoney() >= FlamingoSniper.COST && f.getBuild()) {
 						
 						p2.subtractMoney(FlamingoSniper.COST);
 						f.buildUnit(new FlamingoSniper(p2), field);
+						field.deselectUnits();
 						
 					}
 					
@@ -240,11 +252,13 @@ public class GameGUI extends BorderPane {
 						
 						p1.subtractMoney(FlamingoSniper.COST);
 						d.buildUnit(new FlamingoSniper(p1), field);
+						field.deselectUnits();
 						
 					} else if(p2.yourTurn() && p2 == d.getPlayer() && p2.getMoney() >= FlamingoSniper.COST && d.getBuild()) {
 						
 						p2.subtractMoney(FlamingoSniper.COST);
 						d.buildUnit(new FlamingoSniper(p2), field);
+						field.deselectUnits();
 						
 					}
 				}
@@ -268,11 +282,13 @@ public class GameGUI extends BorderPane {
 						
 						p1.subtractMoney(ArmadilloTank.COST);
 						f.buildUnit(new ArmadilloTank(p1), field);
+						field.deselectUnits();
 						
 					} else if(p2.yourTurn() && p2 == f.getPlayer() && p2.getMoney() >= ArmadilloTank.COST && f.getBuild()) {
 						
 						p2.subtractMoney(ArmadilloTank.COST);
 						f.buildUnit(new ArmadilloTank(p2), field);
+						field.deselectUnits();
 						
 					}
 					
@@ -298,11 +314,13 @@ public class GameGUI extends BorderPane {
 						
 						p1.subtractMoney(BullMatador.COST);
 						f.buildUnit(new BullMatador(p1), field);
+						field.deselectUnits();
 						
 					} else if(p2.yourTurn() && p2 == f.getPlayer() && p2.getMoney() >= BullMatador.COST && f.getBuild()) {
 						
 						p2.subtractMoney(BullMatador.COST);
 						f.buildUnit(new BullMatador(p2), field);
+						field.deselectUnits();
 						
 					}
 					

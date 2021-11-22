@@ -2,23 +2,19 @@ package application;
 
 import java.util.ArrayList;
 
-public class Facility extends GenericUnit {
-	
-	boolean canBuild;
+public class Facility extends Building {
 	
 	public Facility(Player player) {
-		super(20,0,0,0,player);
-		canBuild = true;
-		player.subtractUnit();
-	}
-
-	public Facility(int hp, int attack, int movementRange, Player player) {
-		super(20,0,0,0,player);
-		canBuild = true;
-		player.subtractUnit();
+		super(player);
 	}
 	
-	public void buildUnit(GenericUnit unit, Map field) { //Figure out why one tile is missing
+	public Facility(int hp, int attack, int movementRange, int attackRange, Player player) {
+		this(player);
+	}
+
+	boolean canBuild;
+	
+	public void buildUnit(GenericUnit unit, Map field) { 
 		
 		if(canBuild) {
 			ArrayList<Tile> buildTiles = field.getMovementTilesLand(1);
@@ -53,14 +49,6 @@ public class Facility extends GenericUnit {
 			
 			canBuild = false;
 		}
-	}
-	
-	public boolean getBuild() {
-		return canBuild;
-	}
-	
-	public void reset() {
-		canBuild = true;
 	}
 
 	@Override

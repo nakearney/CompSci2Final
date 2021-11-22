@@ -2,23 +2,17 @@ package application;
 
 import java.util.ArrayList;
 
-public class Docks extends GenericUnit {
-	
-	boolean canBuild;
+public class Docks extends Building {
 	
 	public Docks(Player player) {
-		super(20,0,0,0,player);
-		canBuild = true;
-		player.subtractUnit();
-	}
-
-	public Docks(int hp, int attack, int movementRange, Player player) {
-		super(20,0,0,0,player);
-		canBuild = true;
-		player.subtractUnit();
+		super(player);
 	}
 	
-	public void buildUnit(GenericUnit unit, Map field) { //Figure out why one tile is missing
+	public Docks(int hp, int attack, int movementRange, int attackRange, Player player) {
+		this(player);
+	}
+	
+	public void buildUnit(GenericUnit unit, Map field) { 
 		
 		if(canBuild) {
 			ArrayList<Tile> buildTiles = field.getMovementTilesWater(1);
@@ -47,14 +41,6 @@ public class Docks extends GenericUnit {
 			
 			canBuild = false;
 		}
-	}
-	
-	public boolean getBuild() {
-		return canBuild;
-	}
-	
-	public void reset() {
-		canBuild = true;
 	}
 
 	@Override
