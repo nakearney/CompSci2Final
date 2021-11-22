@@ -2,17 +2,17 @@ package application;
 
 import java.util.ArrayList;
 
-public class Facility extends GenericUnit {
+public class Docks extends GenericUnit {
 	
 	boolean canBuild;
 	
-	public Facility(Player player) {
+	public Docks(Player player) {
 		super(20,0,0,0,player);
 		canBuild = true;
 		player.subtractUnit();
 	}
 
-	public Facility(int hp, int attack, int movementRange, Player player) {
+	public Docks(int hp, int attack, int movementRange, Player player) {
 		super(20,0,0,0,player);
 		canBuild = true;
 		player.subtractUnit();
@@ -21,7 +21,7 @@ public class Facility extends GenericUnit {
 	public void buildUnit(GenericUnit unit, Map field) { //Figure out why one tile is missing
 		
 		if(canBuild) {
-			ArrayList<Tile> buildTiles = field.getMovementTilesLand(1);
+			ArrayList<Tile> buildTiles = field.getMovementTilesWater(1);
 			
 			for(int i = 0; i<buildTiles.size(); i++) {
 				if(buildTiles.get(i).isOccupied()) {
@@ -37,19 +37,13 @@ public class Facility extends GenericUnit {
 			int tileCount = buildTiles.size();
 			int index = (int)Math.random()*(tileCount);
 			
-			if(unit instanceof CatSoldier) {
-				buildTiles.get(index).setUnit((CatSoldier)unit);
-			} else if(unit instanceof SquirrelRogue) {
-				buildTiles.get(index).setUnit((SquirrelRogue)unit);
+			if(unit instanceof AxolotlGod) {
+				buildTiles.get(index).setUnit((AxolotlGod)unit);
 			} else if(unit instanceof DuckWizard) {
 				buildTiles.get(index).setUnit((DuckWizard)unit);
 			} else if(unit instanceof FlamingoSniper) {
 				buildTiles.get(index).setUnit((FlamingoSniper)unit);
-			} else if(unit instanceof ArmadilloTank) {
-				buildTiles.get(index).setUnit((ArmadilloTank)unit);
-			} else if(unit instanceof BullMatador) {
-				buildTiles.get(index).setUnit((BullMatador)unit);
-			}
+			} 
 			
 			canBuild = false;
 		}

@@ -14,27 +14,27 @@ import javafx.scene.paint.Color;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public abstract class GenericUnit extends Button { //Will become abstract 
+public abstract class GenericUnit extends Button {
 
 	private String name;
 	private int hp;
 	private int attack;
 	private int movementRange;
-	private static int cost;
 	private int attackRange;
+	protected int cost;
 	private Player player;
 	private boolean isDead;
 	private boolean isSelected;
 	private boolean hasMoved;
 	private boolean hasAttacked;
 	
-	public GenericUnit(int hp, int attack, int movementRange, int attackRange, Player player) { // Add Image Parameter
+	public GenericUnit(int hp, int attack, int movementRange, int attackRange, Player player) { 
 		this.hp = hp;
 		this.attack = attack;
 		this.movementRange = movementRange;
 		this.attackRange = attackRange;
 		this.player = player;
-		cost = 1000;
+		cost = 500;
 		isDead = false;
 		isSelected = false;
 		this.setBackground(null);
@@ -136,10 +136,6 @@ public abstract class GenericUnit extends Button { //Will become abstract
 		return player;
 	}
 	
-	public static int getCost() {
-		return cost;
-	}
-	
 	public boolean isDead() {
 		return isDead;
 	}
@@ -150,6 +146,10 @@ public abstract class GenericUnit extends Button { //Will become abstract
 	
 	public void setSelected(boolean isSelected) {
 		this.isSelected = isSelected;
+	}
+	
+	public int getCost() {
+		return cost;
 	}
 	
 	public void moved() {
@@ -184,7 +184,7 @@ public abstract class GenericUnit extends Button { //Will become abstract
 		
 	}
 	
-	public void attack(GenericUnit target) { //Would be an abstract method though it will follow a similar formula 
+	public void attack(GenericUnit target) { 
 		target.takeDamage(attack);
 		if(target.isDead()) {
 			target.getPlayer().subtractUnit();

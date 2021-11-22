@@ -32,6 +32,8 @@ public class Main extends Application {
 		map1 = new Map(Map1);
 		map1.setUnit(8, 4, new CatSoldier(player1));
 		map1.setUnit(8, 10, new CatSoldier(player2));
+		map1.setUnit(10,4, new Facility(player1));
+		map1.setUnit(10,10, new Facility(player2));
 		
 		GameGUI game = new GameGUI(player1, player2, map1);
 		Scene s = new Scene(game);

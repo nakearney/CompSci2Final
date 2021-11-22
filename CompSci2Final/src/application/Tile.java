@@ -252,11 +252,4 @@ public class Tile extends StackPane {
 		
 	}
 	
-	//Method below rendered useless
-	/*
-	public void moveUnit(Tile destination) { //Moves Unit from this tile, to destination Tile if it is empty ????
-		
-	}
-	*/
-	
 }

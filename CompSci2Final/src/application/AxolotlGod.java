@@ -2,8 +2,23 @@ package application;
 
 import java.util.ArrayList;
 
-public class AxolotlGod extends GenericUnit {
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
+public class AxolotlGod extends GenericUnit {
+	
+	public static final int COST = 2000;
+	
+	public AxolotlGod(Player player) {
+		super(4, 3, 3, 3, player);
+		cost = COST;
+		if(player.getPlayerNumber()==1) {
+			this.setGraphic(new ImageView(new Image("/Sprites/RedTank.png")));
+		} else {
+			this.setGraphic(new ImageView(new Image("/Sprites/BlueTank.png")));
+		}
+	}
+	
 	public AxolotlGod(int hp, int attack, int movementRange, int attackRange, Player player) {
 		super(hp, attack, movementRange, attackRange, player);
 		// TODO Auto-generated constructor stub
