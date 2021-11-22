@@ -40,6 +40,7 @@ public class Docks extends Building {
 			} 
 			
 			canBuild = false;
+			
 		}
 	}
 

@@ -432,9 +432,9 @@ public class GameGUI extends BorderPane {
 					p1.addMoney(3000);
 				}
 				
-				if(p1.yourTurn() && p2.getUnitCount() == 0) {
+				if(p1.yourTurn() && field.getBuildingTiles(p2).size() == 0) {
 					turnGUI.setText("Player 1 Wins");
-				} else if(p2.yourTurn() && p1.getUnitCount() == 0) {
+				} else if(p2.yourTurn() && field.getBuildingTiles(p1).size() == 0) {
 					turnGUI.setText("Player 2 Wins");
 				} else {
 					p1.switchTurn();
