@@ -26,20 +26,20 @@ public class AxolotlGod extends GenericUnit {
 
 	@Override
 	public ArrayList<Tile> attackStyle(Map field) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Tile> attackArea = field.getAttackTilesWater(getAttackRange());
+		return attackArea;
 	}
 
 	@Override
 	public ArrayList<Tile> nullStyle(Map field) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Tile> nullSpace = field.getSurroundingTiles(getAttackRange());
+		return nullSpace;
 	}
 
 	@Override
 	public ArrayList<Tile> moveStyle(Map field) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Tile> moveArea = field.getMovementTilesWater(getMovementRange());
+		return moveArea;
 	}
 
 }

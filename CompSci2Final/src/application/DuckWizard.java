@@ -10,7 +10,7 @@ public class DuckWizard extends GenericUnit {
 	public static final int COST = 3000;
 
 	public DuckWizard(Player player) {
-		super(3, 4, 2, 4, player);
+		super(3, 4, 4, 2, player);
 		cost = COST;
 		if(player.getPlayerNumber()==1) {
 			this.setGraphic(new ImageView(new Image("/Sprites/RedTank.png")));
@@ -26,20 +26,20 @@ public class DuckWizard extends GenericUnit {
 
 	@Override
 	public ArrayList<Tile> attackStyle(Map field) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Tile> attackArea = field.getLineAttackTilesLandWater(getAttackRange());
+		return attackArea;
 	}
 
 	@Override
 	public ArrayList<Tile> nullStyle(Map field) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Tile> nullSpace = field.getSurroundingTilesLine(getAttackRange());
+		return nullSpace;
 	}
 
 	@Override
 	public ArrayList<Tile> moveStyle(Map field) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Tile> moveArea = field.getMovementTilesLandWater(getMovementRange());
+		return moveArea;
 	}
 
 }

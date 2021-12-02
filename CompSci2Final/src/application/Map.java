@@ -465,6 +465,8 @@ public class Map extends GridPane {
 						
 						if(spotY>-1&&spotY<MAP_SIZE&&spotX>-1&&spotX<MAP_SIZE)
 						if(tileGrid[spotY][spotX].getTraversible())
+						if(spotY>-1&&spotY<MAP_SIZE&&spotX>-1&&spotX<MAP_SIZE)
+						if(tileGrid[spotY][spotX].getIsWater())
 						//if(tileGrid[spotY][spotX].isOccupied())
 						surroundingTiles.add(tileGrid[spotY][spotX]);
 						
@@ -527,6 +529,14 @@ public class Map extends GridPane {
 			if(!surroundingTiles.get(surroundingTiles.indexOf(t)).isOccupied()) {
 				surroundingTiles.remove(t);
 			}
+			//added
+			if(t.getTraversible()==false) {
+				surroundingTiles.remove(t);
+			}
+			if(t.getIsWater()==true) {
+				surroundingTiles.remove(t);
+			}
+			//done added
 			
 		}
 		
@@ -623,14 +633,122 @@ public class Map extends GridPane {
 	}
 	//method for attacking land in straight line
 	public ArrayList<Tile> getLineAttackTilesLand(int range){
-		return null;
+		
+		ArrayList<Tile> unitTiles = this.getUnitTiles();
+		ArrayList<Tile> surroundingTiles = new ArrayList<Tile>();
+		
+		if(unitTiles.size()!=1) {
+			
+			return null;
+			
+		} else {
+		
+			Tile unitTile = unitTiles.get(0);
+			//Unit's x & y coords
+			int x = unitTile.getX();
+			int y = unitTile.getY();
+			
+			for(int i=0;i<4;i++) {
+				//Algorithm to add 4 tiles around unit. used a basis for adding more and more tiles.
+				//Adds directly to the left, right, up and down of the tile.
+				//cos = 1 when i=0 or 2, cos = 0 when i=1 or 3. Opposite for sin.
+				for(int step=1;step<=range;step++) {
+					
+					int shiftX=x+(int)(step*Math.cos(i*(Math.PI/2)));
+					int shiftY=y+(int)(step*Math.sin(i*(Math.PI/2)));
+					
+					
+				//	if(!tileGrid[shiftY][shiftX].getIsWater()) {
+						if(tileGrid[shiftY][shiftX].getTraversible()) {
+							if(shiftY>-1&&shiftY<MAP_SIZE&&shiftX>-1&&shiftX<MAP_SIZE) {
+								if(tileGrid[shiftY][shiftX].getTraversible()||tileGrid[shiftY][shiftX].getIsWater()) {
+								surroundingTiles.add(tileGrid[shiftY][shiftX]);
+								}
+						}
+					}
+				//	}
+				}
+				
+			}
+			
+		}
+		ArrayList<Tile> tileChecker = new ArrayList<Tile>();
+		
+		for(Tile t : surroundingTiles) {
+			
+			tileChecker.add(t);
+			
+		}
+		
+		for(Tile t : tileChecker) {
+			
+			if(!surroundingTiles.get(surroundingTiles.indexOf(t)).isOccupied()) {
+				surroundingTiles.remove(t);
+			}
+			
+			
+			
+		}
+		
+		return surroundingTiles;
 		
 	}
 //method for attacking land and water in a straight line
 	public ArrayList<Tile> getLineAttackTilesLandWater(int range){
-		return null;
 		
-	}
+		ArrayList<Tile> unitTiles = this.getUnitTiles();
+		ArrayList<Tile> surroundingTiles = new ArrayList<Tile>();
+		
+		if(unitTiles.size()!=1) {
+			
+			return null;
+			
+		} else {
+		
+			Tile unitTile = unitTiles.get(0);
+			//Unit's x & y coords
+			int x = unitTile.getX();
+			int y = unitTile.getY();
+			
+			for(int i=0;i<4;i++) {
+				//Algorithm to add 4 tiles around unit. used a basis for adding more and more tiles.
+				//Adds directly to the left, right, up and down of the tile.
+				//cos = 1 when i=0 or 2, cos = 0 when i=1 or 3. Opposite for sin.
+				for(int step=1;step<=range;step++) {
+					
+					int shiftX=x+(int)(step*Math.cos(i*(Math.PI/2)));
+					int shiftY=y+(int)(step*Math.sin(i*(Math.PI/2)));
+					
+					if(shiftY>-1&&shiftY<MAP_SIZE&&shiftX>-1&&shiftX<MAP_SIZE) {
+					if(tileGrid[shiftY][shiftX].getTraversible()==true) 
+					surroundingTiles.add(tileGrid[shiftY][shiftX]);
+					
+					}
+				}
+				
+			}
+			
+		}
+		ArrayList<Tile> tileChecker = new ArrayList<Tile>();
+		
+		for(Tile t : surroundingTiles) {
+			
+			tileChecker.add(t);
+			
+		}
+		
+		for(Tile t : tileChecker) {
+			
+			if(!surroundingTiles.get(surroundingTiles.indexOf(t)).isOccupied()) {
+				surroundingTiles.remove(t);
+			}
+			
+		}
+		
+		return surroundingTiles;
+		
+		}
+	
 //method for hollow circle attack radius
 	public ArrayList<Tile> getHollowAttackTilesLandWater(int range, int hole){
 
@@ -644,7 +762,7 @@ public class Map extends GridPane {
 		} else {
 		
 			Tile unitTile = unitTiles.get(0);
-			//Unit's x & y coords
+			//Unit's x & y cords
 			
 			
 			for(int i=0;i<range;i++) {
@@ -1071,7 +1189,7 @@ public class Map extends GridPane {
 	}
 	
 	//Gets the lines of tiles of a certain range surrounding a unit.
-	public ArrayList<Tile> getSurroundingTileLine(int range) {
+	public ArrayList<Tile> getSurroundingTilesLine(int range) {
 		
 		ArrayList<Tile> unitTiles = this.getUnitTiles();
 		ArrayList<Tile> surroundingTiles = new ArrayList<Tile>();

@@ -26,20 +26,21 @@ public class ArmadilloTank extends GenericUnit {
 
 	@Override
 	public ArrayList<Tile> attackStyle(Map field) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Tile> attackArea = field.getLineAttackTilesLand(getAttackRange());
+		return attackArea;
 	}
 
 	@Override
 	public ArrayList<Tile> nullStyle(Map field) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		ArrayList<Tile> nullSpace = field.getSurroundingTilesLine(getAttackRange());
+		return nullSpace;
 	}
 
 	@Override
 	public ArrayList<Tile> moveStyle(Map field) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Tile> moveArea = field.getMovementTilesLand(getMovementRange());
+		return moveArea;
 	}
-
+	
 }

@@ -10,7 +10,7 @@ public class BullMatador extends GenericUnit {
 	public static final int COST = 5000;
 
 	public BullMatador(Player player) {
-		super(8, 4, 4, 3, player);
+		super(8, 4, 3, 4, player);
 		cost = COST;
 		if(player.getPlayerNumber()==1) {
 			this.setGraphic(new ImageView(new Image("/Sprites/RedTank.png")));
@@ -26,20 +26,20 @@ public class BullMatador extends GenericUnit {
 
 	@Override
 	public ArrayList<Tile> attackStyle(Map field) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Tile> attackArea = field.getLineAttackTilesLand(getAttackRange());
+		return attackArea;
 	}
 
 	@Override
 	public ArrayList<Tile> nullStyle(Map field) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Tile> nullSpace = field.getSurroundingTilesLine(getAttackRange());
+		return nullSpace;
 	}
 
 	@Override
 	public ArrayList<Tile> moveStyle(Map field) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Tile> moveArea = field.getMovementTilesLand(getMovementRange());
+		return moveArea;
 	}
 
 }
