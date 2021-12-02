@@ -10,8 +10,8 @@ public class FlamingoSniper extends GenericUnit {
 	public static final int COST = 4000;
 	
 	public FlamingoSniper(Player player) {
-		super(3, 5, 4, 2, player);
-		hollow=3;
+		super(3, 5, 4, 4, player);
+		hollow=2;
 		cost = COST;
 		if(player.getPlayerNumber()==1) {
 			this.setGraphic(new ImageView(new Image("/Sprites/Flamingo_Sniper_Player1.png")));
