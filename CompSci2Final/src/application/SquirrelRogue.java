@@ -25,7 +25,7 @@ public class SquirrelRogue extends GenericUnit {
 
 	@Override
 	public ArrayList<Tile> attackStyle(Map field) {
-		ArrayList<Tile> attackArea = field.getAttackTilesLand(getAttackRange());
+		ArrayList<Tile> attackArea = field.getLineAttackTilesLand(getAttackRange());
 		return attackArea;
 	}
 
