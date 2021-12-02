@@ -9,12 +9,9 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.BorderStroke;
@@ -29,16 +26,15 @@ import javafx.scene.text.TextAlignment;
 
 public class GameGUI extends BorderPane {
 
-	private Map field;
+	//Contains Move, Attack, and EndTurn
 	private HBox buttons;
+	//Contains purchasing buttons
 	private VBox econGUI;
+	//Contains info on troops
 	private ScrollPane infoGUI;
+	//Displays current turn
 	private Label turnGUI;
-	private Button attack;
-	private Button move;
-	private Button endTurn;
-	private Player p1;
-	private Player p2;
+	//Width of the left and right elements in GameGUI (the info & turnGUI)
 	private double sideWidth=225.0;
 	
 	
@@ -50,12 +46,9 @@ public class GameGUI extends BorderPane {
 		ScrollPane scroller = new ScrollPane();
 		scroller.setPannable(true);
 		scroller.setBackground(new Background(new BackgroundFill(Color.BLACK,null,null)));
-		scroller.setMaxHeight(600*1.81);
-		scroller.setMaxWidth(600*1.81);
 		scroller.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 		scroller.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 		
-		this.field = field;
 		scroller.setContent(field);
 		setCenter(scroller);
 		
@@ -132,6 +125,7 @@ public class GameGUI extends BorderPane {
 				
 				turnDisplay(p1,p2);
 				field.deselectUnits();
+
 			}
 		});
 		
@@ -340,7 +334,7 @@ public class GameGUI extends BorderPane {
 		buttons = new HBox();
 		buttons.setPadding(new Insets(4.0,4.0,4.0,4.0));
 		
-		move = new Button("MOVE");
+		Button move = new Button("MOVE");
 		formatButton(move,Color.BLUE);
 		
 		move.setOnMouseReleased((EventHandler<? super MouseEvent>) new EventHandler<MouseEvent>() {
@@ -356,6 +350,11 @@ public class GameGUI extends BorderPane {
 					GenericUnit unit = unitList.get(0).getUnit();
 					ArrayList<Tile> moveArea = unit.moveStyle(field);
 					
+					if(moveArea==null) {
+						field.deselectUnits();
+						return;
+					}
+					
 					for(Tile t : moveArea) {
 				
 						t.setMyButton(new MoveButton(t,unitList.get(0),unit));
@@ -366,7 +365,7 @@ public class GameGUI extends BorderPane {
 			
 		});
 		
-		attack = new Button("ATTACK");
+		Button attack = new Button("ATTACK");
 		formatButton(attack,Color.RED);
 		
 		attack.setOnMouseReleased((EventHandler<? super MouseEvent>) new EventHandler<MouseEvent>() {
@@ -382,6 +381,11 @@ public class GameGUI extends BorderPane {
 					GenericUnit unit = unitList.get(0).getUnit();
 					ArrayList<Tile> attackArea = unit.attackStyle(field);
 					ArrayList<Tile> nullSpace = unit.nullStyle(field);
+					
+					if(nullSpace==null) {
+						field.deselectUnits();
+						return;
+					}
 					
 					for(Tile t : nullSpace) {
 						
@@ -399,7 +403,7 @@ public class GameGUI extends BorderPane {
 			
 		});
 		
-		endTurn = new Button("END TURN");
+		Button endTurn = new Button("END TURN");
 		formatButton(endTurn, Color.GRAY);
 		
 		endTurn.setOnMouseReleased((EventHandler<? super MouseEvent>) new EventHandler<MouseEvent>() {
@@ -416,10 +420,12 @@ public class GameGUI extends BorderPane {
 					p1.addMoney(3000);
 				}
 				
-				if(p1.yourTurn() && p2.getUnitCount() == 0) {
+				if(p1.yourTurn() && field.getBuildingTiles(p2).size() == 0) {
 					turnGUI.setText("Player 1 Wins");
-				} else if(p2.yourTurn() && p1.getUnitCount() == 0) {
+					gameOver();
+				} else if(p2.yourTurn() && field.getBuildingTiles(p1).size() == 0) {
 					turnGUI.setText("Player 2 Wins");
+					gameOver();
 				} else {
 					p1.switchTurn();
 					p2.switchTurn();
@@ -440,8 +446,8 @@ public class GameGUI extends BorderPane {
 							
 						}
 						
-						if(unit instanceof Facility) { //Reset Builds
-							Facility f = (Facility)t.getUnit();
+						if(unit instanceof Building) { //Reset Builds
+							Building f = (Building)t.getUnit();
 							f.reset();
 						}
 						
@@ -453,16 +459,17 @@ public class GameGUI extends BorderPane {
 			
 		});
 		
-		buttons.setAlignment(Pos.CENTER);
+		buttons.setAlignment(Pos.BASELINE_CENTER);
 		buttons.getChildren().add(move);
 		buttons.getChildren().add(attack);
 		buttons.getChildren().add(endTurn);
+		buttons.setMinWidth(100);
 		
 		setTop(turnGUI);
 		BorderPane.setAlignment(turnGUI, Pos.CENTER);
-		setBottom(buttons);
 		setLeft(infoGUI);
 		setRight(econGUI);
+		setBottom(buttons);
 		
 	}
 	
@@ -589,6 +596,27 @@ public class GameGUI extends BorderPane {
 			}
 			
 		});
+		
+	}
+	
+	private void gameOver() {
+		
+		Button gameOver = new Button("OK");
+		formatButton(gameOver,Color.BISQUE);
+		BorderPane.setAlignment(gameOver, Pos.CENTER);
+		
+		gameOver.setOnMouseReleased((EventHandler<? super MouseEvent>) new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent arg0) {
+				
+				Main.startScreen();
+				
+			}
+			
+		});
+		
+		this.setBottom(gameOver);
 		
 	}
 	

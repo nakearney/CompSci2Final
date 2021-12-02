@@ -13,9 +13,9 @@ public class CatSoldier extends GenericUnit {
 		super(5, 3, 2, 3, player);
 		cost = COST;
 		if(player.getPlayerNumber()==1) {
-			this.setGraphic(new ImageView(new Image("/Sprites/RedTank.png")));
+			this.setGraphic(new ImageView(new Image("/Sprites/Cat_Soldier_Player1.png")));
 		} else {
-			this.setGraphic(new ImageView(new Image("/Sprites/BlueTank.png")));
+			this.setGraphic(new ImageView(new Image("/Sprites/Cat_Soldier_Player2.png")));
 		}
 	}
 

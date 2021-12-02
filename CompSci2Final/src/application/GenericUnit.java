@@ -11,12 +11,9 @@ import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 public abstract class GenericUnit extends Button {
 
-	private String name;
 	private int hp;
 	private int attack;
 	private int movementRange;
@@ -59,7 +56,20 @@ public abstract class GenericUnit extends Button {
 					stroke = new BorderStroke[1];
 					
 					if(player.yourTurn()) {
-						stroke[0] =  new BorderStroke(Color.GOLD,BorderStrokeStyle.SOLID,new CornerRadii(4.0),new BorderWidths(6.0,6.0,6.0,6.0));
+						if(b instanceof Building) {
+							Building build = (Building)b;
+							if(build.getBuild()) {
+								stroke[0] =  new BorderStroke(Color.GOLD,BorderStrokeStyle.SOLID,new CornerRadii(4.0),new BorderWidths(6.0,6.0,6.0,6.0));
+							} else {
+								stroke[0] =  new BorderStroke(Color.GREY,BorderStrokeStyle.SOLID,new CornerRadii(4.0),new BorderWidths(6.0,6.0,6.0,6.0));
+							}
+						} else {
+							if(hasMoved&&hasAttacked) {
+								stroke[0] =  new BorderStroke(Color.GREY,BorderStrokeStyle.SOLID,new CornerRadii(4.0),new BorderWidths(6.0,6.0,6.0,6.0));
+							} else {
+								stroke[0] =  new BorderStroke(Color.GOLD,BorderStrokeStyle.SOLID,new CornerRadii(4.0),new BorderWidths(6.0,6.0,6.0,6.0));
+							}
+						}	
 					} else {
 						stroke[0] =  new BorderStroke(Color.GREY,BorderStrokeStyle.SOLID,new CornerRadii(4.0),new BorderWidths(6.0,6.0,6.0,6.0));
 					}
@@ -87,20 +97,49 @@ public abstract class GenericUnit extends Button {
 			public void handle(MouseEvent arg0) {
 				
 				if(player.yourTurn()) {
-					
-					Main.map1.removeMapButtons();
-					
-					isSelected=!isSelected;
-					
-					if(isSelected) {
-						BorderStroke[] stroke =  {new BorderStroke(Color.PURPLE,BorderStrokeStyle.SOLID,new CornerRadii(4.0),new BorderWidths(6.0,6.0,6.0,6.0))};
-						b.setBorder(new Border(stroke));
+					if(b instanceof Building) {
+						
+						Building build = (Building)b;
+						if(build.getBuild()) {
+							
+							Main.theMap.removeMapButtons();
+							
+							isSelected=!isSelected;
+							
+							if(isSelected) {
+								BorderStroke[] stroke =  {new BorderStroke(Color.PURPLE,BorderStrokeStyle.SOLID,new CornerRadii(4.0),new BorderWidths(6.0,6.0,6.0,6.0))};
+								b.setBorder(new Border(stroke));
+							} else {
+								BorderStroke[] stroke =  {new BorderStroke(Color.GOLD,BorderStrokeStyle.SOLID,new CornerRadii(4.0),new BorderWidths(6.0,6.0,6.0,6.0))};
+								b.setBorder(new Border(stroke));
+							}
+							
+						}
+						
 					} else {
-						BorderStroke[] stroke =  {new BorderStroke(Color.GOLD,BorderStrokeStyle.SOLID,new CornerRadii(4.0),new BorderWidths(6.0,6.0,6.0,6.0))};
-						b.setBorder(new Border(stroke));
+						
+						if(!(hasMoved&&hasAttacked)) {
+							
+							Main.theMap.removeMapButtons();
+							
+							isSelected=!isSelected;
+							
+							if(isSelected) {
+								BorderStroke[] stroke =  {new BorderStroke(Color.PURPLE,BorderStrokeStyle.SOLID,new CornerRadii(4.0),new BorderWidths(6.0,6.0,6.0,6.0))};
+								b.setBorder(new Border(stroke));
+							} else {
+								BorderStroke[] stroke =  {new BorderStroke(Color.GOLD,BorderStrokeStyle.SOLID,new CornerRadii(4.0),new BorderWidths(6.0,6.0,6.0,6.0))};
+								b.setBorder(new Border(stroke));
+							}
+							
+						}
+						
 					}
 					
 				}
+				
+				
+				
 			}
 			
 		});

@@ -2,10 +2,18 @@ package application;
 
 import java.util.ArrayList;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 public class Docks extends Building {
 	
 	public Docks(Player player) {
 		super(player);
+		if(player.getPlayerNumber()==1) {
+			this.setGraphic(new ImageView(new Image("/Sprites/Aircraft_Carrier_Player1.png")));
+		} else {
+			this.setGraphic(new ImageView(new Image("/Sprites/Aircraft_Carrier_Player2.png")));
+		}
 	}
 	
 	public Docks(int hp, int attack, int movementRange, int attackRange, Player player) {
@@ -29,7 +37,7 @@ public class Docks extends Building {
 			}
 			
 			int tileCount = buildTiles.size();
-			int index = (int)Math.random()*(tileCount);
+			int index = (int)(Math.random()*(tileCount));
 			
 			if(unit instanceof AxolotlGod) {
 				buildTiles.get(index).setUnit((AxolotlGod)unit);
@@ -40,6 +48,7 @@ public class Docks extends Building {
 			} 
 			
 			canBuild = false;
+			
 		}
 	}
 
