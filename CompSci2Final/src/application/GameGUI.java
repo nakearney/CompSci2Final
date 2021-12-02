@@ -13,7 +13,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.BorderStroke;
@@ -29,10 +28,13 @@ import javafx.scene.text.TextAlignment;
 
 public class GameGUI extends BorderPane {
 
-	private Map field;
+	//Contains Move, Attack, and EndTurn
 	private HBox buttons;
+	//Contains purchasing buttons
 	private VBox econGUI;
+	//Contains info on troops
 	private ScrollPane infoGUI;
+	//Displays current turn
 	private Label turnGUI;
 	private Button attack;
 	private Button move;
@@ -40,16 +42,18 @@ public class GameGUI extends BorderPane {
 	private Player p1;
 	private Player p2;
 	private Player empty = new Player(0,false);
+
+	//Width of the left and right elements in GameGUI (the info & turnGUI)
 	private double sideWidth=225.0;
 	
 	//Initialize Images here
-	private Image catImage = new Image("/Sprites/RedTank.png");
-	private Image squirrelImage = new Image("/Sprites/RedTank.png");
-	private Image axolotlImage = new Image("/Sprites/RedTank.png");;
-	private Image duckImage = new Image("/Sprites/RedTank.png");;
-	private Image flamingoImage = new Image("/Sprites/RedTank.png");;
-	private Image armadilloImage = new Image("/Sprites/RedTank.png");;
-	private Image bullImage = new Image("/Sprites/RedTank.png");;
+	private Image catImage = new Image("/Sprites/Cat_Soldier_Player1.png");
+	private Image squirrelImage = new Image("/Sprites/Squirrel_Rogue_Player2.png");
+	private Image axolotlImage = new Image("/Sprites/Axolotl_Sailor_Player1.png");;
+	private Image duckImage = new Image("/Sprites/Duck_Wizard_Player2.png");;
+	private Image flamingoImage = new Image("/Sprites/Flamingo_Sniper_Player1.png");;
+	private Image armadilloImage = new Image("/Sprites/Armadillo_Tank_Player2.png");;
+	private Image bullImage = new Image("/Sprites/Matador_Bull_Player1.png");;
 	
 	//Initializes Map in Main Currently. Then passes it here.
 	public GameGUI(Player p1, Player p2, Map field) {
@@ -59,12 +63,9 @@ public class GameGUI extends BorderPane {
 		ScrollPane scroller = new ScrollPane();
 		scroller.setPannable(true);
 		scroller.setBackground(new Background(new BackgroundFill(Color.BLACK,null,null)));
-		scroller.setMaxHeight(600*1.81);
-		scroller.setMaxWidth(600*1.81);
 		scroller.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 		scroller.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 		
-		this.field = field;
 		scroller.setContent(field);
 		setCenter(scroller);
 		
@@ -80,251 +81,19 @@ public class GameGUI extends BorderPane {
 		econGUI.setPrefWidth(sideWidth);
 		
 		Button cat = new Button("Cat Soldier: $" + CatSoldier.COST);
-		formatEconButton(cat, CatSoldier.COST, p1, p2);
-		cat.setOnMouseReleased((EventHandler<? super MouseEvent>) new EventHandler<MouseEvent>() { 
-			@Override
-			public void handle(MouseEvent event) {
-				
-				ArrayList<Tile> unitList = field.getUnitTiles();
-				if(unitList.size()==1 && unitList.get(0).getUnit() instanceof Facility) { //Checks for facility selected
-					
-					Facility f = (Facility)unitList.get(0).getUnit();
-					
-					if(p1.yourTurn() && p1 == f.getPlayer() && p1.getMoney() >= CatSoldier.COST && f.getBuild()) { //Player 1 is valid
-						
-						p1.subtractMoney(CatSoldier.COST);
-						f.buildUnit(new CatSoldier(p1), field);
-						
-					} else if(p2.yourTurn() && p2 == f.getPlayer() && p2.getMoney() >= CatSoldier.COST && f.getBuild()) {
-						
-						p2.subtractMoney(CatSoldier.COST);
-						f.buildUnit(new CatSoldier(p2), field);
-						
-					}
-					
-					
-				} 
-				
-				turnDisplay(p1,p2);
-				field.deselectUnits();
-			}
-		});
-		
+		formatEconButton(cat, new CatSoldier(empty), CatSoldier.COST, p1, p2, field);
 		Button squirrel = new Button("Squirrel Rogue: $" + SquirrelRogue.COST);
-		formatEconButton(squirrel, SquirrelRogue.COST, p1, p2);
-		squirrel.setOnMouseReleased((EventHandler<? super MouseEvent>) new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				
-				ArrayList<Tile> unitList = field.getUnitTiles();
-				if(unitList.size()==1 && unitList.get(0).getUnit() instanceof Facility) { //Checks for facility selected
-					
-					Facility f = (Facility)unitList.get(0).getUnit();
-					
-					if(p1.yourTurn() && p1 == f.getPlayer() && p1.getMoney() >= SquirrelRogue.COST && f.getBuild()) { //Player 1 is valid
-						
-						p1.subtractMoney(SquirrelRogue.COST);
-						f.buildUnit(new SquirrelRogue(p1), field);
-						
-					} else if(p2.yourTurn() && p2 == f.getPlayer() && p2.getMoney() >= SquirrelRogue.COST && f.getBuild()) {
-						
-						p2.subtractMoney(SquirrelRogue.COST);
-						f.buildUnit(new SquirrelRogue(p2), field);
-						
-					}
-					
-					
-				} 
-				
-				turnDisplay(p1,p2);
-				field.deselectUnits();
-			}
-		});
-		
-		Button axolotl = new Button("Axolotl God: $" + AxolotlGod.COST);
-		formatEconButton(axolotl, AxolotlGod.COST, p1, p2);
-		axolotl.setOnMouseReleased((EventHandler<? super MouseEvent>) new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				
-				ArrayList<Tile> unitList = field.getUnitTiles();
-				if(unitList.size()==1 && unitList.get(0).getUnit() instanceof Docks) { //Checks for docks selected
-					
-					Docks d = (Docks)unitList.get(0).getUnit();
-					
-					if(p1.yourTurn() && p1 == d.getPlayer() && p1.getMoney() >= AxolotlGod.COST && d.getBuild()) { //Player 1 is valid
-						
-						p1.subtractMoney(AxolotlGod.COST);
-						d.buildUnit(new AxolotlGod(p1), field);
-						
-					} else if(p2.yourTurn() && p2 == d.getPlayer() && p2.getMoney() >= AxolotlGod.COST && d.getBuild()) {
-						
-						p2.subtractMoney(AxolotlGod.COST);
-						d.buildUnit(new AxolotlGod(p2), field);
-						
-					}
-					
-					
-				} 
-				
-				turnDisplay(p1,p2);
-				field.deselectUnits();
-			}
-		});
-		
+		formatEconButton(squirrel, new SquirrelRogue(empty), SquirrelRogue.COST, p1, p2, field);
+		Button axolotl = new Button("Axolotl Captain: $" + AxolotlCaptain.COST);
+		formatEconButton(axolotl, new AxolotlCaptain(empty), AxolotlCaptain.COST, p1, p2, field);
 		Button duck = new Button("Duck Wizard: $" + DuckWizard.COST);
-		formatEconButton(duck, DuckWizard.COST, p1, p2);
-		duck.setOnMouseReleased((EventHandler<? super MouseEvent>) new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				
-				ArrayList<Tile> unitList = field.getUnitTiles();
-				if(unitList.size()==1 && unitList.get(0).getUnit() instanceof Facility) { //Checks for facility selected
-					
-					Facility f = (Facility)unitList.get(0).getUnit();
-					
-					if(p1.yourTurn() && p1 == f.getPlayer() && p1.getMoney() >= DuckWizard.COST && f.getBuild()) { //Player 1 is valid
-						
-						p1.subtractMoney(DuckWizard.COST);
-						f.buildUnit(new DuckWizard(p1), field);
-						
-					} else if(p2.yourTurn() && p2 == f.getPlayer() && p2.getMoney() >= DuckWizard.COST && f.getBuild()) {
-						
-						p2.subtractMoney(DuckWizard.COST);
-						f.buildUnit(new DuckWizard(p2), field);
-						
-					}
-					
-					
-				} else if(unitList.size()==1 && unitList.get(0).getUnit() instanceof Docks) { //Checks for docks selected
-					
-					Docks d = (Docks)unitList.get(0).getUnit();
-					
-					if(p1.yourTurn() && p1 == d.getPlayer() && p1.getMoney() >= DuckWizard.COST && d.getBuild()) { //Player 1 is valid
-						
-						p1.subtractMoney(DuckWizard.COST);
-						d.buildUnit(new DuckWizard(p1), field);
-						
-					} else if(p2.yourTurn() && p2 == d.getPlayer() && p2.getMoney() >= DuckWizard.COST && d.getBuild()) {
-						
-						p2.subtractMoney(DuckWizard.COST);
-						d.buildUnit(new DuckWizard(p2), field);
-						
-					}
-				}
-				
-				turnDisplay(p1,p2);
-				field.deselectUnits();
-			}
-		});
-		
+		formatEconButton(duck, new DuckWizard(empty), DuckWizard.COST, p1, p2, field);
 		Button flamingo = new Button("Flamingo Sniper: $" + FlamingoSniper.COST);
-		formatEconButton(flamingo, FlamingoSniper.COST, p1, p2);
-		flamingo.setOnMouseReleased((EventHandler<? super MouseEvent>) new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				
-				ArrayList<Tile> unitList = field.getUnitTiles();
-				if(unitList.size()==1 && unitList.get(0).getUnit() instanceof Facility) { //Checks for facility selected
-					
-					Facility f = (Facility)unitList.get(0).getUnit();
-					
-					if(p1.yourTurn() && p1 == f.getPlayer() && p1.getMoney() >= FlamingoSniper.COST && f.getBuild()) { //Player 1 is valid
-						
-						p1.subtractMoney(FlamingoSniper.COST);
-						f.buildUnit(new FlamingoSniper(p1), field);
-						
-					} else if(p2.yourTurn() && p2 == f.getPlayer() && p2.getMoney() >= FlamingoSniper.COST && f.getBuild()) {
-						
-						p2.subtractMoney(FlamingoSniper.COST);
-						f.buildUnit(new FlamingoSniper(p2), field);
-						
-					}
-					
-					
-				} else if(unitList.size()==1 && unitList.get(0).getUnit() instanceof Docks) { //Checks for docks selected
-					
-					Docks d = (Docks)unitList.get(0).getUnit();
-					
-					if(p1.yourTurn() && p1 == d.getPlayer() && p1.getMoney() >= FlamingoSniper.COST && d.getBuild()) { //Player 1 is valid
-						
-						p1.subtractMoney(FlamingoSniper.COST);
-						d.buildUnit(new FlamingoSniper(p1), field);
-						
-					} else if(p2.yourTurn() && p2 == d.getPlayer() && p2.getMoney() >= FlamingoSniper.COST && d.getBuild()) {
-						
-						p2.subtractMoney(FlamingoSniper.COST);
-						d.buildUnit(new FlamingoSniper(p2), field);
-						
-					}
-				}
-				
-				turnDisplay(p1,p2);
-				field.deselectUnits();
-			}
-		});
-		
+		formatEconButton(flamingo, new FlamingoSniper(empty), FlamingoSniper.COST, p1, p2, field);
 		Button armadillo = new Button("Armadillo Tank: $" + ArmadilloTank.COST);
-		formatEconButton(armadillo, ArmadilloTank.COST, p1, p2);
-		armadillo.setOnMouseReleased((EventHandler<? super MouseEvent>) new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				
-				ArrayList<Tile> unitList = field.getUnitTiles();
-				if(unitList.size()==1 && unitList.get(0).getUnit() instanceof Facility) { //Checks for facility selected
-					
-					Facility f = (Facility)unitList.get(0).getUnit();
-					
-					if(p1.yourTurn() && p1 == f.getPlayer() && p1.getMoney() >= ArmadilloTank.COST && f.getBuild()) { //Player 1 is valid
-						
-						p1.subtractMoney(ArmadilloTank.COST);
-						f.buildUnit(new ArmadilloTank(p1), field);
-						
-					} else if(p2.yourTurn() && p2 == f.getPlayer() && p2.getMoney() >= ArmadilloTank.COST && f.getBuild()) {
-						
-						p2.subtractMoney(ArmadilloTank.COST);
-						f.buildUnit(new ArmadilloTank(p2), field);
-						
-					}
-					
-					
-				} 
-				
-				turnDisplay(p1,p2);
-				field.deselectUnits();
-			}
-		});
-		
+		formatEconButton(armadillo, new ArmadilloTank(empty), ArmadilloTank.COST, p1, p2, field);
 		Button bull = new Button("Bull Matador: $" + BullMatador.COST);
-		formatEconButton(bull, BullMatador.COST, p1, p2);
-		bull.setOnMouseReleased((EventHandler<? super MouseEvent>) new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				
-				ArrayList<Tile> unitList = field.getUnitTiles();
-				if(unitList.size()==1 && unitList.get(0).getUnit() instanceof Facility) { //Checks for facility selected
-					
-					Facility f = (Facility)unitList.get(0).getUnit();
-					
-					if(p1.yourTurn() && p1 == f.getPlayer() && p1.getMoney() >= BullMatador.COST && f.getBuild()) { //Player 1 is valid
-						
-						p1.subtractMoney(BullMatador.COST);
-						f.buildUnit(new BullMatador(p1), field);
-						
-					} else if(p2.yourTurn() && p2 == f.getPlayer() && p2.getMoney() >= BullMatador.COST && f.getBuild()) {
-						
-						p2.subtractMoney(BullMatador.COST);
-						f.buildUnit(new BullMatador(p2), field);
-						
-					}
-					
-					
-				} 
-				
-				turnDisplay(p1,p2);
-				field.deselectUnits();
-			}
-		});
+		formatEconButton(bull, new BullMatador(empty), BullMatador.COST, p1, p2, field);
 		
 		econGUI.getChildren().add(cat);
 		econGUI.getChildren().add(squirrel);
@@ -346,7 +115,7 @@ public class GameGUI extends BorderPane {
 		buttons = new HBox();
 		buttons.setPadding(new Insets(4.0,4.0,4.0,4.0));
 		
-		move = new Button("MOVE");
+		Button move = new Button("MOVE");
 		formatButton(move,Color.BLUE);
 		
 		move.setOnMouseReleased((EventHandler<? super MouseEvent>) new EventHandler<MouseEvent>() {
@@ -362,6 +131,11 @@ public class GameGUI extends BorderPane {
 					GenericUnit unit = unitList.get(0).getUnit();
 					ArrayList<Tile> moveArea = unit.moveStyle(field);
 					
+					if(moveArea==null) {
+						field.deselectUnits();
+						return;
+					}
+					
 					for(Tile t : moveArea) {
 				
 						t.setMyButton(new MoveButton(t,unitList.get(0),unit));
@@ -372,7 +146,7 @@ public class GameGUI extends BorderPane {
 			
 		});
 		
-		attack = new Button("ATTACK");
+		Button attack = new Button("ATTACK");
 		formatButton(attack,Color.RED);
 		
 		attack.setOnMouseReleased((EventHandler<? super MouseEvent>) new EventHandler<MouseEvent>() {
@@ -388,6 +162,11 @@ public class GameGUI extends BorderPane {
 					GenericUnit unit = unitList.get(0).getUnit();
 					ArrayList<Tile> attackArea = unit.attackStyle(field);
 					ArrayList<Tile> nullSpace = unit.nullStyle(field);
+					
+					if(nullSpace==null) {
+						field.deselectUnits();
+						return;
+					}
 					
 					for(Tile t : nullSpace) {
 						
@@ -405,7 +184,7 @@ public class GameGUI extends BorderPane {
 			
 		});
 		
-		endTurn = new Button("END TURN");
+		Button endTurn = new Button("END TURN");
 		formatButton(endTurn, Color.GRAY);
 		
 		endTurn.setOnMouseReleased((EventHandler<? super MouseEvent>) new EventHandler<MouseEvent>() {
@@ -424,8 +203,10 @@ public class GameGUI extends BorderPane {
 				
 				if(p1.yourTurn() && field.getBuildingTiles(p2).size() == 0) {
 					turnGUI.setText("Player 1 Wins");
+					gameOver();
 				} else if(p2.yourTurn() && field.getBuildingTiles(p1).size() == 0) {
 					turnGUI.setText("Player 2 Wins");
+					gameOver();
 				} else {
 					p1.switchTurn();
 					p2.switchTurn();
@@ -446,8 +227,8 @@ public class GameGUI extends BorderPane {
 							
 						}
 						
-						if(unit instanceof Facility) { //Reset Builds
-							Facility f = (Facility)t.getUnit();
+						if(unit instanceof Building) { //Reset Builds
+							Building f = (Building)t.getUnit();
 							f.reset();
 						}
 						
@@ -459,16 +240,17 @@ public class GameGUI extends BorderPane {
 			
 		});
 		
-		buttons.setAlignment(Pos.CENTER);
+		buttons.setAlignment(Pos.BASELINE_CENTER);
 		buttons.getChildren().add(move);
 		buttons.getChildren().add(attack);
 		buttons.getChildren().add(endTurn);
+		buttons.setMinWidth(100);
 		
 		setTop(turnGUI);
 		BorderPane.setAlignment(turnGUI, Pos.CENTER);
-		setBottom(buttons);
 		setLeft(infoGUI);
 		setRight(econGUI);
+		setBottom(buttons);
 		
 	}
 	
@@ -539,7 +321,7 @@ public class GameGUI extends BorderPane {
 		}
 	}
 	
-	private void formatEconButton(Button b, int unitCost, Player p1, Player p2) { 
+	private void formatEconButton(Button b, GenericUnit unit, int unitCost, Player p1, Player p2, Map field) { 
 		
 		BorderStroke[] stroke =  {new BorderStroke(Color.WHITESMOKE,BorderStrokeStyle.SOLID,new CornerRadii(4.0),new BorderWidths(6.0,6.0,6.0,6.0))};
 
@@ -573,17 +355,6 @@ public class GameGUI extends BorderPane {
 			}
 			
 		});
-		
-		b.setOnMouseReleased((EventHandler<? super MouseEvent>) new EventHandler<MouseEvent>() {
-
-			@Override
-			public void handle(MouseEvent arg0) {
-				
-				b.setBackground(new Background(new BackgroundFill(Color.BLACK,null,null)));
-				
-			}
-			
-		});
 			
 		b.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -596,9 +367,81 @@ public class GameGUI extends BorderPane {
 			
 		});
 		
+		b.setOnMouseReleased((EventHandler<? super MouseEvent>) new EventHandler<MouseEvent>() { 
+			@Override
+			public void handle(MouseEvent event) {
+				
+				b.setBackground(new Background(new BackgroundFill(Color.BLACK,null,null)));
+				
+				ArrayList<Tile> unitList = field.getUnitTiles();
+				
+				Player currentPlayer;
+				
+				if(p1.yourTurn()) {
+					currentPlayer = p1;
+				} else if(p2.yourTurn()) {
+					currentPlayer = p2;
+				} else {
+					currentPlayer = empty;
+				}
+				
+				if(!(unit instanceof AxolotlCaptain)) {
+					if(unitList.size()==1 && unitList.get(0).getUnit() instanceof Facility) { //Checks for facility selected
+						
+						Facility f = (Facility)unitList.get(0).getUnit();
+
+						if(currentPlayer == f.getPlayer() && currentPlayer.getMoney() >= unitCost && f.getBuild()) { 
+							
+							currentPlayer.subtractMoney(unitCost);
+							
+							if(unit instanceof CatSoldier) {
+								f.buildUnit(new CatSoldier(currentPlayer), field);
+							} else if(unit instanceof SquirrelRogue) {
+								f.buildUnit(new SquirrelRogue(currentPlayer), field);
+							} else if(unit instanceof DuckWizard) {
+								f.buildUnit(new DuckWizard(currentPlayer), field);
+							} else if(unit instanceof FlamingoSniper) {
+								f.buildUnit(new FlamingoSniper(currentPlayer), field);
+							} else if(unit instanceof ArmadilloTank) {
+								f.buildUnit(new ArmadilloTank(currentPlayer), field);
+							} else if(unit instanceof BullMatador) {
+								f.buildUnit(new BullMatador(currentPlayer), field);
+							}
+						} 
+					} 
+				}
+				
+				if(unit instanceof AxolotlCaptain || unit instanceof DuckWizard || unit instanceof FlamingoSniper) {
+					
+					if(unitList.size()==1 && unitList.get(0).getUnit() instanceof Docks) { //Checks for facility selected
+						
+						Docks d = (Docks)unitList.get(0).getUnit();
+
+						if(currentPlayer == d.getPlayer() && currentPlayer.getMoney() >= unitCost && d.getBuild()) { 
+							
+							currentPlayer.subtractMoney(unitCost);
+							
+							if(unit instanceof AxolotlCaptain) {
+								d.buildUnit(new AxolotlCaptain(currentPlayer), field);
+							} else if(unit instanceof DuckWizard) {
+								d.buildUnit(new DuckWizard(currentPlayer), field);
+							} else if(unit instanceof FlamingoSniper) {
+								d.buildUnit(new FlamingoSniper(currentPlayer), field);
+							} 
+						} 
+					} 
+				}
+				
+				
+
+				turnDisplay(p1,p2);
+				field.deselectUnits();
+			}
+		});
+		
 	}
 	
-	public void initInfoGUI() {
+	private void initInfoGUI() {
 		
 		infoGUI = new ScrollPane();
 		infoGUI.setPrefWidth(sideWidth);
@@ -608,7 +451,7 @@ public class GameGUI extends BorderPane {
 		
 		formatInfoBlock(catImage, new CatSoldier(empty), infoList);
 		formatInfoBlock(squirrelImage, new SquirrelRogue(empty), infoList);
-		formatInfoBlock(axolotlImage, new AxolotlGod(empty), infoList);
+		formatInfoBlock(axolotlImage, new AxolotlCaptain(empty), infoList);
 		formatInfoBlock(duckImage, new DuckWizard(empty), infoList);
 		formatInfoBlock(flamingoImage, new FlamingoSniper(empty), infoList);
 		formatInfoBlock(armadilloImage, new ArmadilloTank(empty), infoList);
@@ -617,7 +460,7 @@ public class GameGUI extends BorderPane {
 		infoGUI.setContent(infoList);
 	}
 	
-	public void formatInfoBlock(Image image, GenericUnit unit, VBox infoList) {
+	private void formatInfoBlock(Image image, GenericUnit unit, VBox infoList) {
 		
 		VBox infoBlock = new VBox();
 		Text title = new Text("");
@@ -634,7 +477,7 @@ public class GameGUI extends BorderPane {
 		} else if(unit instanceof SquirrelRogue) {
 			title.setText("Squirrel Rogue");
 			blurb.setText("Squirrel Words");
-		} else if(unit instanceof AxolotlGod) {
+		} else if(unit instanceof AxolotlCaptain) {
 			title.setText("Axolotl Captain");
 			blurb.setText("Axolotl Words");
 		} else if(unit instanceof DuckWizard) {
@@ -663,6 +506,26 @@ public class GameGUI extends BorderPane {
 		infoBlock.setPadding(new Insets(10,0,10,0));
 		
 		infoList.getChildren().add(infoBlock);
+	}
+
+	private void gameOver() {
+		
+		Button gameOver = new Button("OK");
+		formatButton(gameOver,Color.BISQUE);
+		BorderPane.setAlignment(gameOver, Pos.CENTER);
+		
+		gameOver.setOnMouseReleased((EventHandler<? super MouseEvent>) new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent arg0) {
+				
+				Main.startScreen();
+				
+			}
+			
+		});
+		
+		this.setBottom(gameOver);
 	}
 	
 }

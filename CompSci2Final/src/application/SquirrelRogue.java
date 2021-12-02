@@ -10,12 +10,12 @@ public class SquirrelRogue extends GenericUnit {
 	public static final int COST = 1500;
 
 	public SquirrelRogue(Player player) {
-		super(3, 4, 2, 4, player);
+		super(3, 4, 4, 1, player);
 		cost = COST;
 		if(player.getPlayerNumber()==1) {
-			this.setGraphic(new ImageView(new Image("/Sprites/RedTank.png")));
+			this.setGraphic(new ImageView(new Image("/Sprites/Squirrel_Rogue_Player1.png")));
 		} else {
-			this.setGraphic(new ImageView(new Image("/Sprites/BlueTank.png")));
+			this.setGraphic(new ImageView(new Image("/Sprites/Squirrel_Rogue_Player2.png")));
 		}
 	}
 	
@@ -25,20 +25,21 @@ public class SquirrelRogue extends GenericUnit {
 
 	@Override
 	public ArrayList<Tile> attackStyle(Map field) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Tile> attackArea = field.getAttackTilesLand(getAttackRange());
+		return attackArea;
 	}
 
 	@Override
 	public ArrayList<Tile> nullStyle(Map field) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Tile> nullSpace = field.getSurroundingTiles(getAttackRange());
+		return nullSpace;
+
 	}
 
 	@Override
 	public ArrayList<Tile> moveStyle(Map field) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Tile> moveArea = field.getMovementTilesLand(getMovementRange());
+		return moveArea;
 	}
 
 }

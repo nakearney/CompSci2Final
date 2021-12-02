@@ -38,8 +38,8 @@ public class MoveButton extends MapButton {
 			myTile.setUnit(myUnit);
 			startPoint.removeUnit(myUnit);
 			myTile.getUnit().moved();
-			Main.map1.deselectUnits();
-			Main.map1.removeMapButtons();
+			Main.theMap.deselectUnits();
+			Main.theMap.removeMapButtons();
 			
 		}
 	}

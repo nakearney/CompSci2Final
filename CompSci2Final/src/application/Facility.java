@@ -2,10 +2,20 @@ package application;
 
 import java.util.ArrayList;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 public class Facility extends Building {
 	
 	public Facility(Player player) {
 		super(player);
+		
+		if(player.getPlayerNumber()==1) {
+			this.setGraphic(new ImageView(new Image("/Sprites/Barracks_Player1.png")));
+		} else {
+			this.setGraphic(new ImageView(new Image("/Sprites/Barracks_Player2.png")));
+		}
+		
 	}
 	
 	public Facility(int hp, int attack, int movementRange, int attackRange, Player player) {
@@ -29,7 +39,7 @@ public class Facility extends Building {
 			}
 			
 			int tileCount = buildTiles.size();
-			int index = (int)Math.random()*(tileCount);
+			int index = (int)(Math.random()*(tileCount));
 			
 			if(unit instanceof CatSoldier) {
 				buildTiles.get(index).setUnit((CatSoldier)unit);

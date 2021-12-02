@@ -6,16 +6,17 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class FlamingoSniper extends GenericUnit {
-	
+	public int hollow;
 	public static final int COST = 4000;
 	
 	public FlamingoSniper(Player player) {
-		super(3, 5, 2, 4, player);
+		super(3, 5, 4, 2, player);
+		hollow=3;
 		cost = COST;
 		if(player.getPlayerNumber()==1) {
-			this.setGraphic(new ImageView(new Image("/Sprites/RedTank.png")));
+			this.setGraphic(new ImageView(new Image("/Sprites/Flamingo_Sniper_Player1.png")));
 		} else {
-			this.setGraphic(new ImageView(new Image("/Sprites/BlueTank.png")));
+			this.setGraphic(new ImageView(new Image("/Sprites/Flamingo_Sniper_Player2.png")));
 		}
 	}
 
@@ -25,20 +26,21 @@ public class FlamingoSniper extends GenericUnit {
 
 	@Override
 	public ArrayList<Tile> attackStyle(Map field) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Tile> attackArea = field.getHollowAttackTilesLandWater(getAttackRange(),hollow);
+		return attackArea;
 	}
 
 	@Override
 	public ArrayList<Tile> nullStyle(Map field) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Tile> nullSpace = field.getSurroundingTiles(getAttackRange());
+		return nullSpace;
+
 	}
 
 	@Override
 	public ArrayList<Tile> moveStyle(Map field) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Tile> moveArea = field.getMovementTilesLandWater(getMovementRange());
+		return moveArea;
 	}
 
 }
