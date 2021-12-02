@@ -31,7 +31,7 @@ public abstract class GenericUnit extends Button {
 		this.movementRange = movementRange;
 		this.attackRange = attackRange;
 		this.player = player;
-		cost = 500;
+		cost = 0;
 		isDead = false;
 		isSelected = false;
 		this.setBackground(null);
@@ -151,7 +151,7 @@ public abstract class GenericUnit extends Button {
 	}
 	
 
-	public void takeDamage(int damage) { //Nick has an idea for unit death
+	public void takeDamage(int damage) {
 		hp-=damage;
 		if(hp <= 0) {
 			hp = 0;
@@ -230,6 +230,9 @@ public abstract class GenericUnit extends Button {
 			ap.playSound();
 			target.getPlayer().subtractUnit();
 			this.getPlayer().addMoney(target.getCost()/2);
+		} else {
+			AudioPlayer ap = new AudioPlayer("hit.mp3");
+			ap.playSound();
 		}
 	}
 	

@@ -413,20 +413,20 @@ public class GameGUI extends BorderPane {
 				
 				if(unit instanceof AxolotlCaptain || unit instanceof DuckWizard || unit instanceof FlamingoSniper) {
 					
-					if(unitList.size()==1 && unitList.get(0).getUnit() instanceof Docks) { //Checks for facility selected
+					if(unitList.size()==1 && unitList.get(0).getUnit() instanceof Carrier) { //Checks for facility selected
 						
-						Docks d = (Docks)unitList.get(0).getUnit();
+						Carrier c = (Carrier)unitList.get(0).getUnit();
 
-						if(currentPlayer == d.getPlayer() && currentPlayer.getMoney() >= unitCost && d.getBuild()) { 
+						if(currentPlayer == c.getPlayer() && currentPlayer.getMoney() >= unitCost && c.getBuild()) { 
 							
 							currentPlayer.subtractMoney(unitCost);
 							
 							if(unit instanceof AxolotlCaptain) {
-								d.buildUnit(new AxolotlCaptain(currentPlayer), field);
+								c.buildUnit(new AxolotlCaptain(currentPlayer), field);
 							} else if(unit instanceof DuckWizard) {
-								d.buildUnit(new DuckWizard(currentPlayer), field);
+								c.buildUnit(new DuckWizard(currentPlayer), field);
 							} else if(unit instanceof FlamingoSniper) {
-								d.buildUnit(new FlamingoSniper(currentPlayer), field);
+								c.buildUnit(new FlamingoSniper(currentPlayer), field);
 							} 
 						} 
 					} 
@@ -471,9 +471,9 @@ public class GameGUI extends BorderPane {
 		if(unit instanceof CatSoldier) {
 			title.setText("Cat Soldier");
 			blurb.setText(String.format("Not really sure how we managed to %n"
-					+ "get these lazy furballs onto the %n"
-					+ "battlefield. But man do they rock %n"
-					+ "the uniform."));
+										+ "get these lazy furballs onto the %n"
+										+ "battlefield. But man do they rock %n"
+										+ "the uniform."));
 		} else if(unit instanceof SquirrelRogue) {
 			title.setText("Squirrel Rogue");
 			blurb.setText("Squirrel Words");

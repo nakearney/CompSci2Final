@@ -178,26 +178,30 @@ public class Main extends Application {
 			//Process for making units is to initialize the map of tiles created above,
 			//Then use the Map methods to add units.
 			theMap = new Map(Map1);
-			theMap.setUnit(8, 4, new CatSoldier(player1));
-			theMap.setUnit(8, 10, new CatSoldier(player2));
+			theMap.setUnit(3, 4, new CatSoldier(player1));
+			theMap.setUnit(3, 6, new SquirrelRogue(player2));
+			theMap.setUnit(5, 4, new DuckWizard(player1));
+			theMap.setUnit(5, 6, new FlamingoSniper(player2));
+			theMap.setUnit(7, 4, new ArmadilloTank(player1));
+			theMap.setUnit(7, 6, new BullMatador(player2));
 			theMap.setUnit(10,4, new Facility(player1));
 			theMap.setUnit(10,10, new Facility(player2));
-			theMap.setUnit(6,7, new Docks(player1));
-			theMap.setUnit(8,7, new Docks(player2));
+			theMap.setUnit(8,7, new Carrier(player1));
+			theMap.setUnit(6,7, new AxolotlCaptain(player1));
 			
 		} else if(mapIndex==2) {
 			
 			//Creating Map Below
-			int[][] Map1=new int[Map.MAP_SIZE][Map.MAP_SIZE];
-			Map1=Map.setMap(Map1,3);
-			Map1=Map.setBorder(Map1, 2, 0);
+			int[][] Map2=new int[Map.MAP_SIZE][Map.MAP_SIZE];
+			Map2=Map.setMap(Map2,3);
+			Map2=Map.setBorder(Map2, 2, 0);
 			//Process for making units is to initialize the map of tiles created above,
 			//Then use the Map methods to add units.
-			theMap = new Map(Map1);
+			theMap = new Map(Map2);
 			theMap.setUnit(8, 4, new AxolotlCaptain(player1));
 			theMap.setUnit(8, 10, new AxolotlCaptain(player2));
-			theMap.setUnit(10,4, new Docks(player1));
-			theMap.setUnit(10,10, new Docks(player2));
+			theMap.setUnit(10,4, new Carrier(player1));
+			theMap.setUnit(10,10, new Carrier(player2));
 			
 		}
 		

@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class Docks extends Building {
+public class Carrier extends Building {
 	
-	public Docks(Player player) {
+	public Carrier(Player player) {
 		super(player);
 		if(player.getPlayerNumber()==1) {
 			this.setGraphic(new ImageView(new Image("/Sprites/Aircraft_Carrier_Player1.png")));
@@ -16,7 +16,7 @@ public class Docks extends Building {
 		}
 	}
 	
-	public Docks(int hp, int attack, int movementRange, int attackRange, Player player) {
+	public Carrier(int hp, int attack, int movementRange, int attackRange, Player player) {
 		this(player);
 	}
 	
