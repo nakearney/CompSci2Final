@@ -3,6 +3,7 @@ package application;
 import java.util.ArrayList;
 import java.util.Random;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -201,7 +202,7 @@ public class Map extends GridPane {
 	//Sets entire Map to 1 type of tile
 	public static int[][] setMap(int[][] tiles, int type) {
 		
-		tiles=setBorder(tiles,15,type);
+		tiles=setRect(tiles,0,0,MAP_SIZE-1,MAP_SIZE-1,true,type);
 		return tiles;
 		
 	}
@@ -249,9 +250,6 @@ public class Map extends GridPane {
 						
 						int spotX=(int)(x+Math.cos(step*(Math.PI/2)));
 						int spotY=(int)(y+Math.sin(step*(Math.PI/2)));
-						
-						System.out.println(spotX);
-						System.out.println(spotY);
 						
 						if(spotY>-1&&spotY<MAP_SIZE&&spotX>-1&&spotX<MAP_SIZE)
 						if(tileGrid[spotY][spotX].getIsWater())
@@ -316,6 +314,8 @@ public class Map extends GridPane {
 			
 			if(!surroundingTiles.get(surroundingTiles.indexOf(t)).isOccupied()) {
 				surroundingTiles.remove(t);
+			} else if(surroundingTiles.get(surroundingTiles.indexOf(t)).getUnit().getPlayer().getPlayerNumber()==unitTiles.get(0).getUnit().getPlayer().getPlayerNumber()) {
+				surroundingTiles.remove(t);
 			}
 			
 		}
@@ -354,9 +354,6 @@ public class Map extends GridPane {
 						
 						int spotX=(int)(x+Math.cos(step*(Math.PI/2)));
 						int spotY=(int)(y+Math.sin(step*(Math.PI/2)));
-						
-						System.out.println(spotX);
-						System.out.println(spotY);
 						
 						if(spotY>-1&&spotY<MAP_SIZE&&spotX>-1&&spotX<MAP_SIZE)
 						if(tileGrid[spotY][spotX].getTraversible()||tileGrid[spotY][spotX].getIsWater())
@@ -421,6 +418,8 @@ public class Map extends GridPane {
 			
 			if(!surroundingTiles.get(surroundingTiles.indexOf(t)).isOccupied()) {
 				surroundingTiles.remove(t);
+			} else if(surroundingTiles.get(surroundingTiles.indexOf(t)).getUnit().getPlayer().getPlayerNumber()==unitTiles.get(0).getUnit().getPlayer().getPlayerNumber()) {
+				surroundingTiles.remove(t);
 			}
 			
 		}
@@ -459,9 +458,6 @@ public class Map extends GridPane {
 						
 						int spotX=(int)(x+Math.cos(step*(Math.PI/2)));
 						int spotY=(int)(y+Math.sin(step*(Math.PI/2)));
-						
-						System.out.println(spotX);
-						System.out.println(spotY);
 						
 						if(spotY>-1&&spotY<MAP_SIZE&&spotX>-1&&spotX<MAP_SIZE)
 						if(tileGrid[spotY][spotX].getTraversible())
@@ -526,6 +522,8 @@ public class Map extends GridPane {
 			
 			if(!surroundingTiles.get(surroundingTiles.indexOf(t)).isOccupied()) {
 				surroundingTiles.remove(t);
+			} else if(surroundingTiles.get(surroundingTiles.indexOf(t)).getUnit().getPlayer().getPlayerNumber()==unitTiles.get(0).getUnit().getPlayer().getPlayerNumber()) {
+				surroundingTiles.remove(t);
 			}
 			
 		}
@@ -564,9 +562,6 @@ public class Map extends GridPane {
 						
 						int spotX=(int)(x+Math.cos(step*(Math.PI/2)));
 						int spotY=(int)(y+Math.sin(step*(Math.PI/2)));
-						
-						System.out.println(spotX);
-						System.out.println(spotY);
 						
 						if(spotY>-1&&spotY<MAP_SIZE&&spotX>-1&&spotX<MAP_SIZE)
 						if(tileGrid[spotY][spotX].getIsWater())
@@ -662,9 +657,6 @@ public class Map extends GridPane {
 						int spotX=(int)(x+Math.cos(step*(Math.PI/2)));
 						int spotY=(int)(y+Math.sin(step*(Math.PI/2)));
 						
-						System.out.println(spotX);
-						System.out.println(spotY);
-						
 						if(spotY>-1&&spotY<MAP_SIZE&&spotX>-1&&spotX<MAP_SIZE)
 						if(tileGrid[spotY][spotX].getTraversible())
 						//if(tileGrid[spotY][spotX].isOccupied())
@@ -730,9 +722,6 @@ public class Map extends GridPane {
 						
 						int spotX=(int)(x+Math.cos(step*(Math.PI/2)));
 						int spotY=(int)(y+Math.sin(step*(Math.PI/2)));
-						
-						System.out.println(spotX);
-						System.out.println(spotY);
 						
 						if(spotY>-1&&spotY<MAP_SIZE&&spotX>-1&&spotX<MAP_SIZE)
 						if(tileGrid[spotY][spotX].getTraversible())
@@ -800,6 +789,8 @@ public class Map extends GridPane {
 			
 			if(!surroundingTiles.get(surroundingTiles.indexOf(t)).isOccupied()) {
 				surroundingTiles.remove(t);
+			} else if(surroundingTiles.get(surroundingTiles.indexOf(t)).getUnit().getPlayer().getPlayerNumber()==unitTiles.get(0).getUnit().getPlayer().getPlayerNumber()) {
+				surroundingTiles.remove(t);
 			}
 			
 		}
@@ -839,9 +830,6 @@ public class Map extends GridPane {
 						
 						int spotX=(int)(x+Math.cos(step*(Math.PI/2)));
 						int spotY=(int)(y+Math.sin(step*(Math.PI/2)));
-						
-						System.out.println(spotX);
-						System.out.println(spotY);
 						
 						if(spotY>-1&&spotY<MAP_SIZE&&spotX>-1&&spotX<MAP_SIZE)
 						if(tileGrid[spotY][spotX].getTraversible()||tileGrid[spotY][spotX].getIsWater())
@@ -927,9 +915,6 @@ public class Map extends GridPane {
 						
 						int spotX=(int)(x+Math.cos(step*(Math.PI/2)));
 						int spotY=(int)(y+Math.sin(step*(Math.PI/2)));
-						
-						System.out.println(spotX);
-						System.out.println(spotY);
 						
 						if(spotY>-1&&spotY<MAP_SIZE&&spotX>-1&&spotX<MAP_SIZE)
 						if(tileGrid[spotY][spotX].getTraversible())
@@ -1179,6 +1164,28 @@ public class Map extends GridPane {
 			}
 			
 		}
+		
+	}
+	
+	public void removeAll() {
+		
+		this.removeMapButtons();
+		this.deselectUnits();
+		
+		ArrayList<Node> all = new ArrayList<Node>();
+		
+		for(Tile[] tt : tileGrid) {
+			
+			for(Tile t : tt) {
+				
+				if(t.getUnit()!=null)t.removeUnit(t.getUnit());
+				all.add(t);
+				
+			}
+			
+		}
+		
+		this.getChildren().removeAll(all);
 		
 	}
 		

@@ -41,8 +41,8 @@ public class AttackButton extends MapButton {
 				
 			}
 			myUnit.fought();
-			Main.map1.deselectUnits();
-			Main.map1.removeMapButtons();
+			Main.theMap.deselectUnits();
+			Main.theMap.removeMapButtons();
 			
 		}
 		

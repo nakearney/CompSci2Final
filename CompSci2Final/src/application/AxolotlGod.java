@@ -13,9 +13,9 @@ public class AxolotlGod extends GenericUnit {
 		super(4, 3, 3, 3, player);
 		cost = COST;
 		if(player.getPlayerNumber()==1) {
-			this.setGraphic(new ImageView(new Image("/Sprites/RedTank.png")));
+			this.setGraphic(new ImageView(new Image("/Sprites/Axolotl_Sailor_Player1.png")));
 		} else {
-			this.setGraphic(new ImageView(new Image("/Sprites/BlueTank.png")));
+			this.setGraphic(new ImageView(new Image("/Sprites/Axolotl_Sailor_Player2.png")));
 		}
 	}
 	
@@ -26,20 +26,21 @@ public class AxolotlGod extends GenericUnit {
 
 	@Override
 	public ArrayList<Tile> attackStyle(Map field) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Tile> attackArea = field.getAttackTilesWater(getAttackRange());
+		return attackArea;
 	}
 
 	@Override
 	public ArrayList<Tile> nullStyle(Map field) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Tile> nullSpace = field.getSurroundingTiles(getAttackRange());
+		return nullSpace;
 	}
 
 	@Override
 	public ArrayList<Tile> moveStyle(Map field) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		ArrayList<Tile> moveArea = field.getMovementTilesWater(getMovementRange());
+		return moveArea;
 	}
 
 }
