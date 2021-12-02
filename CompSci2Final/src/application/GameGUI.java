@@ -195,10 +195,12 @@ public class GameGUI extends BorderPane {
 				field.removeMapButtons();
 				field.deselectUnits();
 				
-				if(p1.yourTurn()) {
+				if(p1.yourTurn() && !p2.getFirstTurn()) {
 					p2.addMoney(3000);
 				} else if(p2.yourTurn()) {
 					p1.addMoney(3000);
+				} else {
+					p2.setFirstTurn(false);
 				}
 				
 				if(p1.yourTurn() && field.getBuildingTiles(p2).size() == 0) {

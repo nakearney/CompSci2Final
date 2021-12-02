@@ -6,12 +6,14 @@ public class Player {
 	private int unitCount;
 	private int money;
 	private boolean yourTurn;
+	private boolean firstTurn;
 	
 	public Player(int number, boolean yourTurn) {
 		this.number = number;
 		unitCount = 0;
 		this.yourTurn = yourTurn;
 		money = 5000;
+		firstTurn = true;
 	}
 	
 	public int getPlayerNumber() {
@@ -47,6 +49,14 @@ public class Player {
 	
 	public boolean yourTurn() {
 		return yourTurn;
+	}
+	
+	public boolean getFirstTurn() {
+		return firstTurn;
+	}
+	
+	public void setFirstTurn(boolean first) {
+		firstTurn = first;
 	}
 	
 	public void switchTurn() {
