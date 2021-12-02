@@ -24,6 +24,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
 public class GameGUI extends BorderPane {
@@ -38,6 +39,7 @@ public class GameGUI extends BorderPane {
 	private Button endTurn;
 	private Player p1;
 	private Player p2;
+	private Player empty = new Player(0,false);
 	private double sideWidth=225.0;
 	
 	//Initialize Images here
@@ -72,18 +74,7 @@ public class GameGUI extends BorderPane {
 		turnGUI.setTextAlignment(TextAlignment.CENTER);
 		turnDisplay(p1,p2);
 		
-		infoGUI = new ScrollPane();
-		infoGUI.setPrefWidth(sideWidth);
-		infoGUI.setPannable(true);
-		
-		VBox infoList = new VBox();
-		HBox catGUI = new HBox();
-		catGUI.setAlignment(Pos.CENTER);
-		catGUI.getChildren().add(new ImageView(catImage));
-		
-		infoList.getChildren().add(catGUI);
-		
-		infoGUI.setContent(infoList);
+		initInfoGUI();
 		
 		econGUI = new VBox();
 		econGUI.setPrefWidth(sideWidth);
@@ -605,6 +596,73 @@ public class GameGUI extends BorderPane {
 			
 		});
 		
+	}
+	
+	public void initInfoGUI() {
+		
+		infoGUI = new ScrollPane();
+		infoGUI.setPrefWidth(sideWidth);
+		infoGUI.setPannable(true);
+		
+		VBox infoList = new VBox(); 
+		
+		formatInfoBlock(catImage, new CatSoldier(empty), infoList);
+		formatInfoBlock(squirrelImage, new SquirrelRogue(empty), infoList);
+		formatInfoBlock(axolotlImage, new AxolotlGod(empty), infoList);
+		formatInfoBlock(duckImage, new DuckWizard(empty), infoList);
+		formatInfoBlock(flamingoImage, new FlamingoSniper(empty), infoList);
+		formatInfoBlock(armadilloImage, new ArmadilloTank(empty), infoList);
+		formatInfoBlock(bullImage, new BullMatador(empty), infoList);
+		
+		infoGUI.setContent(infoList);
+	}
+	
+	public void formatInfoBlock(Image image, GenericUnit unit, VBox infoList) {
+		
+		VBox infoBlock = new VBox();
+		Text title = new Text("");
+		HBox imageStats = new HBox();
+		Text statsField = new Text(String.format("HP: %d%nAttack: %d%nSpeed: %d%nRange: %d", unit.getHP(), unit.getAttack(), unit.getMovementRange(), unit.getAttackRange()));
+		Text blurb = new Text("");
+		
+		if(unit instanceof CatSoldier) {
+			title.setText("Cat Soldier");
+			blurb.setText(String.format("Not really sure how we managed to %n"
+					+ "get these lazy furballs onto the %n"
+					+ "battlefield. But man do they rock %n"
+					+ "the uniform."));
+		} else if(unit instanceof SquirrelRogue) {
+			title.setText("Squirrel Rogue");
+			blurb.setText("Squirrel Words");
+		} else if(unit instanceof AxolotlGod) {
+			title.setText("Axolotl Captain");
+			blurb.setText("Axolotl Words");
+		} else if(unit instanceof DuckWizard) {
+			title.setText("Duck Wizard");
+			blurb.setText("Duck Words");
+		} else if(unit instanceof FlamingoSniper) {
+			title.setText("Flamingo Sniper");
+			blurb.setText("Flamingo Words");
+		} else if(unit instanceof ArmadilloTank) {
+			title.setText("Armadillo Tank");
+			blurb.setText("Armadillo Words");
+		} else if(unit instanceof BullMatador) {
+			title.setText("Bull Matador");
+			blurb.setText("Bull Words");
+		} 
+		
+		imageStats.setSpacing(5);
+		imageStats.getChildren().add(new ImageView(image));
+		imageStats.getChildren().add(statsField);
+		
+		infoBlock.setAlignment(Pos.CENTER_LEFT);
+		infoBlock.getChildren().add(title);
+		infoBlock.getChildren().add(imageStats);
+		infoBlock.getChildren().add(blurb);
+		
+		infoBlock.setPadding(new Insets(10,0,10,0));
+		
+		infoList.getChildren().add(infoBlock);
 	}
 	
 }

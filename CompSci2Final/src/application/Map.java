@@ -47,6 +47,8 @@ public class Map extends GridPane {
 		
 		this();
 		fill(types);
+		AudioPlayer ap = new AudioPlayer("battletrack1.mp3");
+		ap.playTrack();
 		
 	}
 	

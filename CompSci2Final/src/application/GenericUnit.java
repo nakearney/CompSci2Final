@@ -187,6 +187,8 @@ public abstract class GenericUnit extends Button {
 	public void attack(GenericUnit target) { 
 		target.takeDamage(attack);
 		if(target.isDead()) {
+			AudioPlayer ap = new AudioPlayer("explosion.wav");
+			ap.playSound();
 			target.getPlayer().subtractUnit();
 			this.getPlayer().addMoney(target.getCost()/2);
 		}
