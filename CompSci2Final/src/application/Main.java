@@ -151,7 +151,7 @@ public class Main extends Application {
 		
 		player1 = new Player(1,true);
 		player2 = new Player(2,false);
-		GameGUI game = new GameGUI(player1, player2, getMap(mapIndex));
+		GameGUI game = new GameGUI(player1, player2, getMap(mapIndex), mapIndex);
 		Scene s = new Scene(game,theScene.getWidth(),theScene.getHeight());
 		theStage.setScene(s);
 		theScene=s;

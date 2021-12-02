@@ -42,6 +42,7 @@ public class GameGUI extends BorderPane {
 	private Player p1;
 	private Player p2;
 	private Player empty = new Player(0,false);
+	private AudioPlayer ap;
 
 	//Width of the left and right elements in GameGUI (the info & turnGUI)
 	private double sideWidth=225.0;
@@ -56,7 +57,41 @@ public class GameGUI extends BorderPane {
 	private Image bullImage = new Image("/Sprites/Matador_Bull_Player1.png");;
 	
 	//Initializes Map in Main Currently. Then passes it here.
-	public GameGUI(Player p1, Player p2, Map field) {
+	public GameGUI(Player p1, Player p2, Map field, int trackIndex) {
+		
+		switch(trackIndex) {
+			case 1:
+				ap = new AudioPlayer("battletrack1.mp3");
+				break;
+			case 2: 
+				ap = new AudioPlayer("battletrack1.mp3");
+				break;
+			case 3: 
+				ap = new AudioPlayer("battletrack1.mp3");
+				break;
+			case 4:
+				ap = new AudioPlayer("battletrack1.mp3");
+				break;
+			case 5: 
+				ap = new AudioPlayer("battletrack1.mp3");
+				break;
+			case 6: 
+				ap = new AudioPlayer("battletrack1.mp3");
+				break;
+			case 7:
+				ap = new AudioPlayer("battletrack1.mp3");
+				break;
+			case 8: 
+				ap = new AudioPlayer("battletrack1.mp3");
+				break;
+			case 9: 
+				ap = new AudioPlayer("battletrack1.mp3");
+				break;
+		}
+		
+		
+		
+		ap.playTrack();
 		
 		setBackground(new Background(new BackgroundFill(Color.BLACK,null,null)));
 		
@@ -521,6 +556,7 @@ public class GameGUI extends BorderPane {
 			@Override
 			public void handle(MouseEvent arg0) {
 				
+				ap.stop();
 				Main.startScreen();
 				
 			}
