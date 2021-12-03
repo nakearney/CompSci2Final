@@ -7,7 +7,7 @@ import javafx.scene.image.ImageView;
 
 public class AxolotlCaptain extends GenericUnit {
 	
-	public static final int COST = 2000;
+	public static final int COST = 70;
 	
 	public AxolotlCaptain(Player player) {
 		super(4, 3, 3, 3, player);

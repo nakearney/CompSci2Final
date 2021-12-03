@@ -230,6 +230,7 @@ public abstract class GenericUnit extends Button {
 			ap.playSound();
 			target.getPlayer().subtractUnit();
 			this.getPlayer().addMoney(target.getCost()/3);
+			GameGUI.turnDisplay(Main.player1, Main.player2);
 		} else {
 			AudioPlayer ap = new AudioPlayer("hit.mp3");
 			ap.playSound();

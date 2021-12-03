@@ -7,10 +7,10 @@ import javafx.scene.image.ImageView;
 
 public class FlamingoSniper extends GenericUnit {
 	public int hollow;
-	public static final int COST = 4000;
+	public static final int COST = 120;
 	
 	public FlamingoSniper(Player player) {
-		super(3, 5, 4, 4, player);
+		super(3, 5, 2, 4, player);
 		hollow=2;
 		cost = COST;
 		if(player.getPlayerNumber()==1) {

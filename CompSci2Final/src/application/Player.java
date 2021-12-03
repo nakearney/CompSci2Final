@@ -12,7 +12,7 @@ public class Player {
 		this.number = number;
 		unitCount = 0;
 		this.yourTurn = yourTurn;
-		money = 5000;
+		money = 150;
 		firstTurn = true;
 	}
 	

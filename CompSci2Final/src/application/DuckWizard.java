@@ -7,10 +7,10 @@ import javafx.scene.image.ImageView;
 
 public class DuckWizard extends GenericUnit {
 	
-	public static final int COST = 3000;
+	public static final int COST = 90;
 
 	public DuckWizard(Player player) {
-		super(3, 4, 4, 2, player);
+		super(3, 4, 4, 3, player);
 		cost = COST;
 		if(player.getPlayerNumber()==1) {
 			this.setGraphic(new ImageView(new Image("/Sprites/Duck_Wizard_Player1.png")));

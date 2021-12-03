@@ -36,7 +36,7 @@ public class GameGUI extends BorderPane {
 	//Contains info on troops
 	private ScrollPane infoGUI;
 	//Displays current turn
-	private Label turnGUI;
+	private static Label turnGUI;
 	private Button attack;
 	private Button move;
 	private Button endTurn;
@@ -348,7 +348,7 @@ public class GameGUI extends BorderPane {
 		
 	}
 	
-	private void turnDisplay(Player p1, Player p2) {
+	static void turnDisplay(Player p1, Player p2) {
 		if(p1.yourTurn()) {
 			turnGUI.setText("Player 1: You have " + p1.getUnitCount() + " units and $" + p1.getMoney() + " remaining");
 		} else if(p2.yourTurn()) {
