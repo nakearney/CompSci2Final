@@ -28,6 +28,7 @@ import javafx.scene.text.TextAlignment;
 
 public class GameGUI extends BorderPane {
 
+
 	//Contains Move, Attack, and EndTurn
 	private HBox buttons;
 	//Contains purchasing buttons
@@ -499,35 +500,61 @@ public class GameGUI extends BorderPane {
 	private void formatInfoBlock(Image image, GenericUnit unit, VBox infoList) {
 		
 		VBox infoBlock = new VBox();
+		Background Background = new Background( new BackgroundFill( Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY ) );
+		infoBlock.setBackground(Background);
 		Text title = new Text("");
+		title.setFill(Color.WHITE);
+		title.setScaleY(1.5);
+		title.setScaleX(1.5);
+		title.setScaleZ(1.5);	
 		HBox imageStats = new HBox();
 		Text statsField = new Text(String.format("HP: %d%nAttack: %d%nSpeed: %d%nRange: %d", unit.getHP(), unit.getAttack(), unit.getMovementRange(), unit.getAttackRange()));
 		Text blurb = new Text("");
+		blurb.setFill(Color.WHITE);
+		statsField.setFill(Color.WHITE);
 		
 		if(unit instanceof CatSoldier) {
 			title.setText("Cat Soldier");
-			blurb.setText(String.format("Not really sure how we managed to %n"
-										+ "get these lazy furballs onto the %n"
-										+ "battlefield. But man do they rock %n"
-										+ "the uniform."));
+			blurb.setText(String.format("Not really sure why we picked cats %n"
+										+ "as frontline soldiers. They had a list %n"
+										+ "of terms and conditions. They're %n"
+										+ "more trouble than they're worth."));
 		} else if(unit instanceof SquirrelRogue) {
 			title.setText("Squirrel Rogue");
-			blurb.setText("Squirrel Words");
+			blurb.setText(String.format("Bored of wreaking havoc in their %n"
+										+ "towns and neighborhoods, these %n"
+										+ "small guys have enlisted to the %n"
+										+ "cause. They also got a nice beanie."));
 		} else if(unit instanceof AxolotlCaptain) {
 			title.setText("Axolotl Captain");
-			blurb.setText("Axolotl Words");
+			blurb.setText(String.format("Beneath the ocean's waves lies the %n"
+										+ "the Axolotlian Empire. In order to %n"
+										+ "engage the forces on the surface, %n"
+										+ "old enemy ships were repaired."));
 		} else if(unit instanceof DuckWizard) {
 			title.setText("Duck Wizard");
-			blurb.setText("Duck Words");
+			blurb.setText(String.format("Three weeks out of QuackWarts %n"
+										+ "Institute of Copyright Infringement %n"
+										+ "and Wizardry, this duck is ready to %n"
+										+ "prove their worth in the marshes."));
 		} else if(unit instanceof FlamingoSniper) {
 			title.setText("Flamingo Sniper");
-			blurb.setText("Flamingo Words");
+			blurb.setText(String.format("Not going to pretend that this bird %n"
+										+ "makes any sense. It's got no arms, %n"
+										+ "how is it even holding the rifle? %n"
+										+ "And the legs bend at the ankles???"));
 		} else if(unit instanceof ArmadilloTank) {
 			title.setText("Armadillo Tank");
-			blurb.setText("Armadillo Words");
+			blurb.setText(String.format("The greatest scientists in Armadillo %n"
+										+ "history have banded together to %n"
+										+ "create tank treads. The troops are %n"
+										+ "ready to serve king and country."));
 		} else if(unit instanceof BullMatador) {
 			title.setText("Bull Matador");
-			blurb.setText("Bull Words");
+			blurb.setText(String.format("Having slain their opponent in the %n"
+										+ "ring and won their freedom, these %n"
+										+ "bulls are an elite among their kind. %n"
+										+ "Tread lightly in their presence."));
 		} 
 		
 		imageStats.setSpacing(5);
@@ -539,7 +566,7 @@ public class GameGUI extends BorderPane {
 		infoBlock.getChildren().add(imageStats);
 		infoBlock.getChildren().add(blurb);
 		
-		infoBlock.setPadding(new Insets(10,0,10,0));
+		infoBlock.setPadding(new Insets(10,10,10,20));
 		
 		infoList.getChildren().add(infoBlock);
 	}
