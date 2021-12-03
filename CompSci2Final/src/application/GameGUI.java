@@ -28,6 +28,7 @@ import javafx.scene.text.TextAlignment;
 
 public class GameGUI extends BorderPane {
 
+
 	//Contains Move, Attack, and EndTurn
 	private HBox buttons;
 	//Contains purchasing buttons
@@ -500,10 +501,18 @@ public class GameGUI extends BorderPane {
 	private void formatInfoBlock(Image image, GenericUnit unit, VBox infoList) {
 		
 		VBox infoBlock = new VBox();
+		Background Background = new Background( new BackgroundFill( Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY ) );
+		infoBlock.setBackground(Background);
 		Text title = new Text("");
+		title.setFill(Color.WHITE);
+		title.setScaleY(1.5);
+		title.setScaleX(1.5);
+		title.setScaleZ(1.5);	
 		HBox imageStats = new HBox();
 		Text statsField = new Text(String.format("HP: %d%nAttack: %d%nSpeed: %d%nRange: %d", unit.getHP(), unit.getAttack(), unit.getMovementRange(), unit.getAttackRange()));
 		Text blurb = new Text("");
+		blurb.setFill(Color.WHITE);
+		statsField.setFill(Color.WHITE);
 		
 		
 		
@@ -530,7 +539,6 @@ public class GameGUI extends BorderPane {
 			blurb.setText("Flamingo Words");
 		} else if(unit instanceof ArmadilloTank) {
 			title.setText("Armadillo Tank");
-			blurb.setText("Armadillo Words");
 		} else if(unit instanceof BullMatador) {
 			title.setText("Bull Matador");
 			blurb.setText("Bull Words");
@@ -545,7 +553,7 @@ public class GameGUI extends BorderPane {
 		infoBlock.getChildren().add(imageStats);
 		infoBlock.getChildren().add(blurb);
 		
-		infoBlock.setPadding(new Insets(10,0,10,0));
+		infoBlock.setPadding(new Insets(10,10,10,20));
 		
 		infoList.getChildren().add(infoBlock);
 	}
