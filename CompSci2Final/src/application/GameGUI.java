@@ -514,34 +514,48 @@ public class GameGUI extends BorderPane {
 		blurb.setFill(Color.WHITE);
 		statsField.setFill(Color.WHITE);
 		
-		
-		
 		if(unit instanceof CatSoldier) {
 			title.setText("Cat Soldier");
-			blurb.setText(String.format("Not really sure why we picked cats as %n"
-										+ "our frontline soldiers, but at least %n"
-										+ "they're cheap. Though I could do with %n"
-										+ "less grumbling and requests for food."));
+			blurb.setText(String.format("Not really sure why we picked cats %n"
+										+ "as frontline soldiers. They had a list %n"
+										+ "of terms and conditions. They're %n"
+										+ "more trouble than they're worth."));
 		} else if(unit instanceof SquirrelRogue) {
 			title.setText("Squirrel Rogue");
-			blurb.setText(String.format("Bored of wreaking havoc in the neighborhood %n"
-										+ "lives miserable through their mischief,%n"
-										+ "these little guys have been enlisted %n"
-										+ "to the cause. They also got a nice hat."));
+			blurb.setText(String.format("Bored of wreaking havoc in their %n"
+										+ "towns and neighborhoods, these %n"
+										+ "small guys have enlisted to the %n"
+										+ "cause. They also got a nice beanie."));
 		} else if(unit instanceof AxolotlCaptain) {
 			title.setText("Axolotl Captain");
-			blurb.setText("Axolotl Words");
+			blurb.setText(String.format("Beneath the ocean's waves lies the %n"
+										+ "the Axolotlian Empire. In order to %n"
+										+ "engage the forces on the surface, %n"
+										+ "old enemy ships were repaired."));
 		} else if(unit instanceof DuckWizard) {
 			title.setText("Duck Wizard");
-			blurb.setText("Duck Words");
+			blurb.setText(String.format("Three weeks out of QuackWarts %n"
+										+ "Institute of Copyright Infringement %n"
+										+ "and Wizardry, this duck is ready to %n"
+										+ "prove their worth in the marshes."));
 		} else if(unit instanceof FlamingoSniper) {
 			title.setText("Flamingo Sniper");
-			blurb.setText("Flamingo Words");
+			blurb.setText(String.format("Not going to pretend that this bird %n"
+										+ "makes any sense. It's got no arms, %n"
+										+ "how is it even holding the rifle? %n"
+										+ "And the legs bend at the ankles???"));
 		} else if(unit instanceof ArmadilloTank) {
 			title.setText("Armadillo Tank");
+			blurb.setText(String.format("The greatest scientists in Armadillo %n"
+										+ "history have banded together to %n"
+										+ "create tank treads. The troops are %n"
+										+ "ready to serve king and country."));
 		} else if(unit instanceof BullMatador) {
 			title.setText("Bull Matador");
-			blurb.setText("Bull Words");
+			blurb.setText(String.format("Having slain their opponent in the %n"
+										+ "ring and won their freedom, these %n"
+										+ "bulls are an elite among their kind. %n"
+										+ "Tread lightly in their presence."));
 		} 
 		
 		imageStats.setSpacing(5);
