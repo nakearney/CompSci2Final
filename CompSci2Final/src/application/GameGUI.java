@@ -505,15 +505,20 @@ public class GameGUI extends BorderPane {
 		Text statsField = new Text(String.format("HP: %d%nAttack: %d%nSpeed: %d%nRange: %d", unit.getHP(), unit.getAttack(), unit.getMovementRange(), unit.getAttackRange()));
 		Text blurb = new Text("");
 		
+		
+		
 		if(unit instanceof CatSoldier) {
 			title.setText("Cat Soldier");
-			blurb.setText(String.format("Not really sure how we managed to %n"
-										+ "get these lazy furballs onto the %n"
-										+ "battlefield. But man do they rock %n"
-										+ "the uniform."));
+			blurb.setText(String.format("Not really sure why we picked cats as %n"
+										+ "our frontline soldiers, but at least %n"
+										+ "they're cheap. Though I could do with %n"
+										+ "less grumbling and requests for food."));
 		} else if(unit instanceof SquirrelRogue) {
 			title.setText("Squirrel Rogue");
-			blurb.setText("Squirrel Words");
+			blurb.setText(String.format("Bored of wreaking havoc in the neighborhood %n"
+										+ "lives miserable through their mischief,%n"
+										+ "these little guys have been enlisted %n"
+										+ "to the cause. They also got a nice hat."));
 		} else if(unit instanceof AxolotlCaptain) {
 			title.setText("Axolotl Captain");
 			blurb.setText("Axolotl Words");
