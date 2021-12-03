@@ -24,8 +24,8 @@ public class Facility extends Building {
 	
 	public void buildUnit(GenericUnit unit, Map field) { 
 		
-		if(canBuild) {
-			ArrayList<Tile> buildTiles = field.getMovementTilesLand(1);
+		if(canBuild!=0) {
+			ArrayList<Tile> buildTiles = field.getMoveLand(1);
 			
 			for(int i = 0; i<buildTiles.size(); i++) {
 				if(buildTiles.get(i).isOccupied()) {
@@ -55,18 +55,12 @@ public class Facility extends Building {
 				buildTiles.get(index).setUnit((BullMatador)unit);
 			}
 			
-			canBuild = false;
+			canBuild--;
 		}
 	}
 
 	@Override
 	public ArrayList<Tile> attackStyle(Map field) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ArrayList<Tile> nullStyle(Map field) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -196,16 +196,15 @@ public class GameGUI extends BorderPane {
 		
 					GenericUnit unit = unitList.get(0).getUnit();
 					ArrayList<Tile> attackArea = unit.attackStyle(field);
-					ArrayList<Tile> nullSpace = unit.nullStyle(field);
 					
-					if(nullSpace==null) {
+					if(attackArea==null) {
 						field.deselectUnits();
 						return;
 					}
 					
-					for(Tile t : nullSpace) {
+					for(Tile t : attackArea) {
 						
-						if(attackArea.contains(t)) {
+						if(t.isOccupied()&&!(t.getUnit().getPlayer()==unit.getPlayer())) {
 							t.setMyButton(new AttackButton(t,unitList.get(0),unit));
 						} else {
 							t.setMyButton(new NullButton());
@@ -231,9 +230,9 @@ public class GameGUI extends BorderPane {
 				field.deselectUnits();
 				
 				if(p1.yourTurn() && !p2.getFirstTurn()) {
-					p2.addMoney(3000);
+					p2.addMoney(determineMoney(p2));
 				} else if(p2.yourTurn()) {
-					p1.addMoney(3000);
+					p1.addMoney(determineMoney(p1));
 				} else {
 					p2.setFirstTurn(false);
 				}
@@ -427,7 +426,7 @@ public class GameGUI extends BorderPane {
 						
 						Facility f = (Facility)unitList.get(0).getUnit();
 
-						if(currentPlayer == f.getPlayer() && currentPlayer.getMoney() >= unitCost && f.getBuild()) { 
+						if(currentPlayer == f.getPlayer() && currentPlayer.getMoney() >= unitCost && f.getBuild()!=0) { 
 							
 							currentPlayer.subtractMoney(unitCost);
 							
@@ -454,7 +453,7 @@ public class GameGUI extends BorderPane {
 						
 						Carrier c = (Carrier)unitList.get(0).getUnit();
 
-						if(currentPlayer == c.getPlayer() && currentPlayer.getMoney() >= unitCost && c.getBuild()) { 
+						if(currentPlayer == c.getPlayer() && currentPlayer.getMoney() >= unitCost && c.getBuild()!=0) { 
 							
 							currentPlayer.subtractMoney(unitCost);
 							
@@ -543,6 +542,16 @@ public class GameGUI extends BorderPane {
 		infoBlock.setPadding(new Insets(10,0,10,0));
 		
 		infoList.getChildren().add(infoBlock);
+	}
+	
+	private int determineMoney(Player p) {
+		
+		/*
+		 * Divides 100 by the cube root of units you have to determine
+		 * turnly income.
+		 */
+		return (int)(100/Math.cbrt(p.getUnitCount()));
+		
 	}
 
 	private void gameOver() {

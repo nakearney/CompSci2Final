@@ -19,7 +19,7 @@ public abstract class GenericUnit extends Button {
 	private int movementRange;
 	private int attackRange;
 	protected int cost;
-	private Player player;
+	Player player;
 	private boolean isDead;
 	private boolean isSelected;
 	private boolean hasMoved;
@@ -58,7 +58,7 @@ public abstract class GenericUnit extends Button {
 					if(player.yourTurn()) {
 						if(b instanceof Building) {
 							Building build = (Building)b;
-							if(build.getBuild()) {
+							if(build.getBuild()!=0) {
 								stroke[0] =  new BorderStroke(Color.GOLD,BorderStrokeStyle.SOLID,new CornerRadii(4.0),new BorderWidths(6.0,6.0,6.0,6.0));
 							} else {
 								stroke[0] =  new BorderStroke(Color.GREY,BorderStrokeStyle.SOLID,new CornerRadii(4.0),new BorderWidths(6.0,6.0,6.0,6.0));
@@ -100,7 +100,7 @@ public abstract class GenericUnit extends Button {
 					if(b instanceof Building) {
 						
 						Building build = (Building)b;
-						if(build.getBuild()) {
+						if(build.getBuild()!=0) {
 							
 							Main.theMap.removeMapButtons();
 							
@@ -229,7 +229,7 @@ public abstract class GenericUnit extends Button {
 			AudioPlayer ap = new AudioPlayer("explosion.wav");
 			ap.playSound();
 			target.getPlayer().subtractUnit();
-			this.getPlayer().addMoney(target.getCost()/2);
+			this.getPlayer().addMoney(target.getCost()/3);
 		} else {
 			AudioPlayer ap = new AudioPlayer("hit.mp3");
 			ap.playSound();
@@ -237,8 +237,6 @@ public abstract class GenericUnit extends Button {
 	}
 	
 	public abstract ArrayList<Tile> attackStyle(Map field);
-	
-	public abstract ArrayList<Tile> nullStyle(Map field);
 	
 	public abstract ArrayList<Tile> moveStyle(Map field);
 	

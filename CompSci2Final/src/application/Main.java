@@ -125,6 +125,7 @@ public class Main extends Application {
 		buttons.getChildren().add(map8);
 		buttons.getChildren().add(map9);
 		
+		scroller.setFitToHeight(true);
 		scroller.setContent(buttons);
 		
 		startScreen.setCenter(text);
