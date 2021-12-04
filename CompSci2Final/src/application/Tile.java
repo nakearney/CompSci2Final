@@ -1,5 +1,6 @@
 package application;
 
+import javafx.geometry.Pos;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
@@ -16,6 +17,7 @@ public class Tile extends StackPane {
 	
 	private boolean isOccupied;
 	private GenericUnit unit;
+	private HpDisplay hpDisp;
 	private Color backGroundColor;
 	private boolean isTraversible;
 	private boolean isWater;
@@ -55,6 +57,7 @@ public class Tile extends StackPane {
 		
 		this(image,x,y);
 		this.unit=unit;
+		this.hpDisp=new HpDisplay(unit);
 		setUnit(unit);
 		isOccupied=true;
 		
@@ -92,6 +95,7 @@ public class Tile extends StackPane {
 		
 		this(type,x,y);
 		unit=troop;
+		this.hpDisp=new HpDisplay(troop);
 		setUnit(troop);
 		isOccupied=true;
 		
@@ -125,6 +129,7 @@ public class Tile extends StackPane {
 		
 		this(color,x,y);
 		unit=troop;
+		this.hpDisp=new HpDisplay(troop);
 		setUnit(troop);
 		isOccupied=true;
 		
@@ -166,8 +171,15 @@ public class Tile extends StackPane {
 	
 	public void setUnit(GenericUnit unit) { //Sets Unit
 		this.unit = unit;
+		
 		if(!isOccupied) {
+			HpDisplay D=new HpDisplay(unit);
+			hpDisp=D;
+			//getChildren().add(D);
+			//this.setAlignment(D,Pos.BOTTOM_RIGHT);
 			getChildren().add(unit);
+			getChildren().add(D);
+			this.setAlignment(D,Pos.BOTTOM_RIGHT);
 			isOccupied=true;
 		}
 	}
@@ -177,8 +189,13 @@ public class Tile extends StackPane {
 		
 		if(isOccupied) {
 			
+			
+				getChildren().remove(hpDisp);
+			
 			getChildren().remove(unit);
+			
 			this.unit=null;
+			this.hpDisp=null;
 			isOccupied=false;
 			
 		}
@@ -250,6 +267,13 @@ public class Tile extends StackPane {
 			
 		}
 		
+	}
+	public void updateHp() {
+		getChildren().remove(hpDisp);
+		HpDisplay D=new HpDisplay(unit);
+		hpDisp=D;
+		getChildren().add(D);
+		this.setAlignment(D,Pos.BOTTOM_RIGHT);
 	}
 	
 }

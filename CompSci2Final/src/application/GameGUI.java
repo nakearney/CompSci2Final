@@ -20,8 +20,11 @@ import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Box;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
@@ -33,6 +36,7 @@ public class GameGUI extends BorderPane {
 	private HBox buttons;
 	//Contains purchasing buttons
 	private VBox econGUI;
+	private Box hpDisp;
 	//Contains info on troops
 	private ScrollPane infoGUI;
 	//Displays current turn
@@ -44,6 +48,9 @@ public class GameGUI extends BorderPane {
 	private Player p2;
 	private Player empty = new Player(0,false);
 	private AudioPlayer ap;
+	//Sets hp rect dimentions;
+	private Rectangle OutsideRect=new Rectangle();
+	private Rectangle hpBar=new Rectangle();
 
 	//Width of the left and right elements in GameGUI (the info & turnGUI)
 	private double sideWidth=225.0;
@@ -382,6 +389,7 @@ public class GameGUI extends BorderPane {
 			}
 			
 		});
+		
 			
 		b.setOnMouseExited((EventHandler<? super MouseEvent>) new EventHandler<MouseEvent>() {
 
@@ -573,5 +581,7 @@ public class GameGUI extends BorderPane {
 		
 		this.setBottom(gameOver);
 	}
+	
+	
 	
 }

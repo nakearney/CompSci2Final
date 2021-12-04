@@ -5,13 +5,13 @@ public abstract class Building extends GenericUnit {
 	protected boolean canBuild;
 	
 	public Building(Player player) {
-		super(1,0,0,0,player);
+		super(15,0,0,0,player);
 		canBuild = true;
 		player.subtractUnit();
 	}
 
 	public Building(int hp, int attack, int movementRange, int attackRange, Player player) {
-		super(1,0,0,0,player);
+		super(hp,attack, movementRange,attackRange,player);
 		canBuild = true;
 		player.subtractUnit();
 	}

@@ -15,6 +15,7 @@ import javafx.scene.paint.Color;
 public abstract class GenericUnit extends Button {
 
 	private int hp;
+	
 	private int attack;
 	private int movementRange;
 	private int attackRange;
@@ -24,13 +25,17 @@ public abstract class GenericUnit extends Button {
 	private boolean isSelected;
 	private boolean hasMoved;
 	private boolean hasAttacked;
+	private HpDisplay hpDisp;
 	
 	public GenericUnit(int hp, int attack, int movementRange, int attackRange, Player player) { 
+		
 		this.hp = hp;
+	
 		this.attack = attack;
 		this.movementRange = movementRange;
 		this.attackRange = attackRange;
 		this.player = player;
+		this.hpDisp=new HpDisplay(this);
 		cost = 0;
 		isDead = false;
 		isSelected = false;
@@ -153,6 +158,8 @@ public abstract class GenericUnit extends Button {
 
 	public void takeDamage(int damage) {
 		hp-=damage;
+		hpDisp.setHp(this);
+		
 		if(hp <= 0) {
 			hp = 0;
 			isDead = true;
@@ -174,6 +181,7 @@ public abstract class GenericUnit extends Button {
 	public Player getPlayer() {
 		return player;
 	}
+	
 	
 	public boolean isDead() {
 		return isDead;
@@ -225,6 +233,7 @@ public abstract class GenericUnit extends Button {
 	
 	public void attack(GenericUnit target) { 
 		target.takeDamage(attack);
+		
 		if(target.isDead()) {
 			AudioPlayer ap = new AudioPlayer("explosion.wav");
 			ap.playSound();

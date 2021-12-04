@@ -31,6 +31,7 @@ import javafx.scene.text.TextAlignment;
 
 public class Main extends Application {
 	
+	
 	//Holds the map. Accessible everywhere.
 	public static Map theMap;
 	//Holds the primaryStage. Accessible everywhere.
@@ -58,6 +59,8 @@ public class Main extends Application {
 	}
 	
 	public static void startScreen() {
+		
+		
 		
 		BorderPane startScreen = new BorderPane();
 		startScreen.setBackground(new Background(new BackgroundFill(Color.BLACK,null,null)));
@@ -124,6 +127,7 @@ public class Main extends Application {
 		buttons.getChildren().add(map7);
 		buttons.getChildren().add(map8);
 		buttons.getChildren().add(map9);
+		
 		
 		scroller.setContent(buttons);
 		
