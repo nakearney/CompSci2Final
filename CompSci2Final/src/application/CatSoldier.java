@@ -7,10 +7,10 @@ import javafx.scene.image.ImageView;
 
 public class CatSoldier extends GenericUnit {
 	
-	public static final int COST = 50;
+	public static final int COST = 1000;
 
 	public CatSoldier(Player player) {
-		super(5, 3, 2, 2, player);
+		super(5, 3, 2, 3, player);
 		cost = COST;
 		if(player.getPlayerNumber()==1) {
 			this.setGraphic(new ImageView(new Image("/Sprites/Cat_Soldier_Player1.png")));

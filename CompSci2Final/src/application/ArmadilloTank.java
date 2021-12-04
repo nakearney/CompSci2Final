@@ -7,10 +7,10 @@ import javafx.scene.image.ImageView;
 
 public class ArmadilloTank extends GenericUnit {
 	
-	public static final int COST = 200;
+	public static final int COST = 4000;
 
 	public ArmadilloTank(Player player) {
-		super(18, 2, 2, 2, player);
+		super(12, 2, 2, 2, player);
 		cost = COST;
 		if(player.getPlayerNumber()==1) {
 			this.setGraphic(new ImageView(new Image("/Sprites/Armadillo_Tank_Player1.png")));

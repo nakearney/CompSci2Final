@@ -7,10 +7,10 @@ import javafx.scene.image.ImageView;
 
 public class BullMatador extends GenericUnit {
 	
-	public static final int COST = 300;
+	public static final int COST = 5000;
 
 	public BullMatador(Player player) {
-		super(9, 5, 4, 3, player);
+		super(8, 4, 3, 4, player);
 		cost = COST;
 		if(player.getPlayerNumber()==1) {
 			this.setGraphic(new ImageView(new Image("/Sprites/Matador_Bull_Player1.png")));

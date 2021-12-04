@@ -58,7 +58,7 @@ public abstract class GenericUnit extends Button {
 					if(player.yourTurn()) {
 						if(b instanceof Building) {
 							Building build = (Building)b;
-							if(build.getBuild()!=0) {
+							if(build.getBuild()==true) {
 								stroke[0] =  new BorderStroke(Color.GOLD,BorderStrokeStyle.SOLID,new CornerRadii(4.0),new BorderWidths(6.0,6.0,6.0,6.0));
 							} else {
 								stroke[0] =  new BorderStroke(Color.GREY,BorderStrokeStyle.SOLID,new CornerRadii(4.0),new BorderWidths(6.0,6.0,6.0,6.0));
@@ -100,7 +100,7 @@ public abstract class GenericUnit extends Button {
 					if(b instanceof Building) {
 						
 						Building build = (Building)b;
-						if(build.getBuild()!=0) {
+						if(build.getBuild()==true) {
 							
 							Main.theMap.removeMapButtons();
 							
@@ -229,7 +229,7 @@ public abstract class GenericUnit extends Button {
 			AudioPlayer ap = new AudioPlayer("explosion.wav");
 			ap.playSound();
 			target.getPlayer().subtractUnit();
-			this.getPlayer().addMoney(target.getCost()/3);
+			this.getPlayer().addMoney(target.getCost()/2);
 			GameGUI.turnDisplay(Main.player1, Main.player2);
 		} else {
 			AudioPlayer ap = new AudioPlayer("hit.mp3");

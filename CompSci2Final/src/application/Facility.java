@@ -24,7 +24,7 @@ public class Facility extends Building {
 	
 	public void buildUnit(GenericUnit unit, Map field) { 
 		
-		if(canBuild!=0) {
+		if(canBuild) {
 			ArrayList<Tile> buildTiles = field.getMoveLand(1);
 			
 			for(int i = 0; i<buildTiles.size(); i++) {
@@ -55,7 +55,7 @@ public class Facility extends Building {
 				buildTiles.get(index).setUnit((BullMatador)unit);
 			}
 			
-			canBuild--;
+			canBuild=false;
 		}
 	}
 

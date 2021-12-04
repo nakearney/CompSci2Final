@@ -8,6 +8,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -427,7 +428,7 @@ public class GameGUI extends BorderPane {
 						
 						Facility f = (Facility)unitList.get(0).getUnit();
 
-						if(currentPlayer == f.getPlayer() && currentPlayer.getMoney() >= unitCost && f.getBuild()!=0) { 
+						if(currentPlayer == f.getPlayer() && currentPlayer.getMoney() >= unitCost && f.getBuild()==true) { 
 							
 							currentPlayer.subtractMoney(unitCost);
 							
@@ -454,7 +455,7 @@ public class GameGUI extends BorderPane {
 						
 						Carrier c = (Carrier)unitList.get(0).getUnit();
 
-						if(currentPlayer == c.getPlayer() && currentPlayer.getMoney() >= unitCost && c.getBuild()!=0) { 
+						if(currentPlayer == c.getPlayer() && currentPlayer.getMoney() >= unitCost && c.getBuild()==true) { 
 							
 							currentPlayer.subtractMoney(unitCost);
 							
@@ -482,6 +483,8 @@ public class GameGUI extends BorderPane {
 		
 		infoGUI = new ScrollPane();
 		infoGUI.setPrefWidth(sideWidth);
+		infoGUI.setFitToWidth(true);
+		infoGUI.setHbarPolicy(ScrollBarPolicy.NEVER);
 		infoGUI.setPannable(true);
 		
 		VBox infoList = new VBox(); 
@@ -573,11 +576,12 @@ public class GameGUI extends BorderPane {
 	
 	private int determineMoney(Player p) {
 		
-		/*
+		/* OUTDATED. Leaving this in case we want to do income
+		 * formula in the future.
 		 * Divides 100 by the cube root of units you have to determine
 		 * turnly income.
 		 */
-		return (int)(100/Math.cbrt(p.getUnitCount()));
+		return 1000;
 		
 	}
 

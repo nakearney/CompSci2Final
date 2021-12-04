@@ -22,7 +22,7 @@ public class Carrier extends Building {
 	
 	public void buildUnit(GenericUnit unit, Map field) { 
 		
-		if(canBuild!=0) {
+		if(canBuild) {
 			ArrayList<Tile> buildTiles = field.getMoveWater(1);
 			
 			for(int i = 0; i<buildTiles.size(); i++) {
@@ -47,7 +47,7 @@ public class Carrier extends Building {
 				buildTiles.get(index).setUnit((FlamingoSniper)unit);
 			} 
 			
-			canBuild--;
+			canBuild=false;
 			
 		}
 	}
