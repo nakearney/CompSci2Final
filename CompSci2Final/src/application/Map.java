@@ -202,7 +202,7 @@ public class Map extends GridPane {
 	//Sets entire Map to 1 type of tile
 	public static int[][] setMap(int[][] tiles, int type) {
 		
-		tiles=setRect(tiles,0,0,MAP_SIZE-1,MAP_SIZE-1,true,type);
+		tiles=setRect(tiles,0,0,MAP_SIZE,MAP_SIZE,true,type);
 		return tiles;
 		
 	}
