@@ -5,7 +5,9 @@ public abstract class Building extends GenericUnit {
 	protected boolean canBuild;
 	
 	public Building(Player player) {
-		super(15,0,0,0,player);
+
+		super(20,0,0,0,player);
+
 		canBuild = true;
 		player.subtractUnit();
 	}

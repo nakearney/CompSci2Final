@@ -26,19 +26,13 @@ public class AxolotlCaptain extends GenericUnit {
 
 	@Override
 	public ArrayList<Tile> attackStyle(Map field) {
-		ArrayList<Tile> attackArea = field.getAttackTilesLandWater(getAttackRange());
+		ArrayList<Tile> attackArea = field.getFightLandWater(getAttackRange());
 		return attackArea;
 	}
-
-	@Override
-	public ArrayList<Tile> nullStyle(Map field) {
-		ArrayList<Tile> nullSpace = field.getSurroundingTiles(getAttackRange());
-		return nullSpace;
-	}
-
+	
 	@Override
 	public ArrayList<Tile> moveStyle(Map field) {
-		ArrayList<Tile> moveArea=field.getMovementTilesWater(getMovementRange());
+		ArrayList<Tile> moveArea=field.getMoveWater(getMovementRange());
 		return moveArea;
 	}
 

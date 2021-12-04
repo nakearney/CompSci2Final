@@ -99,11 +99,11 @@ public class Main extends Application {
 		buttons.setVgap(20);
 		buttons.setHgap(20);
 		buttons.setColumnHalignment(HPos.LEFT);
-		Button map1 = new Button("MAP 1");
+		Button map1 = new Button("RIVER CROSSING");
 		formatButton(map1,1);
-		Button map2 = new Button("MAP 2");
+		Button map2 = new Button("OPEN SEA");
 		formatButton(map2,2);
-		Button map3 = new Button("MAP 3");
+		Button map3 = new Button("BOARDWALK");
 		formatButton(map3,3);
 		Button map4 = new Button("MAP 4");
 		formatButton(map4,4);
@@ -129,6 +129,7 @@ public class Main extends Application {
 		buttons.getChildren().add(map9);
 		
 		
+		scroller.setFitToHeight(true);
 		scroller.setContent(buttons);
 		
 		startScreen.setCenter(text);
@@ -175,23 +176,14 @@ public class Main extends Application {
 			Map1=Map.setTile(Map1, 5, 7, 4);
 			Map1=Map.setTile(Map1, 10, 7, 4);
 			Map1=Map.setTile(Map1, 9, 7, 4);
-			Map1=Map.setTile(Map1, 3, 3, 2);
-			Map1=Map.setTile(Map1, 3, 4, 2);
-			Map1=Map.setTile(Map1, 4, 3, 2);
 			Map1=Map.setBorder(Map1, 2, 0);
 			//Process for making units is to initialize the map of tiles created above,
 			//Then use the Map methods to add units.
 			theMap = new Map(Map1);
-			theMap.setUnit(4, 4, new CatSoldier(player1));
-			theMap.setUnit(4, 6, new SquirrelRogue(player2));
-			theMap.setUnit(6, 4, new DuckWizard(player1));
-			theMap.setUnit(6, 6, new FlamingoSniper(player2));
-			theMap.setUnit(8, 4, new ArmadilloTank(player1));
-			theMap.setUnit(8, 6, new BullMatador(player2));
-			theMap.setUnit(10,4, new Facility(player1));
+			theMap.setUnit(5, 4, new CatSoldier(player1));
+			theMap.setUnit(9, 10, new CatSoldier(player2));
+			theMap.setUnit(4,4, new Facility(player1));
 			theMap.setUnit(10,10, new Facility(player2));
-			theMap.setUnit(8,7, new Carrier(player1));
-			theMap.setUnit(6,7, new AxolotlCaptain(player1));
 			
 		} else if(mapIndex==2) {
 			
@@ -199,13 +191,36 @@ public class Main extends Application {
 			int[][] Map2=new int[Map.MAP_SIZE][Map.MAP_SIZE];
 			Map2=Map.setMap(Map2,3);
 			Map2=Map.setBorder(Map2, 2, 0);
+			Map2=Map.setTile(Map2,6,7,2);
+			Map2=Map.setTile(Map2,8,7,2);
+			Map2=Map.setTile(Map2,9,7,2);
+			Map2=Map.setRect(Map2,2,2,2,2,true,2);
+			Map2=Map.setTile(Map2,2,4,2);
+			Map2=Map.setTile(Map2,4,10,2);
+			Map2=Map.setTile(Map2,11,12,2);
 			//Process for making units is to initialize the map of tiles created above,
 			//Then use the Map methods to add units.
 			theMap = new Map(Map2);
-			theMap.setUnit(8, 4, new AxolotlCaptain(player1));
-			theMap.setUnit(8, 10, new AxolotlCaptain(player2));
-			theMap.setUnit(10,4, new Carrier(player1));
-			theMap.setUnit(10,10, new Carrier(player2));
+			theMap.setUnit(7, 4, new AxolotlCaptain(player1));
+			theMap.setUnit(7, 10, new AxolotlCaptain(player2));
+			theMap.setUnit(7,3, new Carrier(player1));
+			theMap.setUnit(7,11, new Carrier(player2));
+			
+		} else if(mapIndex==3) {
+			
+			int[][] Map2=new int[Map.MAP_SIZE][Map.MAP_SIZE];
+			Map2=Map.setMap(Map2,3);
+			Map2=Map.setRect(Map2,1,1,2,2,true,4);
+			Map2=Map.setRect(Map2,12,12,2,2,true,4);
+			Map2=Map.setRect(Map2,2,2,11,11,false,4);
+			
+			Map2=Map.setBorder(Map2, 1, 0);
+			
+			theMap = new Map(Map2);
+			theMap.setUnit(2, 2, new CatSoldier(player1));
+			theMap.setUnit(12, 12, new CatSoldier(player2));
+			theMap.setUnit(1,1, new Facility(player1));
+			theMap.setUnit(13,13, new Facility(player2));
 			
 		}
 		
@@ -221,7 +236,7 @@ public class Main extends Application {
 		
 		b.setBackground(new Background(new BackgroundFill(Color.BLACK,null,null)));
 		b.setBorder(new Border(stroke));
-		b.setStyle("-fx-font-size: 32");
+		b.setStyle("-fx-font-size: 30");
 		b.setTextFill(Color.WHITESMOKE);
 		b.setPrefWidth(362);
 		b.setMinWidth(362);

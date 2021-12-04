@@ -22,24 +22,16 @@ public class CatSoldier extends GenericUnit {
 	@Override
 	public ArrayList<Tile> attackStyle(Map field) {
 		
-		ArrayList<Tile> attackArea = field.getAttackTilesLand(getAttackRange());
+		ArrayList<Tile> attackArea = field.getFightLand(getAttackRange());
 		return attackArea;
 		
 	}
 	
 	public ArrayList<Tile> moveStyle(Map field) {
 		
-		ArrayList<Tile> moveArea = field.getMovementTilesLand(getMovementRange());
+		ArrayList<Tile> moveArea = field.getMoveLand(getMovementRange());
 		return moveArea;
 
-		
-	}
-
-	@Override
-	public ArrayList<Tile> nullStyle(Map field) {
-		
-		ArrayList<Tile> nullSpace = field.getSurroundingTiles(getAttackRange());
-		return nullSpace;
 		
 	}
 

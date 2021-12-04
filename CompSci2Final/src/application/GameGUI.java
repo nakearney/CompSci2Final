@@ -8,6 +8,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -40,7 +41,7 @@ public class GameGUI extends BorderPane {
 	//Contains info on troops
 	private ScrollPane infoGUI;
 	//Displays current turn
-	private Label turnGUI;
+	private static Label turnGUI;
 	private Button attack;
 	private Button move;
 	private Button endTurn;
@@ -69,31 +70,31 @@ public class GameGUI extends BorderPane {
 		
 		switch(trackIndex) {
 			case 1:
-				ap = new AudioPlayer("battletrack1.mp3");
+				ap = new AudioPlayer("map1track.mp3", 3.5, 106);
 				break;
 			case 2: 
-				ap = new AudioPlayer("battletrack1.mp3");
+				ap = new AudioPlayer("map2track.mp3", 0, 177);
 				break;
 			case 3: 
-				ap = new AudioPlayer("battletrack1.mp3");
+				ap = new AudioPlayer("map3track.mp3", 0, 214);
 				break;
 			case 4:
-				ap = new AudioPlayer("battletrack1.mp3");
+				ap = new AudioPlayer("map4track.mp3");
 				break;
 			case 5: 
-				ap = new AudioPlayer("battletrack1.mp3");
+				ap = new AudioPlayer("map5track.mp3", 0, 90);
 				break;
 			case 6: 
-				ap = new AudioPlayer("battletrack1.mp3");
+				ap = new AudioPlayer("testtrack.mp3");
 				break;
 			case 7:
-				ap = new AudioPlayer("battletrack1.mp3");
+				ap = new AudioPlayer("testtrack.mp3");
 				break;
 			case 8: 
-				ap = new AudioPlayer("battletrack1.mp3");
+				ap = new AudioPlayer("testtrack.mp3");
 				break;
 			case 9: 
-				ap = new AudioPlayer("battletrack1.mp3");
+				ap = new AudioPlayer("testtrack.mp3");
 				break;
 		}
 		
@@ -204,16 +205,15 @@ public class GameGUI extends BorderPane {
 		
 					GenericUnit unit = unitList.get(0).getUnit();
 					ArrayList<Tile> attackArea = unit.attackStyle(field);
-					ArrayList<Tile> nullSpace = unit.nullStyle(field);
 					
-					if(nullSpace==null) {
+					if(attackArea==null) {
 						field.deselectUnits();
 						return;
 					}
 					
-					for(Tile t : nullSpace) {
+					for(Tile t : attackArea) {
 						
-						if(attackArea.contains(t)) {
+						if(t.isOccupied()&&!(t.getUnit().getPlayer()==unit.getPlayer())) {
 							t.setMyButton(new AttackButton(t,unitList.get(0),unit));
 						} else {
 							t.setMyButton(new NullButton());
@@ -239,9 +239,9 @@ public class GameGUI extends BorderPane {
 				field.deselectUnits();
 				
 				if(p1.yourTurn() && !p2.getFirstTurn()) {
-					p2.addMoney(3000);
+					p2.addMoney(determineMoney(p2));
 				} else if(p2.yourTurn()) {
-					p1.addMoney(3000);
+					p1.addMoney(determineMoney(p1));
 				} else {
 					p2.setFirstTurn(false);
 				}
@@ -356,7 +356,7 @@ public class GameGUI extends BorderPane {
 		
 	}
 	
-	private void turnDisplay(Player p1, Player p2) {
+	static void turnDisplay(Player p1, Player p2) {
 		if(p1.yourTurn()) {
 			turnGUI.setText("Player 1: You have " + p1.getUnitCount() + " units and $" + p1.getMoney() + " remaining");
 		} else if(p2.yourTurn()) {
@@ -436,7 +436,7 @@ public class GameGUI extends BorderPane {
 						
 						Facility f = (Facility)unitList.get(0).getUnit();
 
-						if(currentPlayer == f.getPlayer() && currentPlayer.getMoney() >= unitCost && f.getBuild()) { 
+						if(currentPlayer == f.getPlayer() && currentPlayer.getMoney() >= unitCost && f.getBuild()==true) { 
 							
 							currentPlayer.subtractMoney(unitCost);
 							
@@ -463,7 +463,7 @@ public class GameGUI extends BorderPane {
 						
 						Carrier c = (Carrier)unitList.get(0).getUnit();
 
-						if(currentPlayer == c.getPlayer() && currentPlayer.getMoney() >= unitCost && c.getBuild()) { 
+						if(currentPlayer == c.getPlayer() && currentPlayer.getMoney() >= unitCost && c.getBuild()==true) { 
 							
 							currentPlayer.subtractMoney(unitCost);
 							
@@ -491,6 +491,8 @@ public class GameGUI extends BorderPane {
 		
 		infoGUI = new ScrollPane();
 		infoGUI.setPrefWidth(sideWidth);
+		infoGUI.setFitToWidth(true);
+		infoGUI.setHbarPolicy(ScrollBarPolicy.NEVER);
 		infoGUI.setPannable(true);
 		
 		VBox infoList = new VBox(); 
@@ -524,27 +526,46 @@ public class GameGUI extends BorderPane {
 		
 		if(unit instanceof CatSoldier) {
 			title.setText("Cat Soldier");
-			blurb.setText(String.format("Not really sure how we managed to %n"
-										+ "get these lazy furballs onto the %n"
-										+ "battlefield. But man do they rock %n"
-										+ "the uniform."));
+			blurb.setText(String.format("Not really sure why we picked cats %n"
+										+ "as frontline soldiers. They had a list %n"
+										+ "of terms and conditions. They're %n"
+										+ "more trouble than they're worth."));
 		} else if(unit instanceof SquirrelRogue) {
 			title.setText("Squirrel Rogue");
-			blurb.setText("Squirrel Words");
+			blurb.setText(String.format("Bored of wreaking havoc in their %n"
+										+ "towns and neighborhoods, these %n"
+										+ "small guys have enlisted to the %n"
+										+ "cause. They also got a nice beanie."));
 		} else if(unit instanceof AxolotlCaptain) {
 			title.setText("Axolotl Captain");
-			blurb.setText("Axolotl Words");
+			blurb.setText(String.format("Beneath the ocean's waves lies the %n"
+										+ "the Axolotlian Empire. In order to %n"
+										+ "engage the forces on the surface, %n"
+										+ "old enemy ships were repaired."));
 		} else if(unit instanceof DuckWizard) {
 			title.setText("Duck Wizard");
-			blurb.setText("Duck Words");
+			blurb.setText(String.format("Three weeks out of QuackWarts %n"
+										+ "Institute of Copyright Infringement %n"
+										+ "and Wizardry, this duck is ready to %n"
+										+ "prove their worth in the marshes."));
 		} else if(unit instanceof FlamingoSniper) {
 			title.setText("Flamingo Sniper");
-			blurb.setText("Flamingo Words");
+			blurb.setText(String.format("Not going to pretend that this bird %n"
+										+ "makes any sense. It's got no arms, %n"
+										+ "how is it even holding the rifle? %n"
+										+ "And the legs bend at the ankles???"));
 		} else if(unit instanceof ArmadilloTank) {
 			title.setText("Armadillo Tank");
+			blurb.setText(String.format("The greatest scientists in Armadillo %n"
+										+ "history have banded together to %n"
+										+ "create tank treads. The troops are %n"
+										+ "ready to serve king and country."));
 		} else if(unit instanceof BullMatador) {
 			title.setText("Bull Matador");
-			blurb.setText("Bull Words");
+			blurb.setText(String.format("Having slain their opponent in the %n"
+										+ "ring and won their freedom, these %n"
+										+ "bulls are an elite among their kind. %n"
+										+ "Tread lightly in their presence."));
 		} 
 		
 		imageStats.setSpacing(5);
@@ -559,6 +580,17 @@ public class GameGUI extends BorderPane {
 		infoBlock.setPadding(new Insets(10,10,10,20));
 		
 		infoList.getChildren().add(infoBlock);
+	}
+	
+	private int determineMoney(Player p) {
+		
+		/* OUTDATED. Leaving this in case we want to do income
+		 * formula in the future.
+		 * Divides 100 by the cube root of units you have to determine
+		 * turnly income.
+		 */
+		return 1000;
+		
 	}
 
 	private void gameOver() {
