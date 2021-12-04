@@ -9,36 +9,43 @@ import javafx.util.Duration;
 public class AudioPlayer {
 	
 	String file;
+	Media media;
 	MediaPlayer mp;
-	int startTime = 0;
+	double startTime;
 	
 	public AudioPlayer(String file) {
 		this.file = file;
 		String path = getClass().getResource("/sounds/" + file).getPath();
-		Media media = new Media(new File(path).toURI().toString());
+		media = new Media(new File(path).toURI().toString());
 		mp = new MediaPlayer(media);
 	}
 	
-	public AudioPlayer(String file, int startTime) {
+	public AudioPlayer(String file, double startTime) {
 		this(file);
 		this.startTime = startTime;
+		mp.setStartTime(Duration.seconds(startTime));
+		mp.setStopTime(media.getDuration());
+	}
+	
+	public AudioPlayer(String file, double startTime, double endTime) {
+		this(file);
+		this.startTime = startTime;
+		mp.setStartTime(Duration.seconds(startTime));
+		mp.setStopTime(Duration.seconds(endTime));
 	}
 
 	public void playSound() {
 		
-		mp.setStartTime(Duration.millis(startTime));
 		mp.play();
 	}
 	
 	public void playTrack() {
 		
-		mp.setStartTime(Duration.millis(startTime));
-		
 		mp.setOnEndOfMedia(new Runnable() {
 
 			@Override
 			public void run() {
-				mp.seek(Duration.millis(startTime));
+				mp.seek(Duration.seconds(startTime));
 			}
 			
 		});
