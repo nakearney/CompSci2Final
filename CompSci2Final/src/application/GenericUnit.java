@@ -232,7 +232,7 @@ public abstract class GenericUnit extends Button {
 			this.getPlayer().addMoney(target.getCost()/2);
 			GameGUI.turnDisplay(Main.player1, Main.player2);
 		} else {
-			AudioPlayer ap = new AudioPlayer("hit.mp3");
+			AudioPlayer ap = new AudioPlayer("hit.mp3", 400);
 			ap.playSound();
 		}
 	}
