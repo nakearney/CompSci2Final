@@ -3,6 +3,7 @@ package application;
 import java.util.ArrayList;
 
 import javafx.event.EventHandler;
+import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Border;
@@ -15,7 +16,6 @@ import javafx.scene.paint.Color;
 public abstract class GenericUnit extends Button {
 
 	private int hp;
-	
 	private int attack;
 	private int movementRange;
 	private int attackRange;
@@ -159,7 +159,7 @@ public abstract class GenericUnit extends Button {
 	public void takeDamage(int damage) {
 		hp-=damage;
 		hpDisp.setHp(this);
-		
+
 		if(hp <= 0) {
 			hp = 0;
 			isDead = true;
@@ -198,6 +198,10 @@ public abstract class GenericUnit extends Button {
 	public int getCost() {
 		return cost;
 	}
+	public HpDisplay getHpDisp() {
+		return hpDisp;
+	}
+	
 	
 	public void moved() {
 		

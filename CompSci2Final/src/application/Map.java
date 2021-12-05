@@ -547,6 +547,7 @@ public class Map extends GridPane {
 			for(Tile t : T) {
 				
 				t.deselectUnit();
+				if(t.getUnit()!=null) t.updateHp();
 				
 			}
 			

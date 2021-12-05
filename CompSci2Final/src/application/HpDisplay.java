@@ -10,16 +10,15 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
-public class HpDisplay extends Group{
+public class HpDisplay extends Group {
 	Text health = new Text("5");
-	
-	//StackPane stack = new StackPane();
+
+	// StackPane stack = new StackPane();
 	StackPane graphic;
 	Rectangle rect;
+
 	public HpDisplay() {
 		graphic = new StackPane();
-		
-		
 		graphic.setBackground(null);
 		this.getChildren().add(graphic);
 		this.getChildren().add(health);
@@ -28,31 +27,28 @@ public class HpDisplay extends Group{
 
 	public HpDisplay(GenericUnit unit) {
 		graphic = new StackPane();
-		rect=new Rectangle();
-		
-		 Font font = Font.font("Verdana", FontWeight.BOLD, 10);
-		 
+		rect = new Rectangle();
+
+		Font font = Font.font("Verdana", FontWeight.BOLD, 10);
+
 		rect.setWidth(20);
 		rect.setHeight(20);
 		rect.setFill(Color.WHITE);
-		graphic.setMaxSize(20,20);
+		graphic.setMaxSize(20, 20);
 		rect.arcHeightProperty();
 		rect.arcWidthProperty();
 		rect.setArcHeight(7);
 		rect.setArcWidth(7);
-	
-		
-	
+
 		int hold = unit.getHP();
 		String h = String.format("%d", hold);
 		health.setText(h);
 		health.setStrokeWidth(3);
 		health.setFont(font);
-		if(unit.getPlayer().getPlayerNumber()==1) {
+		if (unit.getPlayer().getPlayerNumber() == 1) {
 			health.setFill(Color.RED);
 			rect.setStroke(Color.RED);
-		}
-		else {
+		} else {
 			health.setFill(Color.BLUE);
 			rect.setStroke(Color.BLUE);
 		}
@@ -62,17 +58,15 @@ public class HpDisplay extends Group{
 		graphic.getChildren().add(rect);
 		graphic.getChildren().add(health);
 		this.getChildren().add(graphic);
-		
 
 	}
-
-	
 
 	public void setHp(GenericUnit unit) {
 		int hold = unit.getHP();
 		String h = String.format("%d", hold);
 		health.setText(h);
 	}
+
 	public void remove() {
 		graphic.getChildren().remove(graphic);
 		graphic.getChildren().remove(health);
