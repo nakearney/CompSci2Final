@@ -47,7 +47,7 @@ public class Main extends Application {
 		theStage=primaryStage;
 		primaryStage.setMaximized(true);
 		startScreen();
-		primaryStage.setTitle("Scam Kids: Make Money");
+		primaryStage.setTitle("ANIMAL TEAM BATTLE");
 		primaryStage.getIcons().add(new Image("/Sprites/Duck_Wizard_Player1.png"));
 		primaryStage.show();
 		
@@ -68,7 +68,7 @@ public class Main extends Application {
 		text.setMinWidth(400);
 		text.setSpacing(10.0);
 		
-		Label title = new Label("GAMERS vs. SOCIETY");
+		Label title = new Label("ANIMAL TEAM BATTLE");
 		title.setTextAlignment(TextAlignment.CENTER);
 		title.setFont(new Font("Arial",48));
 		title.setTextFill(Color.WHITESMOKE);
@@ -114,6 +114,8 @@ public class Main extends Application {
 		formatButton(map8,8);
 		Button map9 = new Button("MEET AT THE MIDDLE");
 		formatButton(map9,9);
+		Button map10 = new Button("LINES");
+		formatButton(map10,10);
 		
 		buttons.getChildren().add(map1);
 		buttons.getChildren().add(map2);
@@ -124,6 +126,7 @@ public class Main extends Application {
 		buttons.getChildren().add(map7);
 		buttons.getChildren().add(map8);
 		buttons.getChildren().add(map9);
+		buttons.getChildren().add(map10);
 	
 		
 		
@@ -440,6 +443,37 @@ public class Main extends Application {
 			theMap.setUnit(2, 12, new Carrier(player2));
 			
 		}
+		else if(mapIndex==10) {
+			int[][] map10=new int[Map.MAP_SIZE][Map.MAP_SIZE];
+			map10=Map.setMap(map10, 1);
+			
+			map10=Map.setRow(map10, 3,3);
+			map10=Map.setRow(map10, 5,3);
+			map10=Map.setRow(map10, 9,3);
+			map10=Map.setRow(map10, 11,3);
+			Map.setTile(map10, 3, 3, 4);
+			Map.setTile(map10, 7,3, 4);
+			Map.setTile(map10, 11, 3, 4);
+			Map.setTile(map10, 3, 5, 4);
+			Map.setTile(map10, 7,5, 4);
+			Map.setTile(map10, 11, 5, 4);
+			Map.setTile(map10, 3, 9, 4);
+			Map.setTile(map10, 7,9, 4);
+			Map.setTile(map10, 11, 9, 4);
+			Map.setTile(map10, 3, 11, 4);
+			Map.setTile(map10, 7,11, 4);
+			Map.setTile(map10, 11, 11, 4);
+			map10=Map.setBorder(map10, 2, 0);
+			
+			theMap = new Map(map10);
+			theMap.setUnit(3, 2, new CatSoldier(player1));
+			theMap.setUnit(2, 2, new Facility(player1));
+
+			
+			theMap.setUnit(11, 12, new CatSoldier(player2));
+			theMap.setUnit(12, 12, new Facility(player2));
+		}
+		
 		
 		return theMap;
 		
