@@ -112,8 +112,10 @@ public class Main extends Application {
 		formatButton(map7,7);
 		Button map8 = new Button("MAP 8");
 		formatButton(map8,8);
-		Button map9 = new Button("MAP 9");
+		Button map9 = new Button("MEET AT THE MIDDLE");
 		formatButton(map9,9);
+		Button map10=new Button("MAP 10");
+		formatButton(map10,10);
 		
 		buttons.getChildren().add(map1);
 		buttons.getChildren().add(map2);
@@ -124,6 +126,8 @@ public class Main extends Application {
 		buttons.getChildren().add(map7);
 		buttons.getChildren().add(map8);
 		buttons.getChildren().add(map9);
+		buttons.getChildren().add(map10);
+		
 		
 		
 		scroller.setFitToHeight(true);
@@ -241,6 +245,46 @@ public class Main extends Application {
 			
 			
 			
+		}
+		else if(mapIndex==9){
+			int[][] Map9=new int[Map.MAP_SIZE][Map.MAP_SIZE];
+			Map9=Map.setMap(Map9, 3);
+			Map9=Map.setBorder(Map9, 2, 0);
+			Map9=Map.setRect(Map9, 2, 2, 10, 3, true, 1);
+			Map9=Map.setRect(Map9, 3, 6, 9, 3, true, 1);
+			Map9=Map.setRect(Map9, 3, 10, 10, 3, true, 1);
+			Map9=Map.setTile(Map9, 5, 5, 4);
+			Map9=Map.setTile(Map9, 4, 5, 4);
+			Map9=Map.setTile(Map9, 9, 9, 4);
+			Map9=Map.setTile(Map9, 10, 9, 4);
+		
+			
+			theMap = new Map(Map9);
+			theMap.setUnit(2, 3, new CatSoldier(player1));
+			theMap.setUnit(2, 2, new Facility(player1));
+			theMap.setUnit(12, 2, new Carrier(player1));
+			
+			theMap.setUnit(12, 11, new CatSoldier(player2));
+			theMap.setUnit(12, 12, new Facility(player2));
+			theMap.setUnit(2, 12, new Carrier(player2));
+			
+		}
+		else if(mapIndex==10) {
+			int[][] map10=new int[Map.MAP_SIZE][Map.MAP_SIZE];
+			map10=Map.setMap(map10, 1);
+			map10=Map.setBorder(map10, 2, 0);
+			map10=Map.setTile(map10, 5, 5, 3);
+			map10=Map.setTile(map10, 6, 4, 3);
+			map10=Map.setTile(map10, 7, 5, 3);
+			map10=Map.setTile(map10, 8, 6, 3);
+			
+			theMap = new Map(map10);
+			theMap.setUnit(2, 3, new CatSoldier(player1));
+			theMap.setUnit(2, 2, new Facility(player1));
+
+			
+			theMap.setUnit(12, 11, new CatSoldier(player2));
+			theMap.setUnit(12, 12, new Facility(player2));
 		}
 		
 		return theMap;
