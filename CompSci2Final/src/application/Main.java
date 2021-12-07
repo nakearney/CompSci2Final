@@ -114,8 +114,6 @@ public class Main extends Application {
 		formatButton(map8,8);
 		Button map9 = new Button("MEET AT THE MIDDLE");
 		formatButton(map9,9);
-		Button map10=new Button("MAP 10");
-		formatButton(map10,10);
 		
 		buttons.getChildren().add(map1);
 		buttons.getChildren().add(map2);
@@ -126,7 +124,7 @@ public class Main extends Application {
 		buttons.getChildren().add(map7);
 		buttons.getChildren().add(map8);
 		buttons.getChildren().add(map9);
-		buttons.getChildren().add(map10);
+	
 		
 		
 		
@@ -208,7 +206,7 @@ public class Main extends Application {
 			theMap.setUnit(7,11, new Carrier(player2));
 			
 		} else if(mapIndex==3) {
-
+			
 			int[][] Map3=new int[Map.MAP_SIZE][Map.MAP_SIZE];
 			Map3=Map.setMap(Map3,3);
 			Map3=Map.setCol(Map3,7,4);
@@ -232,7 +230,6 @@ public class Main extends Application {
 			Map3=Map.setTile(Map3,11,13,1);
 			
 			Map3=Map.setBorder(Map3, 1, 0);
-			
 			theMap = new Map(Map3);
 			theMap.setUnit(2, 2, new CatSoldier(player2));
 			theMap.setUnit(12, 12, new CatSoldier(player1));
@@ -244,10 +241,52 @@ public class Main extends Application {
 		} else if(mapIndex==4) {
 			
 			
+
+			int[][] Map4=new int[Map.MAP_SIZE][Map.MAP_SIZE];
+			Map4=Map.setMap(Map4,2);
+			
+			Map4=Map.setRect(Map4,6,6,3,3,true,4);
+			
+			Map4=Map.setRect(Map4,0,3,3,4,true,1);
+			Map4=Map.setRect(Map4,0,2,2,6,true,1);
+			Map4=Map.setRect(Map4,3,4,6,2,false,4);
+			
+			Map4=Map.setRect(Map4,12,8,3,4,true,1);
+			Map4=Map.setRect(Map4,13,7,2,6,true,1);
+			Map4=Map.setRect(Map4,6,9,6,2,false,4);
+			
+			Map4=Map.setRect(Map4,0,12,10,3,true,0);
+			Map4=Map.setRect(Map4,10,13,2,2,true,0);
+			Map4=Map.setRect(Map4,12,14,2,1,true,0);
+			Map4=Map.setRect(Map4,0,11,9,1,true,0);
+			Map4=Map.setRect(Map4,0,11,9,1,true,0);
+			Map4=Map.setRect(Map4,0,10,6,1,true,0);
+			Map4=Map.setRect(Map4,1,9,5,1,true,0);
+			Map4=Map.setRect(Map4,3,8,3,1,true,0);
+			Map4=Map.setTile(Map4,5,7,0);
+			
+			Map4=Map.setRect(Map4,5,0,10,3,true,0);
+			Map4=Map.setRect(Map4,3,0,2,2,true,0);
+			Map4=Map.setRect(Map4,1,0,2,1,true,0);
+			Map4=Map.setRect(Map4,6,3,9,1,true,0);
+			Map4=Map.setRect(Map4,12,4,2,2,true,0);
+			Map4=Map.setRect(Map4,9,4,3,3,true,0);
+			Map4=Map.setTile(Map4,9,7,0);
+			Map4=Map.setTile(Map4,14,4,0);
+			
+			theMap = new Map(Map4);
+			
+			theMap.setUnit(0,4,new Facility(player1));
+			theMap.setUnit(0,5,new Facility(player1));
+			
+			theMap.setUnit(14,9,new Facility(player2));
+			theMap.setUnit(14,10,new Facility(player2));
+			
+
 		}
 		
 		if(mapIndex==5) {
-			
+
 			int[][] Map5=new int[Map.MAP_SIZE][Map.MAP_SIZE];
 			Map5=Map.setMap(Map5,1);
 			
@@ -353,9 +392,9 @@ public class Main extends Application {
 			Map8=Map.setRect(Map8,5,1,5,13,false,3);
 			Map8=Map.setRect(Map8,1,5,13,5,false,3);
 			
-			Map8=Map.setTile(Map8,3,5,4);
-			Map8=Map.setTile(Map8,11,9,4);
+			Map8=Map.setTile(Map8,5,3,4);
 			Map8=Map.setTile(Map8,9,3,4);
+			Map8=Map.setTile(Map8,9,11,4);
 			Map8=Map.setTile(Map8,5,11,4);
 			Map8=Map.setTile(Map8,5,7,4);
 			Map8=Map.setTile(Map8,7,5,4);
@@ -364,13 +403,17 @@ public class Main extends Application {
 			
 			theMap = new Map(Map8);
 			
-			theMap.setUnit(3,11, new Facility(player1));
-			theMap.setUnit(11,3, new Facility(player1));
+			theMap.setUnit(3,11, new Facility(player2));
+			theMap.setUnit(3,7, new Facility(player2));
 			theMap.setUnit(3,3, new Facility(player2));
-			theMap.setUnit(11,11, new Facility(player2));
+			
+			theMap.setUnit(11,11, new Facility(player1));
+			theMap.setUnit(11,7, new Facility(player1));
+			theMap.setUnit(11,3, new Facility(player1));
+			
 			theMap.setUnit(5,5, new Carrier(player1));
-			theMap.setUnit(9,9, new Carrier(player1));
-			theMap.setUnit(5,9, new Carrier(player2));
+			theMap.setUnit(5,9, new Carrier(player1));
+			theMap.setUnit(9,9, new Carrier(player2));
 			theMap.setUnit(9,5, new Carrier(player2));
 			
 		}
@@ -396,23 +439,6 @@ public class Main extends Application {
 			theMap.setUnit(12, 12, new Facility(player2));
 			theMap.setUnit(2, 12, new Carrier(player2));
 			
-		}
-		else if(mapIndex==10) {
-			int[][] map10=new int[Map.MAP_SIZE][Map.MAP_SIZE];
-			map10=Map.setMap(map10, 1);
-			map10=Map.setBorder(map10, 2, 0);
-			map10=Map.setTile(map10, 5, 5, 3);
-			map10=Map.setTile(map10, 6, 4, 3);
-			map10=Map.setTile(map10, 7, 5, 3);
-			map10=Map.setTile(map10, 8, 6, 3);
-			
-			theMap = new Map(map10);
-			theMap.setUnit(2, 3, new CatSoldier(player1));
-			theMap.setUnit(2, 2, new Facility(player1));
-
-			
-			theMap.setUnit(12, 11, new CatSoldier(player2));
-			theMap.setUnit(12, 12, new Facility(player2));
 		}
 		
 		return theMap;

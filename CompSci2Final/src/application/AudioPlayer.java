@@ -8,10 +8,10 @@ import javafx.util.Duration;
 
 public class AudioPlayer {
 	
-	String file;
-	Media media;
-	MediaPlayer mp;
-	double startTime;
+	private String file;
+	private Media media;
+	private MediaPlayer mp;
+	private double startTime;
 	
 	public AudioPlayer(String file) {
 		this.file = file;
