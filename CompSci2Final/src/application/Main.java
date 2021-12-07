@@ -47,7 +47,7 @@ public class Main extends Application {
 		theStage=primaryStage;
 		primaryStage.setMaximized(true);
 		startScreen();
-		primaryStage.setTitle("ANIMAL TEAM BATTLE");
+		primaryStage.setTitle("WILD ANIMAL WAR");
 		primaryStage.getIcons().add(new Image("/Sprites/Duck_Wizard_Player1.png"));
 		primaryStage.show();
 		
@@ -68,7 +68,7 @@ public class Main extends Application {
 		text.setMinWidth(400);
 		text.setSpacing(10.0);
 		
-		Label title = new Label("ANIMAL TEAM BATTLE");
+		Label title = new Label("WILD ANIMAL WAR");
 		title.setTextAlignment(TextAlignment.CENTER);
 		title.setFont(new Font("Arial",48));
 		title.setTextFill(Color.WHITESMOKE);
@@ -116,6 +116,8 @@ public class Main extends Application {
 		formatButton(map9,9);
 		Button map10 = new Button("LINES");
 		formatButton(map10,10);
+		Button map11 = new Button("WOODEN WONDERLAND");
+		formatButton(map11,11);
 		
 		buttons.getChildren().add(map1);
 		buttons.getChildren().add(map2);
@@ -127,6 +129,7 @@ public class Main extends Application {
 		buttons.getChildren().add(map8);
 		buttons.getChildren().add(map9);
 		buttons.getChildren().add(map10);
+		buttons.getChildren().add(map11);
 	
 		
 		
@@ -473,7 +476,20 @@ public class Main extends Application {
 			theMap.setUnit(11, 12, new CatSoldier(player2));
 			theMap.setUnit(12, 12, new Facility(player2));
 		}
-		
+		else if(mapIndex==11) {
+			int[][] map11=new int[Map.MAP_SIZE][Map.MAP_SIZE];
+			map11=Map.setMap(map11, 4);
+			
+			map11=Map.setBorder(map11, 2, 0);
+			
+			theMap = new Map(map11);
+			theMap.setUnit(3, 2, new CatSoldier(player1));
+			theMap.setUnit(2, 2, new Facility(player1));
+
+			
+			theMap.setUnit(11, 12, new CatSoldier(player2));
+			theMap.setUnit(12, 12, new Facility(player2));
+		}
 		
 		return theMap;
 		

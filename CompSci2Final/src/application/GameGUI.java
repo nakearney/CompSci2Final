@@ -97,6 +97,9 @@ public class GameGUI extends BorderPane {
 			case 10: 
 				ap = new AudioPlayer("testtrack.mp3");
 				break;
+			case 11:
+			ap = new AudioPlayer("map5track.mp3", 0, 90);
+			break;
 		}
 	
 
