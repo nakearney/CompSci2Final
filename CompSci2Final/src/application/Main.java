@@ -6,7 +6,6 @@ import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
-import java.io.File;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -30,6 +29,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 
 public class Main extends Application {
+	
 	
 	//Holds the map. Accessible everywhere.
 	public static Map theMap;
@@ -102,7 +102,7 @@ public class Main extends Application {
 		formatButton(map2,2);
 		Button map3 = new Button("BOARDWALK");
 		formatButton(map3,3);
-		Button map4 = new Button("MAP 4");
+		Button map4 = new Button("TWIN PEAKS");
 		formatButton(map4,4);
 		Button map5 = new Button("HOURGLASS LAKE");
 		formatButton(map5,5);
@@ -124,6 +124,7 @@ public class Main extends Application {
 		buttons.getChildren().add(map7);
 		buttons.getChildren().add(map8);
 		buttons.getChildren().add(map9);
+		
 		
 		scroller.setFitToHeight(true);
 		scroller.setContent(buttons);
@@ -148,7 +149,7 @@ public class Main extends Application {
 	}
 	
 	//Call this message to change a map. mapIndex is an ID for the map you are accessing
-	public static void setMap(int mapIndex) {
+	private static void setMap(int mapIndex) {
 		
 		player1 = new Player(1,true);
 		player2 = new Player(2,false);
@@ -203,20 +204,41 @@ public class Main extends Application {
 			theMap.setUnit(7,11, new Carrier(player2));
 			
 		} else if(mapIndex==3) {
-			
+
 			int[][] Map3=new int[Map.MAP_SIZE][Map.MAP_SIZE];
 			Map3=Map.setMap(Map3,3);
-			Map3=Map.setRect(Map3,1,1,2,2,true,4);
-			Map3=Map.setRect(Map3,12,12,2,2,true,4);
+			Map3=Map.setCol(Map3,7,4);
+			Map3=Map.setRow(Map3,7,4);
+			Map3=Map.setRect(Map3,1,1,13,13,false,3);
+			//Island Rocks
+			Map3=Map.setRect(Map3,4,8,2,6,false,2);
+			Map3=Map.setRect(Map3,1,9,6,2,false,2);
+			
+	
+			Map3=Map.setRect(Map3,8,4,6,2,false,2);
+			Map3=Map.setRect(Map3,9,1,2,6,false,2);
+			
 			Map3=Map.setRect(Map3,2,2,11,11,false,4);
+			//Corner Islands
+			Map3=Map.setRect(Map3,1,1,2,2,true,1);
+			Map3=Map.setRect(Map3,12,12,2,2,true,1);
+			Map3=Map.setTile(Map3,1,3,1);
+			Map3=Map.setTile(Map3,3,1,1);
+			Map3=Map.setTile(Map3,13,11,1);
+			Map3=Map.setTile(Map3,11,13,1);
 			
 			Map3=Map.setBorder(Map3, 1, 0);
 			
 			theMap = new Map(Map3);
-			theMap.setUnit(2, 2, new CatSoldier(player1));
-			theMap.setUnit(12, 12, new CatSoldier(player2));
-			theMap.setUnit(1,1, new Facility(player1));
-			theMap.setUnit(13,13, new Facility(player2));
+			theMap.setUnit(2, 2, new CatSoldier(player2));
+			theMap.setUnit(12, 12, new CatSoldier(player1));
+			theMap.setUnit(1,1, new Facility(player2));
+			theMap.setUnit(13,13, new Facility(player1));
+			theMap.setUnit(4,4, new Carrier(player2));
+			theMap.setUnit(10,10, new Carrier(player1));
+			
+		} else if(mapIndex==4) {
+			
 			
 		}
 		
@@ -286,9 +308,33 @@ public class Main extends Application {
 			int[][] Map7=new int[Map.MAP_SIZE][Map.MAP_SIZE];
 			Map7=Map.setMap(Map7,1);
 			
+			Map7=Map.setRect(Map7,4,4,3,1,true,2);
+			Map7=Map.setRect(Map7,8,8,2,2,true,2);
+			Map7=Map.setRect(Map7,9,5,2,1,true,2);
+			Map7=Map.setRect(Map7,3,8,2,1,true,2);
+			Map7=Map.setRect(Map7,3,10,1,2,true,2);
+			Map7=Map.setRect(Map7,7,11,4,1,true,2);
+			Map7=Map.setRect(Map7,11,4,1,3,true,2);
+			Map7=Map.setRect(Map7,8,3,1,3,true,2);
+			
+			Map7=Map.setTile(Map7,6,2,2);
+			Map7=Map.setTile(Map7,5,5,2);
+			Map7=Map.setTile(Map7,4,7,2);
+			Map7=Map.setTile(Map7,6,9,2);
+			Map7=Map.setTile(Map7,5,10,2);
+			Map7=Map.setTile(Map7,6,7,2);
+			Map7=Map.setTile(Map7,11,9,2);
+			
+			Map7=Map.setBorder(Map7, 2,2);
 			Map7=Map.setBorder(Map7,1,0);
 			
 			theMap = new Map(Map7);
+			theMap.setUnit(5,11, new Facility(player1));
+			theMap.setUnit(3,2, new Facility(player1));
+			theMap.setUnit(2,6, new Facility(player1));
+			theMap.setUnit(9,3, new Facility(player2));
+			theMap.setUnit(11,12, new Facility(player2));
+			theMap.setUnit(12,8, new Facility(player2));
 			
 		} else if(mapIndex==8) {
 			

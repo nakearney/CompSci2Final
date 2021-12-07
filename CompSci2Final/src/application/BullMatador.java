@@ -10,7 +10,7 @@ public class BullMatador extends GenericUnit {
 	public static final int COST = 5000;
 
 	public BullMatador(Player player) {
-		super(8, 4, 3, 4, player);
+		super(9, 5, 4, 3, player);
 		cost = COST;
 		if(player.getPlayerNumber()==1) {
 			this.setGraphic(new ImageView(new Image("/Sprites/Matador_Bull_Player1.png")));
@@ -21,7 +21,6 @@ public class BullMatador extends GenericUnit {
 	
 	public BullMatador(int hp, int attack, int movementRange, int attackRange, Player player) {
 		super(hp, attack, movementRange, attackRange, player);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -32,7 +31,7 @@ public class BullMatador extends GenericUnit {
 
 	@Override
 	public ArrayList<Tile> moveStyle(Map field) {
-		ArrayList<Tile> moveArea = field.getMoveLand(getMovementRange());
+		ArrayList<Tile> moveArea = field.getMoveLandLine(getMovementRange());
 		return moveArea;
 	}
 
