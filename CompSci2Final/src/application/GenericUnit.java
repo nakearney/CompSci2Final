@@ -3,7 +3,6 @@ package application;
 import java.util.ArrayList;
 
 import javafx.event.EventHandler;
-import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Border;
@@ -198,6 +197,7 @@ public abstract class GenericUnit extends Button {
 	public int getCost() {
 		return cost;
 	}
+	
 	public HpDisplay getHpDisp() {
 		return hpDisp;
 	}
@@ -241,7 +241,7 @@ public abstract class GenericUnit extends Button {
 		if(target.isDead()) {
 			AudioPlayer ap = new AudioPlayer("explosion.wav");
 			ap.playSound();
-			target.getPlayer().subtractUnit();
+			if(!(target instanceof Building))target.getPlayer().subtractUnit();
 			this.getPlayer().addMoney(target.getCost()/2);
 			GameGUI.turnDisplay(Main.player1, Main.player2);
 		} else {

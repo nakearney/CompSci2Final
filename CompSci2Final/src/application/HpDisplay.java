@@ -1,8 +1,6 @@
 package application;
 
 import javafx.scene.Group;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -11,9 +9,8 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 public class HpDisplay extends Group {
+	
 	Text health = new Text("5");
-
-	// StackPane stack = new StackPane();
 	StackPane graphic;
 	Rectangle rect;
 
@@ -34,11 +31,9 @@ public class HpDisplay extends Group {
 		rect.setWidth(20);
 		rect.setHeight(20);
 		rect.setFill(Color.WHITE);
-		graphic.setMaxSize(20, 20);
-		rect.arcHeightProperty();
-		rect.arcWidthProperty();
 		rect.setArcHeight(7);
 		rect.setArcWidth(7);
+		graphic.setMaxSize(20, 20);
 
 		int hold = unit.getHP();
 		String h = String.format("%d", hold);
@@ -54,7 +49,6 @@ public class HpDisplay extends Group {
 		}
 		health.setScaleY(1.2);
 		health.setScaleX(1.2);
-		health.setScaleZ(1.2);
 		graphic.getChildren().add(rect);
 		graphic.getChildren().add(health);
 		this.getChildren().add(graphic);

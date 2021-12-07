@@ -10,7 +10,7 @@ public class ArmadilloTank extends GenericUnit {
 	public static final int COST = 4000;
 
 	public ArmadilloTank(Player player) {
-		super(12, 2, 2, 2, player);
+		super(13, 2, 2, 2, player);
 		cost = COST;
 		if(player.getPlayerNumber()==1) {
 			this.setGraphic(new ImageView(new Image("/Sprites/Armadillo_Tank_Player1.png")));
@@ -21,12 +21,11 @@ public class ArmadilloTank extends GenericUnit {
 	
 	public ArmadilloTank(int hp, int attack, int movementRange, int attackRange, Player player) {
 		super(hp, attack, movementRange, attackRange, player);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public ArrayList<Tile> attackStyle(Map field) {
-		ArrayList<Tile> attackArea = field.getFightLandLine(getAttackRange());
+		ArrayList<Tile> attackArea = field.getFightLand(getAttackRange());
 		return attackArea;
 	}
 

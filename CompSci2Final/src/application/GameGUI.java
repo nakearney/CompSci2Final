@@ -21,11 +21,10 @@ import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Box;
-import javafx.scene.shape.Rectangle;
+//import javafx.scene.shape.Box;
+//import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
@@ -33,29 +32,28 @@ import javafx.scene.text.TextAlignment;
 public class GameGUI extends BorderPane {
 
 
-	//Contains Move, Attack, and EndTurn
-	private HBox buttons;
-	//Contains purchasing buttons
-	private VBox econGUI;
-	private Box hpDisp;
+	/*Contains Move, Attack, and EndTurn
+	//private HBox buttons;*/
+	/*Contains purchasing buttons
+	//private VBox econGUI;*/
+	//private Box hpDisp;
 	//Contains info on troops
 	private ScrollPane infoGUI;
 	//Displays current turn
 	private static Label turnGUI;
-	private Button attack;
-	private Button move;
-	private Button endTurn;
-	private Player p1;
-	private Player p2;
+	//private Button attack;
+	//private Button move;
+	//private Button endTurn;
+	//private Player p1;
+	//private Player p2;
 	private Player empty = new Player(0,false);
 	private AudioPlayer ap;
-	//Sets hp rect dimentions;
-	private Rectangle OutsideRect=new Rectangle();
-	private Rectangle hpBar=new Rectangle();
+	/* Sets hp rect dimentions;
+	*  private Rectangle OutsideRect=new Rectangle();
+	*  private Rectangle hpBar=new Rectangle(); */
 
 	//Width of the left and right elements in GameGUI (the info & turnGUI)
 	private double sideWidth=225.0;
-	
 	//Initialize Images here
 	private Image catImage = new Image("/Sprites/Cat_Soldier_Player1.png");
 	private Image squirrelImage = new Image("/Sprites/Squirrel_Rogue_Player2.png");
@@ -121,7 +119,7 @@ public class GameGUI extends BorderPane {
 		
 		initInfoGUI();
 		
-		econGUI = new VBox();
+		VBox econGUI = new VBox();
 		econGUI.setPrefWidth(sideWidth);
 		
 		Button cat = new Button("Cat Soldier: $" + CatSoldier.COST);
@@ -156,7 +154,7 @@ public class GameGUI extends BorderPane {
 			}
 		});
 		
-		buttons = new HBox();
+		HBox buttons = new HBox();
 		buttons.setPadding(new Insets(4.0,4.0,4.0,4.0));
 		
 		Button move = new Button("MOVE");
@@ -584,12 +582,7 @@ public class GameGUI extends BorderPane {
 	
 	private int determineMoney(Player p) {
 		
-		/* OUTDATED. Leaving this in case we want to do income
-		 * formula in the future.
-		 * Divides 100 by the cube root of units you have to determine
-		 * turnly income.
-		 */
-		return 1000;
+		return Main.theMap.getBuildingTiles(p).size()*1000;
 		
 	}
 

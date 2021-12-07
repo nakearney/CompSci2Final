@@ -6,7 +6,6 @@ import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
-import java.io.File;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -60,8 +59,6 @@ public class Main extends Application {
 	
 	public static void startScreen() {
 		
-		
-		
 		BorderPane startScreen = new BorderPane();
 		startScreen.setBackground(new Background(new BackgroundFill(Color.BLACK,null,null)));
 		
@@ -105,7 +102,7 @@ public class Main extends Application {
 		formatButton(map2,2);
 		Button map3 = new Button("BOARDWALK");
 		formatButton(map3,3);
-		Button map4 = new Button("MAP 4");
+		Button map4 = new Button("TWIN PEAKS");
 		formatButton(map4,4);
 		Button map5 = new Button("MAP 5");
 		formatButton(map5,5);
@@ -152,7 +149,7 @@ public class Main extends Application {
 	}
 	
 	//Call this message to change a map. mapIndex is an ID for the map you are accessing
-	public static void setMap(int mapIndex) {
+	private static void setMap(int mapIndex) {
 		
 		player1 = new Player(1,true);
 		player2 = new Player(2,false);
@@ -210,17 +207,39 @@ public class Main extends Application {
 			
 			int[][] Map2=new int[Map.MAP_SIZE][Map.MAP_SIZE];
 			Map2=Map.setMap(Map2,3);
-			Map2=Map.setRect(Map2,1,1,2,2,true,4);
-			Map2=Map.setRect(Map2,12,12,2,2,true,4);
+			Map2=Map.setCol(Map2,7,4);
+			Map2=Map.setRow(Map2,7,4);
+			Map2=Map.setRect(Map2,1,1,13,13,false,3);
+			//Island Rocks
+			Map2=Map.setRect(Map2,4,8,2,6,false,2);
+			Map2=Map.setRect(Map2,1,9,6,2,false,2);
+			
+	
+			Map2=Map.setRect(Map2,8,4,6,2,false,2);
+			Map2=Map.setRect(Map2,9,1,2,6,false,2);
+			
 			Map2=Map.setRect(Map2,2,2,11,11,false,4);
+			//Corner Islands
+			Map2=Map.setRect(Map2,1,1,2,2,true,1);
+			Map2=Map.setRect(Map2,12,12,2,2,true,1);
+			Map2=Map.setTile(Map2,1,3,1);
+			Map2=Map.setTile(Map2,3,1,1);
+			Map2=Map.setTile(Map2,13,11,1);
+			Map2=Map.setTile(Map2,11,13,1);
 			
 			Map2=Map.setBorder(Map2, 1, 0);
 			
 			theMap = new Map(Map2);
-			theMap.setUnit(2, 2, new CatSoldier(player1));
-			theMap.setUnit(12, 12, new CatSoldier(player2));
-			theMap.setUnit(1,1, new Facility(player1));
-			theMap.setUnit(13,13, new Facility(player2));
+			theMap.setUnit(2, 2, new CatSoldier(player2));
+			theMap.setUnit(12, 12, new CatSoldier(player1));
+			theMap.setUnit(1,1, new Facility(player2));
+			theMap.setUnit(13,13, new Facility(player1));
+			theMap.setUnit(4,4, new Carrier(player2));
+			theMap.setUnit(10,10, new Carrier(player1));
+			
+		} else if(mapIndex==4) {
+			
+			
 			
 		}
 		
