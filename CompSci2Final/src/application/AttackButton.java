@@ -6,8 +6,8 @@ import javafx.scene.paint.Color;
 
 public class AttackButton extends MapButton {
 
-	Tile myTile,startPoint;
-	GenericUnit myUnit;
+	private Tile myTile,startPoint;
+	private GenericUnit myUnit;
 	
 	public AttackButton(Tile myTile, Tile startPoint, GenericUnit myUnit) {
 		super(Color.RED);

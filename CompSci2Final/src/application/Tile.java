@@ -22,7 +22,7 @@ public class Tile extends StackPane {
 	private boolean isTraversible;
 	private boolean isWater;
 	private MapButton myButton=null;
-	int x,y;
+	private int x,y;
 	
 	/*
 	 * Tile constructors below. Supports constructors for initializing a Tile using a
