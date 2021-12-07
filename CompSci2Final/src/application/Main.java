@@ -205,31 +205,31 @@ public class Main extends Application {
 			
 		} else if(mapIndex==3) {
 			
-			int[][] Map2=new int[Map.MAP_SIZE][Map.MAP_SIZE];
-			Map2=Map.setMap(Map2,3);
-			Map2=Map.setCol(Map2,7,4);
-			Map2=Map.setRow(Map2,7,4);
-			Map2=Map.setRect(Map2,1,1,13,13,false,3);
+			int[][] Map3=new int[Map.MAP_SIZE][Map.MAP_SIZE];
+			Map3=Map.setMap(Map3,3);
+			Map3=Map.setCol(Map3,7,4);
+			Map3=Map.setRow(Map3,7,4);
+			Map3=Map.setRect(Map3,1,1,13,13,false,3);
 			//Island Rocks
-			Map2=Map.setRect(Map2,4,8,2,6,false,2);
-			Map2=Map.setRect(Map2,1,9,6,2,false,2);
+			Map3=Map.setRect(Map3,4,8,2,6,false,2);
+			Map3=Map.setRect(Map3,1,9,6,2,false,2);
 			
 	
-			Map2=Map.setRect(Map2,8,4,6,2,false,2);
-			Map2=Map.setRect(Map2,9,1,2,6,false,2);
+			Map3=Map.setRect(Map3,8,4,6,2,false,2);
+			Map3=Map.setRect(Map3,9,1,2,6,false,2);
 			
-			Map2=Map.setRect(Map2,2,2,11,11,false,4);
+			Map3=Map.setRect(Map3,2,2,11,11,false,4);
 			//Corner Islands
-			Map2=Map.setRect(Map2,1,1,2,2,true,1);
-			Map2=Map.setRect(Map2,12,12,2,2,true,1);
-			Map2=Map.setTile(Map2,1,3,1);
-			Map2=Map.setTile(Map2,3,1,1);
-			Map2=Map.setTile(Map2,13,11,1);
-			Map2=Map.setTile(Map2,11,13,1);
+			Map3=Map.setRect(Map3,1,1,2,2,true,1);
+			Map3=Map.setRect(Map3,12,12,2,2,true,1);
+			Map3=Map.setTile(Map3,1,3,1);
+			Map3=Map.setTile(Map3,3,1,1);
+			Map3=Map.setTile(Map3,13,11,1);
+			Map3=Map.setTile(Map3,11,13,1);
 			
-			Map2=Map.setBorder(Map2, 1, 0);
+			Map3=Map.setBorder(Map3, 1, 0);
 			
-			theMap = new Map(Map2);
+			theMap = new Map(Map3);
 			theMap.setUnit(2, 2, new CatSoldier(player2));
 			theMap.setUnit(12, 12, new CatSoldier(player1));
 			theMap.setUnit(1,1, new Facility(player2));
@@ -239,7 +239,45 @@ public class Main extends Application {
 			
 		} else if(mapIndex==4) {
 			
+			int[][] Map4=new int[Map.MAP_SIZE][Map.MAP_SIZE];
+			Map4=Map.setMap(Map4,2);
 			
+			Map4=Map.setRect(Map4,6,6,3,3,true,4);
+			
+			Map4=Map.setRect(Map4,0,3,3,4,true,1);
+			Map4=Map.setRect(Map4,0,2,2,6,true,1);
+			Map4=Map.setRect(Map4,3,4,6,2,false,4);
+			
+			Map4=Map.setRect(Map4,12,8,3,4,true,1);
+			Map4=Map.setRect(Map4,13,7,2,6,true,1);
+			Map4=Map.setRect(Map4,6,9,6,2,false,4);
+			
+			Map4=Map.setRect(Map4,0,12,10,3,true,0);
+			Map4=Map.setRect(Map4,10,13,2,2,true,0);
+			Map4=Map.setRect(Map4,12,14,2,1,true,0);
+			Map4=Map.setRect(Map4,0,11,9,1,true,0);
+			Map4=Map.setRect(Map4,0,11,9,1,true,0);
+			Map4=Map.setRect(Map4,0,10,6,1,true,0);
+			Map4=Map.setRect(Map4,1,9,5,1,true,0);
+			Map4=Map.setRect(Map4,3,8,3,1,true,0);
+			Map4=Map.setTile(Map4,5,7,0);
+			
+			Map4=Map.setRect(Map4,5,0,10,3,true,0);
+			Map4=Map.setRect(Map4,3,0,2,2,true,0);
+			Map4=Map.setRect(Map4,1,0,2,1,true,0);
+			Map4=Map.setRect(Map4,6,3,9,1,true,0);
+			Map4=Map.setRect(Map4,12,4,2,2,true,0);
+			Map4=Map.setRect(Map4,9,4,3,3,true,0);
+			Map4=Map.setTile(Map4,9,7,0);
+			Map4=Map.setTile(Map4,14,4,0);
+			
+			theMap = new Map(Map4);
+			
+			theMap.setUnit(0,4,new Facility(player1));
+			theMap.setUnit(0,5,new Facility(player1));
+			
+			theMap.setUnit(14,9,new Facility(player2));
+			theMap.setUnit(14,10,new Facility(player2));
 			
 		}
 		
