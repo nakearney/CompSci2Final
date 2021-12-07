@@ -7,10 +7,10 @@ import javafx.scene.image.ImageView;
 
 public class SquirrelRogue extends GenericUnit {
 	
-	public static final int COST = 1500;
+	public static final int COST = 2000;
 
 	public SquirrelRogue(Player player) {
-		super(1, 6, 4, 1, player);
+		super(1, 5, 4, 1, player);
 		cost = COST;
 		if(player.getPlayerNumber()==1) {
 			this.setGraphic(new ImageView(new Image("/Sprites/Squirrel_Rogue_Player1.png")));

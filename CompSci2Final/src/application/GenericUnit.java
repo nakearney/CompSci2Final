@@ -19,7 +19,7 @@ public abstract class GenericUnit extends Button {
 	private int movementRange;
 	private int attackRange;
 	protected int cost;
-	Player player;
+	private Player player;
 	private boolean isDead;
 	private boolean isSelected;
 	private boolean hasMoved;
