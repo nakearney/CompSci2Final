@@ -22,7 +22,7 @@ public class CatSoldier extends GenericUnit {
 	@Override
 	public ArrayList<Tile> attackStyle(Map field) {
 		
-		ArrayList<Tile> attackArea = field.getFightLand(getAttackRange());
+		ArrayList<Tile> attackArea = field.getFightLandWater(getAttackRange());
 		return attackArea;
 		
 	}
