@@ -18,7 +18,7 @@ public abstract class MapButton extends Button {
 		
 	}
 	
-	void setColor(Color color) {
+	protected void setColor(Color color) {
 		
 		format(color);
 		
@@ -26,7 +26,7 @@ public abstract class MapButton extends Button {
 	
 	public abstract void action();
 	
-	void format(Color color) {
+	protected void format(Color color) {
 		
 		BorderStroke[] stroke =  {new BorderStroke(color,BorderStrokeStyle.SOLID,new CornerRadii(4.0),new BorderWidths(6.0,6.0,6.0,6.0))};
 		this.setBackground(null);

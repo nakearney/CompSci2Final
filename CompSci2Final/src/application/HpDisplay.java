@@ -10,9 +10,9 @@ import javafx.scene.text.Text;
 
 public class HpDisplay extends Group {
 	
-	Text health = new Text("5");
-	StackPane graphic;
-	Rectangle rect;
+	private Text health = new Text("5");
+	private StackPane graphic;
+	private Rectangle rect;
 
 	public HpDisplay() {
 		graphic = new StackPane();

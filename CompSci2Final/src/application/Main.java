@@ -34,12 +34,12 @@ public class Main extends Application {
 	//Holds the map. Accessible everywhere.
 	public static Map theMap;
 	//Holds the primaryStage. Accessible everywhere.
-	public static Stage theStage;
+	private static Stage theStage;
 	//Holds the players. Accessible everywhere.
 	public static Player player1;
 	public static Player player2;
 	//Holds the scene. Accessible everywhere
-	public static Scene theScene;
+	private static Scene theScene;
 	
 	@Override
 	public void start(Stage primaryStage) {

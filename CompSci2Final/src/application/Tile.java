@@ -202,38 +202,38 @@ public class Tile extends StackPane {
 		
 	}
 	
-	void setCoords(int x, int y) {
+	public void setCoords(int x, int y) {
 		
 		this.x=x;
 		this.y=y;
 		
 	}
 	
-	int getX() {
+	public int getX() {
 		
 		return x;
 		
 	}
 	
-	int getY() {
+	public int getY() {
 		
 		return y;
 		
 	}
 	
-	boolean getTraversible() {
+	public boolean getTraversible() {
 		
 		return isTraversible;
 		
 	}
 	
-	boolean getIsWater() {
+	public boolean getIsWater() {
 		
 		return isWater;
 		
 	}
 	
-	void setMyButton(MapButton b) {
+	public void setMyButton(MapButton b) {
 		
 		if(myButton!=null) removeMyButton();
 		myButton = b;
@@ -241,13 +241,13 @@ public class Tile extends StackPane {
 		
 	}
 	
-	MapButton getMyButton() {
+	public MapButton getMyButton() {
 		
 		return myButton;
 		
 	}
 	
-	void removeMyButton() {
+	public void removeMyButton() {
 		
 		if(myButton!=null) {
 			
@@ -258,7 +258,7 @@ public class Tile extends StackPane {
 		
 	}
 	
-	void deselectUnit() {
+	public void deselectUnit() {
 		
 		if(isOccupied) {
 			
