@@ -6,8 +6,8 @@ import javafx.scene.paint.Color;
 
 public class MoveButton extends MapButton {
 
-	Tile myTile,startPoint;
-	GenericUnit myUnit;
+	private Tile myTile,startPoint;
+	private GenericUnit myUnit;
 	
 	public MoveButton(Tile myTile, Tile startPoint, GenericUnit myUnit) {
 		

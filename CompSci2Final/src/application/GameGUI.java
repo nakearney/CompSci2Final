@@ -354,7 +354,7 @@ public class GameGUI extends BorderPane {
 		
 	}
 	
-	static void turnDisplay(Player p1, Player p2) {
+	public static void turnDisplay(Player p1, Player p2) {
 		if(p1.yourTurn()) {
 			turnGUI.setText("Player 1: You have " + p1.getUnitCount() + " units and $" + p1.getMoney() + " remaining");
 		} else if(p2.yourTurn()) {

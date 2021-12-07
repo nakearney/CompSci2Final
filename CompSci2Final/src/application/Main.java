@@ -34,12 +34,12 @@ public class Main extends Application {
 	//Holds the map. Accessible everywhere.
 	public static Map theMap;
 	//Holds the primaryStage. Accessible everywhere.
-	public static Stage theStage;
+	private static Stage theStage;
 	//Holds the players. Accessible everywhere.
 	public static Player player1;
 	public static Player player2;
 	//Holds the scene. Accessible everywhere
-	public static Scene theScene;
+	private static Scene theScene;
 	
 	@Override
 	public void start(Stage primaryStage) {
@@ -104,13 +104,13 @@ public class Main extends Application {
 		formatButton(map3,3);
 		Button map4 = new Button("TWIN PEAKS");
 		formatButton(map4,4);
-		Button map5 = new Button("MAP 5");
+		Button map5 = new Button("HOURGLASS LAKE");
 		formatButton(map5,5);
-		Button map6 = new Button("MAP 6");
+		Button map6 = new Button("WATER-LOCKED");
 		formatButton(map6,6);
-		Button map7 = new Button("MAP 7");
+		Button map7 = new Button("ROCK MAZE");
 		formatButton(map7,7);
-		Button map8 = new Button("MAP 8");
+		Button map8 = new Button("TIC TAC TOE");
 		formatButton(map8,8);
 		Button map9 = new Button("MAP 9");
 		formatButton(map9,9);
@@ -228,7 +228,6 @@ public class Main extends Application {
 			Map3=Map.setTile(Map3,11,13,1);
 			
 			Map3=Map.setBorder(Map3, 1, 0);
-			
 			theMap = new Map(Map3);
 			theMap.setUnit(2, 2, new CatSoldier(player2));
 			theMap.setUnit(12, 12, new CatSoldier(player1));
@@ -239,6 +238,8 @@ public class Main extends Application {
 			
 		} else if(mapIndex==4) {
 			
+			
+
 			int[][] Map4=new int[Map.MAP_SIZE][Map.MAP_SIZE];
 			Map4=Map.setMap(Map4,2);
 			
@@ -278,6 +279,140 @@ public class Main extends Application {
 			
 			theMap.setUnit(14,9,new Facility(player2));
 			theMap.setUnit(14,10,new Facility(player2));
+			
+
+		}
+		
+		if(mapIndex==5) {
+
+			int[][] Map5=new int[Map.MAP_SIZE][Map.MAP_SIZE];
+			Map5=Map.setMap(Map5,1);
+			
+			Map5=Map.setRect(Map5,6,2,3,11,true,3);
+			Map5=Map.setRect(Map5,4,3,7,3,true,3);
+			Map5=Map.setRect(Map5,4,9,7,3,true,3);
+			
+			Map5=Map.setTile(Map5,6,7,1);
+			Map5=Map.setTile(Map5,8,7,1);
+			Map5=Map.setTile(Map5,7,7,4);
+			
+			Map5=Map.setBorder(Map5,1,0);
+			
+			theMap = new Map(Map5);
+			
+			theMap.setUnit(10,7, new CatSoldier(player1));
+			theMap.setUnit(12,7, new Facility(player1));
+			theMap.setUnit(12,2, new Facility(player1));
+			theMap.setUnit(12,12, new Facility(player1));
+			theMap.setUnit(9,4, new Carrier(player1));
+			theMap.setUnit(9,10, new Carrier(player1));
+			
+			theMap.setUnit(4,7, new CatSoldier(player2));
+			theMap.setUnit(2,7, new Facility(player2));
+			theMap.setUnit(2,2, new Facility(player2));
+			theMap.setUnit(2,12, new Facility(player2));
+			theMap.setUnit(5,4, new Carrier(player2));
+			theMap.setUnit(5,10, new Carrier(player2));
+		
+			
+		} else if(mapIndex==6) {
+			
+			int[][] Map6=new int[Map.MAP_SIZE][Map.MAP_SIZE];
+			Map6=Map.setMap(Map6,1);
+			
+			Map6=Map.setBorder(Map6,3,3);
+			Map6=Map.setBorder(Map6,2,1);
+			Map6=Map.setBorder(Map6,1,0);
+			
+			Map6=Map.setRect(Map6,7,5,1,5,true,3);
+			Map6=Map.setRect(Map6,3,5,4,1,true,3);
+			Map6=Map.setRect(Map6,7,9,6,1,true,3);
+			
+			Map6=Map.setTile(Map6,7,7,4);
+			Map6=Map.setTile(Map6,5,5,4);
+			Map6=Map.setTile(Map6,4,5,4);
+			Map6=Map.setTile(Map6,9,9,4);
+			Map6=Map.setTile(Map6,10,9,4);
+			
+			theMap = new Map(Map6);
+			theMap.setUnit(2,2, new AxolotlCaptain(player1));
+			theMap.setUnit(12,2, new AxolotlCaptain(player1));
+			theMap.setUnit(12,12, new AxolotlCaptain(player2));
+			theMap.setUnit(2,12, new AxolotlCaptain(player2));
+			theMap.setUnit(10,4, new Facility(player1));
+			theMap.setUnit(4,4, new Facility(player1));
+			theMap.setUnit(4,10, new Facility(player2));
+			theMap.setUnit(10,10, new Facility(player2));
+			
+		} else if(mapIndex==7) {
+			
+			int[][] Map7=new int[Map.MAP_SIZE][Map.MAP_SIZE];
+			Map7=Map.setMap(Map7,1);
+			
+			Map7=Map.setRect(Map7,4,4,3,1,true,2);
+			Map7=Map.setRect(Map7,8,8,2,2,true,2);
+			Map7=Map.setRect(Map7,9,5,2,1,true,2);
+			Map7=Map.setRect(Map7,3,8,2,1,true,2);
+			Map7=Map.setRect(Map7,3,10,1,2,true,2);
+			Map7=Map.setRect(Map7,7,11,4,1,true,2);
+			Map7=Map.setRect(Map7,11,4,1,3,true,2);
+			Map7=Map.setRect(Map7,8,3,1,3,true,2);
+			
+			Map7=Map.setTile(Map7,6,2,2);
+			Map7=Map.setTile(Map7,5,5,2);
+			Map7=Map.setTile(Map7,4,7,2);
+			Map7=Map.setTile(Map7,6,9,2);
+			Map7=Map.setTile(Map7,5,10,2);
+			Map7=Map.setTile(Map7,6,7,2);
+			Map7=Map.setTile(Map7,11,9,2);
+			
+			Map7=Map.setBorder(Map7, 2,2);
+			Map7=Map.setBorder(Map7,1,0);
+			
+			theMap = new Map(Map7);
+			theMap.setUnit(5,11, new Facility(player1));
+			theMap.setUnit(3,2, new Facility(player1));
+			theMap.setUnit(2,6, new Facility(player1));
+			theMap.setUnit(9,3, new Facility(player2));
+			theMap.setUnit(11,12, new Facility(player2));
+			theMap.setUnit(12,8, new Facility(player2));
+			
+		} else if(mapIndex==8) {
+			
+			int[][] Map8=new int[Map.MAP_SIZE][Map.MAP_SIZE];
+			
+			Map8=Map.setBorder(Map8,6,3);
+			Map8=Map.setBorder(Map8,5,1);
+			Map8=Map.setBorder(Map8,2,3);
+			Map8=Map.setBorder(Map8,1,0);
+			
+			Map8=Map.setRect(Map8,6,6,3,3,true,1);
+			Map8=Map.setRect(Map8,5,1,5,13,false,3);
+			Map8=Map.setRect(Map8,1,5,13,5,false,3);
+			
+			Map8=Map.setTile(Map8,5,3,4);
+			Map8=Map.setTile(Map8,9,3,4);
+			Map8=Map.setTile(Map8,9,11,4);
+			Map8=Map.setTile(Map8,5,11,4);
+			Map8=Map.setTile(Map8,5,7,4);
+			Map8=Map.setTile(Map8,7,5,4);
+			Map8=Map.setTile(Map8,9,7,4);
+			Map8=Map.setTile(Map8,7,9,4);
+			
+			theMap = new Map(Map8);
+			
+			theMap.setUnit(3,11, new Facility(player2));
+			theMap.setUnit(3,7, new Facility(player2));
+			theMap.setUnit(3,3, new Facility(player2));
+			
+			theMap.setUnit(11,11, new Facility(player1));
+			theMap.setUnit(11,7, new Facility(player1));
+			theMap.setUnit(11,3, new Facility(player1));
+			
+			theMap.setUnit(5,5, new Carrier(player1));
+			theMap.setUnit(5,9, new Carrier(player1));
+			theMap.setUnit(9,9, new Carrier(player2));
+			theMap.setUnit(9,5, new Carrier(player2));
 			
 		}
 		
