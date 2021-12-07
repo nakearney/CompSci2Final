@@ -283,6 +283,13 @@ public class Main extends Application {
 			
 		} else if(mapIndex==7) {
 			
+			int[][] Map7=new int[Map.MAP_SIZE][Map.MAP_SIZE];
+			Map7=Map.setMap(Map7,1);
+			
+			Map7=Map.setBorder(Map7,1,0);
+			
+			theMap = new Map(Map7);
+			
 		} else if(mapIndex==8) {
 			
 			int[][] Map8=new int[Map.MAP_SIZE][Map.MAP_SIZE];
@@ -300,7 +307,6 @@ public class Main extends Application {
 			Map8=Map.setTile(Map8,11,9,4);
 			Map8=Map.setTile(Map8,9,3,4);
 			Map8=Map.setTile(Map8,5,11,4);
-			
 			Map8=Map.setTile(Map8,5,7,4);
 			Map8=Map.setTile(Map8,7,5,4);
 			Map8=Map.setTile(Map8,9,7,4);
@@ -312,7 +318,6 @@ public class Main extends Application {
 			theMap.setUnit(11,3, new Facility(player1));
 			theMap.setUnit(3,3, new Facility(player2));
 			theMap.setUnit(11,11, new Facility(player2));
-			
 			theMap.setUnit(5,5, new Carrier(player1));
 			theMap.setUnit(9,9, new Carrier(player1));
 			theMap.setUnit(5,9, new Carrier(player2));
