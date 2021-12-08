@@ -101,10 +101,6 @@ public class GameGUI extends BorderPane {
 			ap = new AudioPlayer("map5track.mp3", 0, 90);
 			break;
 		}
-	
-
-		
-		
 		
 		ap.playTrack();
 		

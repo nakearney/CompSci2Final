@@ -179,7 +179,7 @@ public class Tile extends StackPane {
 			//this.setAlignment(D,Pos.BOTTOM_RIGHT);
 			getChildren().add(unit);
 			getChildren().add(D);
-			this.setAlignment(D,Pos.BOTTOM_RIGHT);
+			StackPane.setAlignment(D,Pos.BOTTOM_RIGHT);
 			isOccupied=true;
 		}
 	}
@@ -273,7 +273,7 @@ public class Tile extends StackPane {
 		HpDisplay D=new HpDisplay(unit);
 		hpDisp=D;
 		getChildren().add(D);
-		this.setAlignment(D,Pos.BOTTOM_RIGHT);
+		StackPane.setAlignment(D,Pos.BOTTOM_RIGHT);
 	}
 	
 }
