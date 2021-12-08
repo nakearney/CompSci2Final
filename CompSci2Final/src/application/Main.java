@@ -116,7 +116,7 @@ public class Main extends Application {
 		formatButton(map9,9);
 		Button map10 = new Button("LINES");
 		formatButton(map10,10);
-		Button map11 = new Button("WOODEN WONDERLAND");
+		Button map11 = new Button("WOOD WONDERLAND");
 		formatButton(map11,11);
 		
 		buttons.getChildren().add(map1);
