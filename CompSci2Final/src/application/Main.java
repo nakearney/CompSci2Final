@@ -47,7 +47,7 @@ public class Main extends Application {
 		theStage=primaryStage;
 		primaryStage.setMaximized(true);
 		startScreen();
-		primaryStage.setTitle("Scam Kids: Make Money");
+		primaryStage.setTitle("WARNIMALS");
 		primaryStage.getIcons().add(new Image("/Sprites/Duck_Wizard_Player1.png"));
 		primaryStage.show();
 		
@@ -68,7 +68,7 @@ public class Main extends Application {
 		text.setMinWidth(400);
 		text.setSpacing(10.0);
 		
-		Label title = new Label("GAMERS vs. SOCIETY");
+		Label title = new Label("WARNIMALS");
 		title.setTextAlignment(TextAlignment.CENTER);
 		title.setFont(new Font("Arial",48));
 		title.setTextFill(Color.WHITESMOKE);
