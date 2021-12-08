@@ -30,7 +30,6 @@ import javafx.scene.text.TextAlignment;
 
 public class Main extends Application {
 	
-	
 	//Holds the map. Accessible everywhere.
 	public static Map theMap;
 	//Holds the primaryStage. Accessible everywhere.
@@ -47,7 +46,7 @@ public class Main extends Application {
 		theStage=primaryStage;
 		primaryStage.setMaximized(true);
 		startScreen();
-		primaryStage.setTitle("WILD ANIMAL WAR");
+		primaryStage.setTitle("WARNIMALS");
 		primaryStage.getIcons().add(new Image("/Sprites/Duck_Wizard_Player1.png"));
 		primaryStage.show();
 		
@@ -68,7 +67,7 @@ public class Main extends Application {
 		text.setMinWidth(400);
 		text.setSpacing(10.0);
 		
-		Label title = new Label("WILD ANIMAL WAR");
+		Label title = new Label("WARNIMALS");
 		title.setTextAlignment(TextAlignment.CENTER);
 		title.setFont(new Font("Arial",48));
 		title.setTextFill(Color.WHITESMOKE);

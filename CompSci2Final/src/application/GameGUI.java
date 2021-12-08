@@ -74,7 +74,7 @@ public class GameGUI extends BorderPane {
 				ap = new AudioPlayer("map2track.mp3", 0, 177);
 				break;
 			case 3: 
-				ap = new AudioPlayer("map3track.mp3", 0, 214);
+				ap = new AudioPlayer("map2track.mp3", 0, 214);
 				break;
 			case 4:
 				ap = new AudioPlayer("map4track.mp3");
@@ -83,13 +83,13 @@ public class GameGUI extends BorderPane {
 				ap = new AudioPlayer("map5track.mp3", 0, 90);
 				break;
 			case 6: 
-				ap = new AudioPlayer("testtrack.mp3");
+				ap = new AudioPlayer("map2track.mp3");
 				break;
 			case 7:
-				ap = new AudioPlayer("testtrack.mp3");
+				ap = new AudioPlayer("map3track.mp3");
 				break;
 			case 8: 
-				ap = new AudioPlayer("testtrack.mp3");
+				ap = new AudioPlayer("map5track.mp3");
 				break;
 			case 9: 
 				ap = new AudioPlayer("testtrack.mp3");
@@ -101,10 +101,6 @@ public class GameGUI extends BorderPane {
 				ap = new AudioPlayer("map2track.mp3", 0, 177);
 				break;
 		}
-	
-
-		
-		
 		
 		ap.playTrack();
 		
@@ -484,8 +480,6 @@ public class GameGUI extends BorderPane {
 					} 
 				}
 				
-				
-
 				turnDisplay(p1,p2);
 				field.deselectUnits();
 			}
