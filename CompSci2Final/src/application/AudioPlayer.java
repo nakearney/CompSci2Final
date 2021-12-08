@@ -18,6 +18,7 @@ public class AudioPlayer {
 		String path = getClass().getResource("/sounds/" + file).getPath();
 		media = new Media(new File(path).toURI().toString());
 		mp = new MediaPlayer(media);
+		mp.setVolume(.2);
 	}
 	
 	public AudioPlayer(String file, double startTime) {
