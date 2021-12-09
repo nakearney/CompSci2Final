@@ -39,6 +39,7 @@ public class Main extends Application {
 	public static Player player2;
 	//Holds the scene. Accessible everywhere
 	private static Scene theScene;
+	public static AudioPlayer ap = new AudioPlayer("startscreentrack.mp3");
 	
 	@Override
 	public void start(Stage primaryStage) {
@@ -58,6 +59,7 @@ public class Main extends Application {
 	
 	public static void startScreen() {
 		
+		ap.playTrack();
 		BorderPane startScreen = new BorderPane();
 		startScreen.setBackground(new Background(new BackgroundFill(Color.BLACK,null,null)));
 		
@@ -534,6 +536,7 @@ public class Main extends Application {
 			@Override
 			public void handle(MouseEvent arg0) {
 				
+				ap.stop();
 				b.setBackground(new Background(new BackgroundFill(Color.BLACK,null,null)));
 				setMap(action);
 				
